@@ -45,6 +45,9 @@ for nome, unidade, campus, icmc in CURSOS:
                 "pct_pai_superior": np.clip(90 - ep + rng.normal(0, 3), 5, 95),
                 "pct_mae_superior": np.clip(92 - ep + rng.normal(0, 3), 5, 95),
                 "pct_cursinho": np.clip(rng.uniform(30, 70), 5, 95),
+                # modalidade só existe depois das cotas
+                "pct_mod_EP": rng.uniform(20, 35) if ano >= 2018 else np.nan,
+                "pct_mod_PPI": rng.uniform(10, 25) if ano >= 2018 else np.nan,
                 "respondentes": int(rng.integers(40, 3000) / (i + 1)),
             })
 

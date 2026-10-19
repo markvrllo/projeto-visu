@@ -28,7 +28,11 @@ INDICADORES = {
     "pct_pai_superior": "% pai com ensino superior",
     "pct_mae_superior": "% mãe com ensino superior",
     "pct_cursinho": "% fez cursinho",
+    "pct_mod_EP": "% inscritos na modalidade Escola Pública",
+    "pct_mod_PPI": "% inscritos na modalidade PPI",
 }
+# a modalidade só existe depois das cotas, então fica fora das coordenadas paralelas
+EIXOS_PARALELAS = [c for c in INDICADORES if not c.startswith("pct_mod_")]
 # rótulos curtos para os eixos das coordenadas paralelas
 CURTOS = {"pct_escola_publica": "Esc. pública", "pct_PPI": "PPI", "pct_renda_ate_3SM": "Renda ≤3 SM",
           "pct_renda_mais_10SM": "Renda >10 SM", "pct_pai_superior": "Pai superior",
@@ -108,11 +112,11 @@ def atualizar_funil(indicador, sel, ano):
 
 @app.callback(Output("paralelas", "figure"), Input("etapa", "value"), Input("ano", "value"))
 def atualizar_paralelas(etapa, ano):
-    d = df[(df["etapa"] == etapa) & (df["ano"] == ano)].dropna(subset=list(INDICADORES))
+    d = df[(df["etapa"] == etapa) & (df["ano"] == ano)].dropna(subset=EIXOS_PARALELAS)
     fig = go.Figure(go.Parcoords(
         line={"color": d["icmc"].astype(int), "colorscale": [[0, COR_OUTROS], [1, COR_ICMC]]},
         dimensions=[{"label": CURTOS[col] + " (%)", "values": d[col], "range": [0, 100]}
-                    for col in INDICADORES],
+                    for col in EIXOS_PARALELAS],
     ))
     fig.update_layout(margin={"l": 60, "r": 60, "t": 80})
     return fig

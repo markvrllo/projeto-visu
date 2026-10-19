@@ -38,15 +38,15 @@ Testes: `python -m pytest`.
 | `src/harmonizacao.py` | Identificação das perguntas, reagrupamento das categorias e cálculo dos indicadores |
 | `app/app.py` | App Dash com as visualizações |
 
-## Primeiro passo com um PDF real: calibrar o parser
+## Calibração do parser
 
-O parser foi escrito antes de termos os PDFs em mãos. Com o primeiro PDF baixado:
+O parser foi calibrado com páginas reais de `FUVEST_2021_qase_chamados_matricula_1_curso.pdf` (ver o trecho em `tests/test_pipeline.py`). Os indicadores conferem com a contagem feita à mão. Outros anos podem ter pequenas diferenças de layout. Se um PDF der "0 linhas" ou números estranhos, veja o texto extraído com:
 
 ```bash
-python -m src.qase_parser --dump data/raw/FUVEST_2021_qase_chamados_matricula_1_curso.pdf --paginas 3-6
+python -m src.qase_parser --dump data/raw/ARQUIVO.pdf --paginas 3-6
 ```
 
-Compare o texto impresso com as regex do topo de `src/qase_parser.py` (`RE_CARREIRA`, `RE_CURSO`, `RE_PERGUNTA`, `RE_OPCAO`). Ajuste o que for preciso e cole um trecho real em `tests/test_pipeline.py`.
+e ajuste as regex do topo de `src/qase_parser.py`.
 
 ## Pontos de atenção no pré-processamento
 
@@ -54,3 +54,5 @@ Compare o texto impresso com as regex do topo de `src/qase_parser.py` (`RE_CARRE
 - **Renda:** as faixas são em salários mínimos e o SM muda a cada ano. Confira se algum ano usa reais.
 - **Cobertura:** o QASE descreve só quem entrou pela Fuvest. As vagas do Sisu, do Enem-USP e do Provão Paulista ficam de fora, e isso deve ser discutido como limitação.
 - **2023 em diante:** a Fuvest não publicou o QASE em PDF.
+- **Modalidade (AC/EP/PPI):** em 2021 há a pergunta "Em qual modalidade de acesso você se inscreveu?". Os indicadores `pct_mod_*` ficam vazios nos anos sem essa pergunta.
+- **Denominador:** respostas como "Não sei", "Não possuo pai" e "No exterior" ficam fora do cálculo do percentual.

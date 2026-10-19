@@ -16,7 +16,8 @@ import pandas as pd
 
 def normalizar(txt):
     """minúsculas e sem acentos, para comparar textos."""
-    txt = unicodedata.normalize("NFKD", str(txt)).encode("ascii", "ignore").decode()
+    txt = str(txt).replace("−", "-")  # a Fuvest usa o sinal de menos (U+2212) como hífen
+    txt = unicodedata.normalize("NFKD", txt).encode("ascii", "ignore").decode()
     return re.sub(r"\s+", " ", txt.lower()).strip()
 
 
@@ -25,7 +26,7 @@ def normalizar(txt):
 def tipo_pergunta(pergunta):
     p = normalizar(pergunta)
     # perguntas restritas a um subgrupo (ex.: "cor ou raça, apenas para quem cursou escola pública")
-    if any(k in p for k in ("apenas", "somente", "so escola", "entre os que")):
+    if any(k in p for k in ("apenas", "somente", "candidatos que", "para os candidatos")):
         return None
     if "cor" in p and ("raca" in p or "etnia" in p) and "escola publica" not in p:
         return "cor_raca"
@@ -33,7 +34,9 @@ def tipo_pergunta(pergunta):
         return "escola_medio"
     if "renda" in p and "pessoas" not in p:
         return "renda"
-    if "escolaridade" in p or "grau de instrucao" in p:
+    if "modalidade" in p:
+        return "modalidade"
+    if "escolaridade" in p or "instrucao" in p:
         if "pai" in p:
             return "escolaridade_pai"
         if "mae" in p:
@@ -71,16 +74,17 @@ def categoria_escola(op):
 
 
 def categoria_renda(op):
-    """Usa o limite inferior da faixa, em salários mínimos.
+    """Usa o limite inferior da faixa, em salários mínimos (só o trecho antes de "SM";
+    em 2021 a opção ainda traz os valores em reais depois do SM).
 
-    'Inferior a 1 SM' -> até 3; 'De 3 a 5 SM' -> 3 a 10; 'Acima de 20 SM' -> mais de 10.
-    Se algum ano usar faixas em reais em vez de SM, é preciso converter antes (ver README).
+    'Até 1 SM' -> até 3; 'Acima de 2 até 3 SM' -> até 3; 'Acima de 3 até 5 SM' -> 3 a 10;
+    'Acima de 10 até 15 SM' -> mais de 10. Anos com faixas só em reais precisam de conversão (ver README).
     """
-    o = normalizar(op)
+    o = normalizar(op).split(" sm")[0]
     nums = [float(x.replace(",", ".")) for x in re.findall(r"\d+(?:,\d+)?", o)]
     if not nums:
         return None
-    inferior = 0.0 if any(k in o for k in ("inferior", "ate ", "menos")) else nums[0]
+    inferior = 0.0 if o.startswith(("ate", "inferior", "menos")) else nums[0]
     if inferior < 3:
         return "ate_3SM"
     if inferior < 10:
@@ -90,6 +94,8 @@ def categoria_renda(op):
 
 def categoria_escolaridade(op):
     o = normalizar(op)
+    if o.startswith(("nao sei", "nao possuo")):
+        return None  # fica fora do denominador
     if "superior completo" in o or "pos-graduacao" in o or "pos graduacao" in o:
         return "superior"
     return "sem_superior"
@@ -99,7 +105,19 @@ def categoria_cursinho(op):
     return "nao" if normalizar(op).startswith("nao") else "sim"
 
 
+def categoria_modalidade(op):
+    o = normalizar(op)
+    if "ampla" in o:
+        return "AC"
+    if "preto" in o or "pardo" in o or "indigena" in o:
+        return "PPI"
+    if "escola publica" in o:
+        return "EP"
+    return None
+
+
 CATEGORIZADORES = {
+    "modalidade": categoria_modalidade,
     "cor_raca": categoria_cor,
     "escola_medio": categoria_escola,
     "renda": categoria_renda,
@@ -117,6 +135,10 @@ INDICADORES = {
     "pct_pai_superior": ("escolaridade_pai", "superior"),
     "pct_mae_superior": ("escolaridade_mae", "superior"),
     "pct_cursinho": ("cursinho", "sim"),
+    # modalidade de inscrição (só existe a partir das cotas na Fuvest)
+    "pct_mod_AC": ("modalidade", "AC"),
+    "pct_mod_EP": ("modalidade", "EP"),
+    "pct_mod_PPI": ("modalidade", "PPI"),
 }
 
 
@@ -125,7 +147,8 @@ def harmonizar(longo: pd.DataFrame) -> pd.DataFrame:
     df["tipo"] = df["pergunta"].map(tipo_pergunta)
     df = df[df["tipo"].isin(CATEGORIZADORES)]
     df["categoria"] = [CATEGORIZADORES[t](o) for t, o in zip(df["tipo"], df["opcao"])]
-    return df
+    # respostas sem categoria ("Não sei", "No exterior"...) saem também do denominador
+    return df[df["categoria"].notna()]
 
 
 def calcular_indicadores(harm: pd.DataFrame) -> pd.DataFrame:

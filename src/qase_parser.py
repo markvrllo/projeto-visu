@@ -1,18 +1,26 @@
 """Extrai as tabelas do Questionário de Avaliação Socioeconômica (QASE) da Fuvest.
 
-Cada PDF tem uma seção por carreira (ou curso). Dentro dela vêm as perguntas
-numeradas e, para cada opção de resposta, o percentual e a contagem, no formato
-"Opção ........ 45,2% (47)".
+Layout de cada página (calibrado com o PDF FUVEST_2021_qase_chamados_matricula_1_curso):
+
+    Candidatos que foram chamados para a 1ª matrícula no seguinte curso:
+    Dos 42 candidatos, 42 (100,0%) Carreira 100−Administração, Ciências Contábeis, ...
+    entregaram o questionário respondido.
+    42 vagas. Curso 01−Administração − Diurno − Ribeirão Preto [USP/FEARP]
+    11 Qual é a renda bruta mensal da sua família, incluindo seu próprio rendimento? O valor do salário mínimo
+    (SM) é R$ 1.045,00.
+    2,4% Até 1 SM − até R$ 1.045,00. (1)
+    7,1% Acima de 1 até 2 SM − de R$ 1.045,01 até R$ 2.090,00. (3)
+    ...
+    42 respostas
+
+O cabeçalho do curso se repete em toda página. As duas primeiras páginas são um
+índice e são ignoradas, porque o parser só aceita "Carreira" depois de "Dos N candidatos".
 
 O resultado é uma tabela "longa": uma linha por (arquivo, carreira/curso, pergunta, opção).
 
-ATENÇÃO: as expressões regulares abaixo foram escritas a partir da descrição do
-layout dos PDFs, sem acesso a um arquivo real. Antes de rodar em lote, use
-`python -m src.qase_parser --dump ARQUIVO.pdf --paginas 3-6` para ver o texto
-extraído e ajustar as regex se necessário. Os testes em tests/ mostram o formato esperado.
-
 Uso:
-    python -m src.qase_parser data/raw/*.pdf -o data/processed/qase_longo.csv
+    python -m src.qase_parser data/raw/*qase*.pdf -o data/processed/qase_longo.csv
+    python -m src.qase_parser --dump ARQUIVO.pdf --paginas 3-6     # ver o texto extraído
 """
 import argparse
 import re
@@ -21,17 +29,18 @@ from pathlib import Path
 
 import pandas as pd
 
-# "Carreira 710−Computação" / "Curso 06−Bacharelado em Ciências de Computação − São Carlos [USP/ICMCSC]"
-# A Fuvest usa o sinal "−" (U+2212), mas aceitamos hífen e travessão também.
-TRACO = r"\s*[−–—-]\s*"
-RE_CARREIRA = re.compile(rf"^Carreira\s+(\d+){TRACO}(.+?)\s*$")
-RE_CURSO = re.compile(rf"^Curso\s+(\d+){TRACO}(.+?)\s*$")
-# Pergunta: "11. Qual a renda familiar..." ou "11 - Qual ..." ou "11) ..."
-RE_PERGUNTA = re.compile(r"^(\d{1,2})\s*[.)\-–−]\s*(\D.+?)\s*$")
-# Opção: "texto 45,2% (47)" — pode haver mais de uma opção na mesma linha
-RE_OPCAO = re.compile(r"(?P<texto>[^%()]*?\S)\s*\.*\s*(?P<pct>\d{1,3}(?:[.,]\d+)?)\s*%\s*\(\s*(?P<n>[\d.]+)\s*\)")
+TRACO = r"\s*[−–—-]\s*"  # a Fuvest usa "−" (U+2212); aceitamos hífen e travessão também
+RE_CARREIRA = re.compile(rf"^Dos\s+(\d+)\s+candidatos,\s+(\d+)\s+\([\d,]+%\)\s+Carreira\s+(\d+){TRACO}(.+?)\s*$")
+RE_CURSO = re.compile(rf"^(\d+)\s+vagas\.?\s*(?:Curso\s+(\d+){TRACO}(.+?))?\s*$")
+RE_PERGUNTA = re.compile(r"^(\d{2})(?:\s+(\S.*))?$")
+# "52,4% Todo em escola pública. (22)" — a contagem é o ÚLTIMO número entre parênteses
+# (há opções como "Região Intermediária de São Paulo (3501) (9)" e lixo como "(2) 2 PPI" no fim)
+RE_OPCAO = re.compile(r"^(?P<pct>\d{1,3},\d)%\s+(?P<texto>.+)\s*\((?P<n>\d+)\)[^()]*$")
+RE_RESPOSTAS = re.compile(r"^(\d+)\s+respostas$")
 RE_UNIDADE = re.compile(r"\[(?:USP/)?([^\]]+)\]")
-CAMPI = ["São Carlos", "Ribeirão Preto", "Piracicaba", "Bauru", "Pirassununga", "Lorena", "Santos", "São Paulo"]
+CAMPI = ["São Carlos", "Ribeirão Preto", "Piracicaba", "Bauru", "Pirassununga", "Lorena", "Santos", "USP Leste"]
+LIXO = ("FUVEST ", "Questionário de Avaliação", "Candidatos que", "Candidatos chamados", "Candidatos convocados",
+        "Candidatos inscritos", "Candidatos matriculados", "entregaram o questionário", "Copyright")
 
 
 def texto_do_pdf(caminho, paginas=None):
@@ -48,7 +57,9 @@ def separar_unidade_campus(nome):
     m = RE_UNIDADE.search(nome)
     unidade = m.group(1) if m else None
     limpo = RE_UNIDADE.sub("", nome).strip(" −–-")
-    campus = next((c for c in CAMPI if c in limpo), None)
+    campus = next((c for c in CAMPI if c in nome), "São Paulo")
+    if unidade and unidade.endswith("SC"):  # ICMCSC, IAUSC, IQSC...
+        campus = "São Carlos"
     return limpo, unidade, campus
 
 
@@ -59,7 +70,9 @@ def parse_linhas(linhas, meta=None):
     """
     meta = meta or {}
     registros = []
-    carreira = curso = pergunta = None
+    secao = None          # dados da carreira/curso atual
+    pergunta = None       # [número, texto]
+    lendo_enunciado = False
 
     for bruta in linhas:
         linha = bruta.strip()
@@ -67,40 +80,43 @@ def parse_linhas(linhas, meta=None):
             continue
 
         if m := RE_CARREIRA.match(linha):
-            carreira = (m.group(1), m.group(2))
-            curso, pergunta = None, None
+            # cabeçalho repetido em toda página; o curso (se houver) vem na linha "NN vagas. Curso ..."
+            nome, unidade, campus = separar_unidade_campus(m.group(4))
+            secao = {"candidatos": int(m.group(1)), "questionarios": int(m.group(2)),
+                     "cod_carreira": m.group(3), "carreira": nome, "cod_curso": None, "curso": None,
+                     "unidade": unidade, "campus": campus, "vagas": None}
             continue
-        if m := RE_CURSO.match(linha):
-            curso = (m.group(1), m.group(2))
-            pergunta = None
+        if secao is not None and (m := RE_CURSO.match(linha)):
+            secao["vagas"] = int(m.group(1))
+            if m.group(2):
+                nome, unidade, campus = separar_unidade_campus(m.group(3))
+                secao.update(cod_curso=m.group(2), curso=nome, unidade=unidade, campus=campus)
+            continue
+        if secao is None or linha.startswith(LIXO) or RE_RESPOSTAS.match(linha):
+            lendo_enunciado = False
             continue
 
-        opcoes = list(RE_OPCAO.finditer(linha))
-        if not opcoes:
-            if m := RE_PERGUNTA.match(linha):
-                pergunta = (int(m.group(1)), m.group(2))
-            continue
-
-        if carreira is None and curso is None or pergunta is None:
-            continue  # opção fora de uma seção reconhecida (índice, capa...)
-
-        nome_base = curso[1] if curso else carreira[1]
-        nome, unidade, campus = separar_unidade_campus(nome_base)
-        for op in opcoes:
+        if m := RE_OPCAO.match(linha):
+            lendo_enunciado = False
+            if pergunta is None:
+                continue
             registros.append({
                 **meta,
-                "cod_carreira": carreira[0] if carreira else None,
-                "carreira": carreira[1] if carreira else None,
-                "cod_curso": curso[0] if curso else None,
-                "curso": nome if curso else None,
-                "unidade": unidade,
-                "campus": campus,
+                **secao,
                 "num_pergunta": pergunta[0],
                 "pergunta": pergunta[1],
-                "opcao": op.group("texto").strip(" .:"),
-                "pct": float(op.group("pct").replace(",", ".")),
-                "n": int(op.group("n").replace(".", "")),
+                "opcao": m.group("texto").strip(" ."),
+                "pct": float(m.group("pct").replace(",", ".")),
+                "n": int(m.group("n")),
             })
+            continue
+
+        if m := RE_PERGUNTA.match(linha):
+            pergunta = [int(m.group(1)), m.group(2) or ""]
+            lendo_enunciado = True
+        elif lendo_enunciado and pergunta is not None:
+            # enunciado que continua na linha seguinte
+            pergunta[1] = (pergunta[1] + " " + linha).strip()
     return registros
 
 
