@@ -1,0 +1,6 @@
+pdfplumber>=0.11
+pandas>=2.2
+dash>=2.17
+plotly>=5.22
+requests>=2.31
+pytest>=8
