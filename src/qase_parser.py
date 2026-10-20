@@ -122,7 +122,8 @@ def parse_linhas(linhas, meta=None):
 
 def meta_do_nome(arquivo):
     """Deduz ano, etapa e nível a partir do nome do arquivo da Fuvest."""
-    nome = Path(arquivo).name.lower()
+    # arquivos gerados por scripts/picotar_pdfs.py têm "__<curso>" no fim; só o nome original importa
+    nome = Path(arquivo).name.lower().split("__")[0]
     ano = int(re.search(r"20\d\d", nome).group())
     if "inscritos" in nome:
         etapa = "inscritos"

@@ -10,16 +10,19 @@ Analisamos o Questionário de Avaliação Socioeconômica (QASE) da Fuvest de 20
 python -m venv .venv && source .venv/bin/activate   # Windows: .venv\Scripts\activate
 pip install -r requirements.txt
 
-# 1. baixar os PDFs (lista completa em docs/lista_pdfs.md)
-python scripts/baixar_pdfs.py --so-prioridade       # ou sem a flag para baixar tudo
+# 1. coletar os PDFs nas páginas de acervo da Fuvest (lista em data/fontes_coletadas.csv)
+python scripts/coletar_fuvest.py --anos 2010-2022
 
-# 2. extrair as tabelas dos PDFs -> data/processed/qase_longo.csv
-python -m src.qase_parser data/raw/*qase*.pdf
+# 2. (opcional) separar cada PDF em um arquivo por carreira/curso
+python scripts/picotar_pdfs.py data/raw/*qase*.pdf
 
-# 3. harmonizar categorias e calcular indicadores -> data/processed/indicadores.csv
+# 3. extrair as tabelas dos PDFs -> data/processed/qase_longo.csv
+python -m src.qase_parser data/raw/*qase*.pdf      # ou data/raw/por_curso/*.pdf (não use os dois juntos)
+
+# 4. harmonizar categorias e calcular indicadores -> data/processed/indicadores.csv
 python -m src.harmonizacao
 
-# 4. abrir o app em http://127.0.0.1:8050
+# 5. abrir o app em http://127.0.0.1:8050
 python app/app.py
 ```
 
@@ -27,13 +30,36 @@ Para testar o app antes de ter os dados reais, rode `python scripts/gerar_dados_
 
 Testes: `python -m pytest`.
 
+### Coleta (`scripts/coletar_fuvest.py`)
+
+Abre a página de acervo de cada ano (`fuvest.br/acervo-vestibular-AAAA`) com requests + BeautifulSoup, classifica os links de PDF pelo nome do arquivo e pelo texto do link, e baixa os selecionados para `data/raw/`. O script respeita o `robots.txt` e espera 1 s entre pedidos.
+
+```bash
+python scripts/coletar_fuvest.py --anos 2013-2022 --etapas inscritos matriculados --nivel carreira   # prioridade da 1ª entrega
+python scripts/coletar_fuvest.py --tipos nota_de_corte notas_minimas candidato_vaga --anos 2010-2026
+python scripts/coletar_fuvest.py --so-listar     # só mostra o que encontrou
+```
+
+Se o site mudar e a coleta falhar, `scripts/baixar_pdfs.py` baixa a partir da lista fixa em `data/fontes_qase.csv`.
+
+### Separação por curso (`scripts/picotar_pdfs.py`)
+
+Os PDFs de "por curso" têm mais de 1000 páginas. O script lê o cabeçalho de cada página com pypdf e grava um PDF por carreira/curso em `data/raw/por_curso/`. As páginas de índice são descartadas. Os filtros servem para ficar só com o que interessa ou para mandar um trecho pequeno para alguém:
+
+```bash
+python scripts/picotar_pdfs.py data/raw/FUVEST_2021_qase_chamados_matricula_1_curso.pdf --unidade ICMC
+python scripts/picotar_pdfs.py data/raw/*carreira*.pdf --carreira 710 875     # PDFs por carreira não têm a unidade no nome
+```
+
 ## Estrutura
 
 | Caminho | O que é |
 |---|---|
 | `data/fontes_qase.csv`, `data/fontes_notas.csv` | URLs de todos os PDFs da Fuvest usados |
 | `docs/lista_pdfs.md` | A mesma lista, legível, com a prioridade de download |
-| `scripts/baixar_pdfs.py` | Download dos PDFs para `data/raw/` |
+| `scripts/coletar_fuvest.py` | Coleta dos PDFs nas páginas de acervo (BeautifulSoup) |
+| `scripts/picotar_pdfs.py` | Separa cada PDF do QASE em um arquivo por carreira/curso (pypdf) |
+| `scripts/baixar_pdfs.py` | Plano B: download a partir da lista fixa |
 | `src/qase_parser.py` | Extração das tabelas do QASE (pdfplumber + regex) |
 | `src/harmonizacao.py` | Identificação das perguntas, reagrupamento das categorias e cálculo dos indicadores |
 | `app/app.py` | App Dash com as visualizações |
