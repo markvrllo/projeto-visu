@@ -19,12 +19,13 @@ O cabeçalho do curso se repete em toda página. As duas primeiras páginas são
 O resultado é uma tabela "longa": uma linha por (arquivo, carreira/curso, pergunta, opção).
 
 Uso:
-    python -m src.qase_parser data/raw/*qase*.pdf -o data/processed/qase_longo.csv
+    python -m src.qase_parser data/raw/por_carreira -o data/processed/qase_longo.csv   # pasta inteira, em paralelo
     python -m src.qase_parser --dump ARQUIVO.pdf --paginas 3-6     # ver o texto extraído
 """
 import argparse
 import re
 import sys
+from concurrent.futures import ProcessPoolExecutor, as_completed
 from pathlib import Path
 
 import pandas as pd
@@ -72,18 +73,22 @@ def separar_unidade_campus(nome):
     return limpo, unidade, campus
 
 
-def parse_linhas(linhas, meta=None):
+def parse_linhas(linhas, meta=None, paginas=None):
     """Percorre as linhas de texto e devolve uma lista de dicionários (formato longo).
 
     `meta` é copiado para cada linha (ex.: ano, etapa, nivel, arquivo).
+    `paginas` (opcional) traz o número da página de cada linha, para rastrear cada número até o PDF.
+    Cada opção leva também `n_respostas`, o total "N respostas" impresso no fim da sua pergunta
+    (vazio se a linha não foi encontrada), que serve para validar a soma das contagens.
     """
     meta = meta or {}
     registros = []
     secao = None          # dados da carreira/curso atual
     pergunta = None       # [número, texto]
     lendo_enunciado = False
+    inicio_pergunta = 0   # índice em `registros` da primeira opção da pergunta atual
 
-    for bruta in linhas:
+    for i, bruta in enumerate(linhas):
         linha = bruta.strip()
         if not linha:
             continue
@@ -103,7 +108,13 @@ def parse_linhas(linhas, meta=None):
             if m.group("mod") or m.group("todas"):
                 secao["modalidade"] = m.group("mod") or "Todas"
             continue
-        if secao is None or linha.startswith(LIXO) or RE_RESPOSTAS.match(linha):
+        if secao is not None and (m := RE_RESPOSTAS.match(linha)):
+            for reg in registros[inicio_pergunta:]:
+                reg["n_respostas"] = inteiro(m.group(1))
+            inicio_pergunta = len(registros)
+            lendo_enunciado = False
+            continue
+        if secao is None or linha.startswith(LIXO):
             lendo_enunciado = False
             continue
 
@@ -119,11 +130,14 @@ def parse_linhas(linhas, meta=None):
                 "opcao": m.group("texto").strip(" ."),
                 "pct": float(m.group("pct").replace(",", ".")),
                 "n": inteiro(m.group("n")),
+                "n_respostas": None,
+                "pagina": paginas[i] if paginas is not None else None,
             })
             continue
 
         if m := RE_PERGUNTA.match(linha):
             pergunta = [int(m.group(1)), m.group(2) or ""]
+            inicio_pergunta = len(registros)
             lendo_enunciado = True
         elif lendo_enunciado and pergunta is not None:
             # enunciado que continua na linha seguinte
@@ -149,17 +163,32 @@ def meta_do_nome(arquivo):
 
 
 def parse_pdf(arquivo):
-    linhas = []
-    for pagina in texto_do_pdf(arquivo):
-        linhas.extend(pagina.splitlines())
-    return parse_linhas(linhas, meta_do_nome(arquivo))
+    linhas, paginas = [], []
+    for num, pagina in enumerate(texto_do_pdf(arquivo), start=1):
+        partes = pagina.splitlines()
+        linhas.extend(partes)
+        paginas.extend([num] * len(partes))
+    return parse_linhas(linhas, meta_do_nome(arquivo), paginas)
+
+
+COLUNAS = ["ano", "etapa", "nivel", "arquivo", "candidatos", "questionarios", "cod_carreira", "carreira", "cod_curso",
+           "curso", "unidade", "campus", "vagas", "modalidade", "num_pergunta", "pergunta", "opcao", "pct", "n",
+           "n_respostas", "pagina"]
+
+
+def _avisar(arquivo, regs):
+    if not regs:
+        print(f"{Path(arquivo).name}: nenhuma linha reconhecida — rode com --dump e ajuste as regex", file=sys.stderr)
+    return regs
 
 
 def main(argv=None):
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
-    ap.add_argument("pdfs", nargs="+")
+    ap.add_argument("pdfs", nargs="+", help="PDFs ou pastas (uma pasta entra com todos os *.pdf dentro dela)")
     ap.add_argument("-o", "--saida", default="data/processed/qase_longo.csv")
     ap.add_argument("--dump", action="store_true", help="só imprime o texto extraído (para calibrar as regex)")
+    ap.add_argument("--cache", default="data/processed/cache_qase", help="pasta com um CSV por PDF já processado")
+    ap.add_argument("-j", "--jobs", type=int, default=None, help="processos em paralelo (padrão: nº de CPUs)")
     ap.add_argument("--paginas", help="intervalo de páginas para --dump, ex.: 3-6 (começa em 1)")
     args = ap.parse_args(argv)
 
@@ -173,15 +202,29 @@ def main(argv=None):
             print(txt)
         return
 
-    todos = []
-    for arquivo in args.pdfs:
-        regs = parse_pdf(arquivo)
-        print(f"{Path(arquivo).name}: {len(regs)} linhas", file=sys.stderr)
-        if not regs:
-            print("  nenhuma linha reconhecida — rode com --dump e ajuste as regex", file=sys.stderr)
-        todos.extend(regs)
+    pdfs = []
+    for item in args.pdfs:
+        pdfs.extend(sorted(str(x) for x in Path(item).glob("*.pdf")) if Path(item).is_dir() else [item])
+    # cada PDF vira um CSV em --cache assim que termina: dá para acompanhar o progresso e retomar
+    # uma execução interrompida (PDFs já processados são pulados)
+    cache = Path(args.cache)
+    cache.mkdir(parents=True, exist_ok=True)
+    faltam = [p for p in pdfs if not (cache / (Path(p).name + ".csv")).exists()]
+    print(f"{len(pdfs)} PDFs, {len(pdfs) - len(faltam)} já no cache, {len(faltam)} a processar", file=sys.stderr)
+    with ProcessPoolExecutor(max_workers=args.jobs) as ex:
+        futuros = {ex.submit(parse_pdf, p): p for p in faltam}
+        for k, fut in enumerate(as_completed(futuros), start=1):
+            arquivo = futuros[fut]
+            regs = _avisar(arquivo, fut.result())
+            destino = cache / (Path(arquivo).name + ".csv")
+            pd.DataFrame(regs, columns=COLUNAS).to_csv(destino.with_suffix(".tmp"), index=False)
+            destino.with_suffix(".tmp").replace(destino)
+            if k % 25 == 0 or k == len(faltam):
+                print(f"[{k}/{len(faltam)}] {Path(arquivo).name}", file=sys.stderr, flush=True)
+    partes = [pd.read_csv(cache / (Path(p).name + ".csv"), dtype={"cod_carreira": str, "cod_curso": str})
+              for p in pdfs]
+    df = pd.concat(partes, ignore_index=True)
 
-    df = pd.DataFrame(todos)
     Path(args.saida).parent.mkdir(parents=True, exist_ok=True)
     df.to_csv(args.saida, index=False)
     print(f"salvo em {args.saida} ({len(df)} linhas)", file=sys.stderr)
