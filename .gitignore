@@ -4,4 +4,5 @@ __pycache__/
 venv/
 data/raw/*.pdf
 data/raw/**/*.pdf
+data/*.pdf
 .pytest_cache/
