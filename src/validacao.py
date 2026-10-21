@@ -19,6 +19,7 @@ Anuário (data/processed/anuario_longo.csv), por pergunta, área e etapa:
   A2  a % impressa bate com quantidade / soma da pergunta (tolerância 0,06 pp)   -> aviso se até 1 pp, reprova acima
   A3  a soma das 3 áreas é igual ao total da USP (mesmo ano, pergunta e opção)   -> reprova a tabela por área
       quando a maioria das linhas não bate (tabela trocada); aviso nos casos isolados
+  A4  o total de respostas da pergunta difere mais de 2% da mediana da tabela   -> aviso
 
 Uso:
     python -m src.validacao --pdfs data/raw/por_carreira
@@ -139,6 +140,15 @@ def validar_anuario(a: pd.DataFrame):
                                  f"({r['n']}/{r['n_respostas']})"})
         if grave:
             reprov.append({c: r[c] for c in chave})
+
+    # A4: dentro de uma tabela e coluna, quase todas as perguntas têm o mesmo total de respostas
+    tot = a.groupby(chave, sort=False).agg(ano=("ano", "first"), ingresso=("ingresso", "first"),
+                                           pagina=("pagina", "first"), total=("n", "sum")).reset_index()
+    tot["mediana"] = tot.groupby(["arquivo", "area", "etapa"])["total"].transform("median")
+    for _, r in tot[(tot["total"] - tot["mediana"]).abs() > 0.02 * tot["mediana"]].iterrows():
+        probs.append({**{c: r[c] for c in ["arquivo", "pagina", "ano", "ingresso", "pergunta", "area", "etapa"]},
+                      "check": "A4 total da pergunta != total da tabela", "gravidade": "aviso",
+                      "detalhe": f"{r['total']} respostas; a mediana das perguntas é {r['mediana']:.0f}"})
 
     a["pq"], a["op"] = a["pergunta"].map(_nz), a["opcao"].map(_nz)
     k = ["ano", "ingresso", "pq", "op", "etapa"]

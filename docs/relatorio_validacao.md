@@ -40,6 +40,7 @@ Por ano e etapa:
 | A2 % impressa != quantidade | reprova | 58 |
 | A3 soma das áreas != USP | aviso | 1 |
 | A3 soma das áreas != USP | reprova | 1 |
+| A4 total da pergunta != total da tabela | aviso | 45 |
 
 Reprovações:
 

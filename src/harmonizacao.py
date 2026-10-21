@@ -68,7 +68,8 @@ def tipo_pergunta(pergunta):
             return "escolaridade_mae"
     if "cursinho" in p or "pre-vestibular" in p:
         return "cursinho"
-    if "sexo" in p or "genero" in p:
+    # "Qual seu sexo?"; a pergunta de "identidade de gênero" (ENEM-USP 2026) é outra e não entra
+    if "sexo" in p:
         return "sexo"
     return None
 
