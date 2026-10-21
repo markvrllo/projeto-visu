@@ -20,16 +20,16 @@ Projeto: **"Quem entra na USP: o perfil dos ingressantes antes e depois das cota
 
 | Perfil | Papel | Questões que responde | Dono no código |
 |---|---|---|---|
-| **A. Dados** | Montar e manter o dataset | base para todas | `scripts/`, `src/qase_parser.py`, `src/harmonizacao.py`, `data/` |
+| **A. Dados** | Montar e manter o dataset (toda a coleta, a leitura dos PDFs do QASE e dos anuários e a manipulação dos dados) | base para todas | `scripts/`, `src/qase_parser.py`, `src/anuario_parser.py`, `src/harmonizacao.py`, `data/` |
 | **B. Evolução** | Visões temporais | Q1 (evolução na USP e nas áreas) e, na 2ª entrega, Q5 (seletividade e modalidades) | `app/visoes/serie.py`, `app/visoes/heatmap.py`, `app/visoes/modalidades.py` |
 | **C. Funil e carreiras** | Funil e comparação entre carreiras | Q2 (funil) e Q3 (carreiras), e na 2ª entrega Q6 (vias de ingresso) | `app/visoes/funil.py`, `app/visoes/paralelas.py`, `app/visoes/vias.py` |
-| **D. Integração e interação** | Leitura dos anuários, layout do app, interações, acessibilidade, relatório e vídeo | coordena as conclusões | `src/anuario_parser.py`, `app/app.py`, `app/estado.py`, relatório e vídeo |
+| **D. Integração e interação** | Layout do app, interações, acessibilidade, relatório e vídeo | coordena as conclusões | `app/app.py`, `app/estado.py`, relatório e vídeo |
 
 Cada pessoa escreve o código **e** a parte do relatório da sua área, e precisa saber explicar o que fez (pode haver arguição sobre uso de IA). Todos precisam entender o projeto como um todo.
 
 ## O "contrato" entre os perfis
 
-O arquivo `data/processed/indicadores.csv`. Enquanto A e D montam os dados reais, B e C trabalham com `indicadores_DEMO.csv` (`python scripts/gerar_dados_demo.py`), que precisa ser atualizado para as colunas novas abaixo.
+O arquivo `data/processed/indicadores.csv`. Enquanto A monta os dados reais, B e C trabalham com `indicadores_DEMO.csv` (`python scripts/gerar_dados_demo.py`), que precisa ser atualizado para as colunas novas abaixo.
 
 Colunas (não mudar sem avisar o grupo):
 
@@ -67,7 +67,9 @@ Regras de git:
 - Validar: em cada pergunta, a soma das contagens deve bater com "N respostas". Anotar os anos ou carreiras que falharem.
 - Criar a tabela **carreira → área** (`data/carreira_area.csv`) com as mesmas 3 áreas do anuário. Ela permite somar as carreiras do QASE e comparar com os números do anuário.
 - Somar as contagens (não as porcentagens) para gerar os níveis `area` e `usp` do QASE.
-- Gerar `indicadores.csv` real a partir do QASE e juntar com a parte do anuário que D entrega.
+- `src/anuario_parser.py`: ler as tabelas de `data/raw/anuario/` (geral e por área; colunas Insc./Conv./Matr., Quant. e %) para o formato longo do QASE (`ano, fonte, ingresso, etapa, nivel, area, pergunta, opcao, n, pct`), de forma que `src/harmonizacao.py` sirva para as duas fontes. Ignorar as colunas de **treineiros**.
+- Comparar Anuário 2022 com a soma do QASE 2022 (tabela "ponte" para o relatório).
+- Gerar `indicadores.csv` real juntando QASE e anuário, e atualizar `scripts/gerar_dados_demo.py` para as colunas novas.
 
 **Relatório:** seções *Conjunto de dados* (fontes, tamanho, tipos de variáveis, cobertura por ano e por fonte) e *Pré-processamento* (extração, harmonização das categorias, agregação de carreira para área, emenda das duas fontes).
 **Vídeo (~1 min):** de onde vêm os dados e como viraram tabela.
@@ -92,8 +94,6 @@ Regras de git:
 
 ### D. Integração e interação
 **Código**
-- `src/anuario_parser.py`: ler as tabelas de `data/raw/anuario/` (geral e por área; colunas Insc./Conv./Matr., Quant. e %) para o formato longo do QASE (`ano, fonte, ingresso, etapa, nivel, area, pergunta, opcao, n, pct`), de forma que `src/harmonizacao.py` sirva para as duas fontes. Ignorar as colunas de **treineiros**. A revisa.
-- Comparar Anuário 2022 com a soma do QASE 2022 (tabela "ponte" para o relatório).
 - Separar `app/app.py` em um arquivo por visão (`app/visoes/*.py`), para B e C não editarem o mesmo arquivo.
 - Filtros globais (indicador, nível/área, etapa, ano) e tooltips.
 - Acessibilidade: paleta Okabe-Ito, rótulos diretos e teste com simulador de daltonismo (print para o relatório).
@@ -105,9 +105,9 @@ Regras de git:
 ### Cronograma da 1ª entrega
 | Data | Marco |
 |---|---|
-| 21–23/10 | A: parser rodando nos PDFs por carreira de 2013–2022 e tabela carreira → área. D: `anuario_parser.py` e demo com as colunas novas. B e C: visões com os dados de demonstração. |
+| 21–23/10 | A: parser rodando nos PDFs por carreira de 2013–2022, `anuario_parser.py`, tabela carreira → área e demo com as colunas novas. D: app separado por visão. B e C: visões com os dados de demonstração. |
 | 24/10 | `indicadores.csv` real v1 (QASE + anuário). Reunião rápida para fechar as 3 questões. |
-| 25–28/10 | B e C: visões com dados reais e insights anotados. D: app separado por visão, filtros globais e tabela ponte 2022. |
+| 25–28/10 | B e C: visões com dados reais e insights anotados. A: tabela ponte 2022. D: filtros globais, tooltips e teste de daltonismo. |
 | 31/10 | Rascunho do relatório completo (cada um a sua parte). |
 | 01/11 | Gravação dos trechos do vídeo. D edita. |
 | 02/11 | Revisão cruzada do relatório e do vídeo. Teste do app numa máquina "limpa". |
@@ -129,7 +129,7 @@ Exigência: **pelo menos 2 interações novas e pelo menos 2 visualizações nov
 ### A. Dados (2ª entrega)
 - Coluna de **índice de seletividade** por carreira, ano e indicador.
 - Indicadores por **modalidade** (2019–2022) já validados contra o total da carreira.
-- Dados de ENEM-USP e Provão Paulista no `indicadores.csv` (com D).
+- Dados de ENEM-USP e Provão Paulista no `indicadores.csv`.
 - Opcional, se houver tempo: indicadores por **região de origem** (pergunta do QASE) e geometria das regiões do IBGE para um mapa coroplético.
 - **Relatório e vídeo:** novos dados e como foram tratados.
 
@@ -150,7 +150,7 @@ Exigência: **pelo menos 2 interações novas e pelo menos 2 visualizações nov
 
 ## Equilíbrio de carga
 
-- **A** continua com mais trabalho na 1ª entrega (10 anos de PDF por carreira), mas a leitura dos anuários passou para **D**, que tinha menos código no começo.
+- **A** concentra tudo o que é dado e PDF (QASE e anuários), por isso tem mais trabalho na 1ª entrega e menos na 2ª.
 - **D** tem as duas interações obrigatórias na 2ª entrega.
 - **B** e **C** têm carga parecida nas duas.
 
