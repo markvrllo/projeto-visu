@@ -51,6 +51,15 @@ python scripts/picotar_pdfs.py data/raw/FUVEST_2021_qase_chamados_matricula_1_cu
 python scripts/picotar_pdfs.py data/raw/*carreira*.pdf --carreira 710 875     # PDFs por carreira não têm a unidade no nome
 ```
 
+### Anuário Estatístico da USP, 2023 em diante (`scripts/recortar_anuario.py`)
+
+A Fuvest não publica o QASE em PDF desde 2023. O Anuário Estatístico da USP traz o mesmo questionário resumido (colunas Insc./Conv./Matr.), mas só para o total da USP e por área (Biológicas, Exatas, Humanas), sem carreira, curso ou modalidade. O script acha as tabelas de perfil pelo título (o número da tabela muda entre anuários) e grava um PDF por tabela em `data/raw/anuario/`: Fuvest em todos os anos, ENEM-USP a partir de 2025 e Provão Paulista em 2026.
+
+```bash
+python scripts/recortar_anuario.py AnuarioUSP_2023.pdf AnuarioUSP_2024.pdf AnuarioUSP_2025.pdf AnuarioUSP_2026.pdf
+python scripts/recortar_anuario.py AnuarioUSP_2026.pdf --com-candidato-vaga     # inclui candidato/vaga por curso
+```
+
 ## Estrutura
 
 | Caminho | O que é |
@@ -59,6 +68,7 @@ python scripts/picotar_pdfs.py data/raw/*carreira*.pdf --carreira 710 875     # 
 | `docs/lista_pdfs.md` | A mesma lista, legível, com a prioridade de download |
 | `scripts/coletar_fuvest.py` | Coleta dos PDFs nas páginas de acervo (BeautifulSoup) |
 | `scripts/picotar_pdfs.py` | Separa cada PDF do QASE em um arquivo por carreira/curso (pypdf) |
+| `scripts/recortar_anuario.py` | Recorta do Anuário Estatístico da USP as tabelas de perfil dos candidatos (2023+) |
 | `scripts/baixar_pdfs.py` | Plano B: download a partir da lista fixa |
 | `src/qase_parser.py` | Extração das tabelas do QASE (pdfplumber + regex) |
 | `src/harmonizacao.py` | Identificação das perguntas, reagrupamento das categorias e cálculo dos indicadores |
