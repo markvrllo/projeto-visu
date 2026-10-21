@@ -65,6 +65,7 @@ python scripts/recortar_anuario.py AnuarioUSP_2026.pdf --com-candidato-vaga     
 | Caminho | O que é |
 |---|---|
 | `data/fontes_qase.csv`, `data/fontes_notas.csv` | URLs de todos os PDFs da Fuvest usados |
+| `docs/divisao_tarefas.md` | Divisão do trabalho entre os 4 perfis, questões e cronograma |
 | `docs/lista_pdfs.md` | A mesma lista, legível, com a prioridade de download |
 | `scripts/coletar_fuvest.py` | Coleta dos PDFs nas páginas de acervo (BeautifulSoup) |
 | `scripts/picotar_pdfs.py` | Separa cada PDF do QASE em um arquivo por carreira/curso (pypdf) |
