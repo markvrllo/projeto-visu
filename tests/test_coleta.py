@@ -6,7 +6,7 @@ from pypdf import PdfReader
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "scripts"))
 from coletar_fuvest import classificar, links_da_pagina  # noqa: E402
-from picotar_pdfs import picotar, secoes  # noqa: E402
+from picotar_pdfs import cabecalho, picotar, secoes  # noqa: E402
 
 FIXTURES = Path(__file__).parent / "fixtures"
 AMOSTRA = FIXTURES / "FUVEST_2021_qase_chamados_matricula_1_curso_amostra.pdf"
@@ -62,3 +62,34 @@ def test_picotar_amostra_real(tmp_path):
 
     so_icmc = SimpleNamespace(unidade=["ICMC"], carreira=None, campus=None)
     assert picotar(AMOSTRA, tmp_path / "icmc", so_icmc) == 0
+
+
+def test_cabecalho_milhar_e_modalidade():
+    # texto do pypdf em fuvest_2013_qase_inscritos_car.pdf p. 635 e FUVEST_2022_..._carreira.pdf p. 1941
+    p2013 = "Carreira 710−Computação\nCopyright(c) 2013\nDos 3.229 candidatos, 3.229 (100,0%)\n330 vagas.\n"
+    assert cabecalho(p2013) == ("710", "Computação", "", "", "")
+    p2022 = ("Carreira 735−Engenharia Civil (São Carlos)\nDos 26 candidatos, 26 (100,0%)\n"
+             "26 vagas.\nModalidade de Acesso: Ampla Concorrência\n")
+    assert cabecalho(p2022)[4] == "Ampla Concorrência"
+    assert cabecalho(p2022.replace("Modalidade de Acesso: Ampla Concorrência", "Todas as Modalidades de Acesso"))[4] == "Todas"
+
+
+def test_classificar_anuario():
+    sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "scripts"))
+    from recortar_anuario import classificar as classificar_anuario
+
+    # sumário repete o título, mas sem "Quant.": não pode entrar
+    sumario = "Tabela 3.04 Características pessoais dos candidatos ao vestibular da FUVEST,\nem 2023"
+    assert classificar_anuario(sumario) is None
+    # textos reais (resumidos) do AnuarioUSP_2025.pdf, p. 237 e p. 332
+    fuvest = ("Tabela 3.04 Características pessoais dos candidatos ao vestibular da FUVEST, em 2025\n"
+              "Candidatos Treineiros\nInsc. Conv. Matr. Insc. Conv. Matr.\nQuant. %")
+    assert classificar_anuario(fuvest) == "fuvest_geral"
+    assert classificar_anuario(fuvest.replace("FUVEST, em", "FUVEST, por Área de Conhecimento, em")) == "fuvest_por_area"
+    enem = "Tabela 3.37 - Características pessoais dos candidatos do ENEM-USP, em 2025\nInsc. Conv. Matr.\nQuant. %"
+    assert classificar_anuario(enem) == "enem-usp_geral"
+    provao = "Tabela 3.40 Características pessoais dos candidatos do Provão Paulista, em 2026\nQuant. %"
+    assert classificar_anuario(provao) == "provao-paulista_geral"
+    cand = "Tabela 3.03 - Relação número de candidatos por vaga no vestibular da FUVEST\nUnidade/Curso 2024"
+    assert classificar_anuario(cand) is None
+    assert classificar_anuario(cand, com_candidato_vaga=True) == "fuvest_candidato_vaga"

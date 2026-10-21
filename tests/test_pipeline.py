@@ -120,6 +120,42 @@ def test_categorias_e_perguntas():
     assert tipo_pergunta("Qual é a sua cor ou etnia?") == "cor_raca"
 
 
+# Trechos reais (resumidos) de PDFs por carreira: fuvest_2013_qase_inscritos_car.pdf p. 635 (milhar com
+# ponto, pergunta com 1 dígito) e FUVEST_2022_qase_matriculados_no_final_carreira.pdf p. 1941 (modalidade)
+TRECHO_CARREIRA = """
+FUVEST 2013
+Questionário de Avaliação Socioeconômica 635
+Candidatos que se inscreveram na seguinte carreira:
+Dos 3.229 candidatos, 3.229 (100,0%) Carreira 710−Computação
+entregaram o questionário respondido.
+330 vagas.
+1 Qual é o seu sexo?
+82,3% Masculino. (2.659)
+17,7% Feminino. (570)
+3.229 respostas
+FUVEST 2022 Questionário de Avaliação Socioeconômica 1941
+Candidatos matriculados após a última chamada na seguinte carreira:
+Dos 26 candidatos, 26 (100,0%) Carreira 735−Engenharia Civil (São Carlos)
+entregaram o questionário respondido.
+26 vagas. Modalidade de Acesso: Ampla Concorrência
+01 Onde você cursou o ensino fundamental?
+0,0% Todo em escola pública. (0)
+92,3% Todo em escola particular. (24)
+7,7% Maior parte em escola pública. (2)
+26 respostas
+"""
+
+
+def test_parse_carreira_milhar_e_modalidade():
+    df = pd.DataFrame(parse_linhas(TRECHO_CARREIRA.splitlines()))
+    comp = df[df["cod_carreira"] == "710"]
+    assert (comp["candidatos"].iloc[0], comp["vagas"].iloc[0]) == (3229, 330)
+    assert list(comp["n"]) == [2659, 570] and comp["num_pergunta"].iloc[0] == 1
+    assert comp["modalidade"].isna().all()
+    civil = df[df["cod_carreira"] == "735"]
+    assert (civil["modalidade"].iloc[0], civil["campus"].iloc[0], civil["n"].sum()) == ("Ampla Concorrência", "São Carlos", 26)
+
+
 def test_meta_do_nome():
     m = meta_do_nome("FUVEST_2021_qase_matriculados_no_final_curso.pdf")
     assert (m["ano"], m["etapa"], m["nivel"]) == (2021, "matriculados", "curso")
