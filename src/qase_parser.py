@@ -30,13 +30,17 @@ from pathlib import Path
 import pandas as pd
 
 TRACO = r"\s*[−–—-]\s*"  # a Fuvest usa "−" (U+2212); aceitamos hífen e travessão também
-RE_CARREIRA = re.compile(rf"^Dos\s+(\d+)\s+candidatos,\s+(\d+)\s+\([\d,]+%\)\s+Carreira\s+(\d+){TRACO}(.+?)\s*$")
-RE_CURSO = re.compile(rf"^(\d+)\s+vagas\.?\s*(?:Curso\s+(\d+){TRACO}(.+?))?\s*$")
-RE_PERGUNTA = re.compile(r"^(\d{2})(?:\s+(\S.*))?$")
+# contagens grandes vêm com ponto de milhar ("Dos 3.229 candidatos", "(2.659)", "3.229 respostas")
+NUM = r"\d{1,3}(?:\.\d{3})*"
+RE_CARREIRA = re.compile(rf"^Dos\s+({NUM})\s+candidatos,\s+({NUM})\s+\([\d,]+%\)\s+Carreira\s+(\d+){TRACO}(.+?)\s*$")
+# a partir de 2019: "26 vagas. Modalidade de Acesso: Ampla Concorrência" ou "4 vagas. Todas as Modalidades de Acesso"
+RE_CURSO = re.compile(rf"^({NUM})\s+vagas\.?\s*(?:Curso\s+(\d+){TRACO}(.+?))?"
+                      r"\s*(?:Modalidade de Acesso:\s*(?P<mod>.+?)|(?P<todas>Todas as Modalidades de Acesso))?\s*$")
+RE_PERGUNTA = re.compile(r"^(\d{1,2})(?:\s+(\S.*))?$")  # "01 Qual..." (2021+) ou "1 Qual..." (2013)
 # "52,4% Todo em escola pública. (22)" — a contagem é o ÚLTIMO número entre parênteses
 # (há opções como "Região Intermediária de São Paulo (3501) (9)" e lixo como "(2) 2 PPI" no fim)
-RE_OPCAO = re.compile(r"^(?P<pct>\d{1,3},\d)%\s+(?P<texto>.+)\s*\((?P<n>\d+)\)[^()]*$")
-RE_RESPOSTAS = re.compile(r"^(\d+)\s+respostas$")
+RE_OPCAO = re.compile(rf"^(?P<pct>\d{{1,3}},\d)%\s+(?P<texto>.+)\s*\((?P<n>{NUM})\)[^()]*$")
+RE_RESPOSTAS = re.compile(rf"^({NUM})\s+respostas$")
 RE_UNIDADE = re.compile(r"\[(?:USP/)?([^\]]+)\]")
 CAMPI = ["São Carlos", "Ribeirão Preto", "Piracicaba", "Bauru", "Pirassununga", "Lorena", "Santos", "USP Leste"]
 LIXO = ("FUVEST ", "Questionário de Avaliação", "Candidatos que", "Candidatos chamados", "Candidatos convocados",
@@ -50,6 +54,11 @@ def texto_do_pdf(caminho, paginas=None):
     with pdfplumber.open(caminho) as pdf:
         idx = range(len(pdf.pages)) if paginas is None else paginas
         return [pdf.pages[i].extract_text() or "" for i in idx]
+
+
+def inteiro(txt):
+    """'3.229' -> 3229."""
+    return int(txt.replace(".", ""))
 
 
 def separar_unidade_campus(nome):
@@ -82,15 +91,17 @@ def parse_linhas(linhas, meta=None):
         if m := RE_CARREIRA.match(linha):
             # cabeçalho repetido em toda página; o curso (se houver) vem na linha "NN vagas. Curso ..."
             nome, unidade, campus = separar_unidade_campus(m.group(4))
-            secao = {"candidatos": int(m.group(1)), "questionarios": int(m.group(2)),
+            secao = {"candidatos": inteiro(m.group(1)), "questionarios": inteiro(m.group(2)),
                      "cod_carreira": m.group(3), "carreira": nome, "cod_curso": None, "curso": None,
-                     "unidade": unidade, "campus": campus, "vagas": None}
+                     "unidade": unidade, "campus": campus, "vagas": None, "modalidade": None}
             continue
         if secao is not None and (m := RE_CURSO.match(linha)):
-            secao["vagas"] = int(m.group(1))
+            secao["vagas"] = inteiro(m.group(1))
             if m.group(2):
                 nome, unidade, campus = separar_unidade_campus(m.group(3))
                 secao.update(cod_curso=m.group(2), curso=nome, unidade=unidade, campus=campus)
+            if m.group("mod") or m.group("todas"):
+                secao["modalidade"] = m.group("mod") or "Todas"
             continue
         if secao is None or linha.startswith(LIXO) or RE_RESPOSTAS.match(linha):
             lendo_enunciado = False
@@ -107,7 +118,7 @@ def parse_linhas(linhas, meta=None):
                 "pergunta": pergunta[1],
                 "opcao": m.group("texto").strip(" ."),
                 "pct": float(m.group("pct").replace(",", ".")),
-                "n": int(m.group("n")),
+                "n": inteiro(m.group("n")),
             })
             continue
 

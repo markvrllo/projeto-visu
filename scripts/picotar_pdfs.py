@@ -32,9 +32,11 @@ logging.getLogger("pypdf").setLevel(logging.ERROR)  # avisos de fonte não afeta
 
 RAIZ = Path(__file__).resolve().parents[1]
 TRACO = r"\s*[−–—-]\s*"
-RE_SECAO = re.compile(r"Dos\s+\d+\s+candidatos")
+RE_SECAO = re.compile(r"Dos\s+[\d.]+\s+candidatos")  # "Dos 3.229 candidatos": milhar com ponto
 RE_CARREIRA = re.compile(rf"^Carreira\s+(\d+){TRACO}(.+?)\s*$", re.M)
 RE_CURSO = re.compile(rf"^Curso\s+(\d+){TRACO}(.+?)\s*$", re.M)
+# a partir de 2019 cada carreira/curso se repete por modalidade de acesso
+RE_MODALIDADE = re.compile(r"Modalidade de Acesso:\s*(.+?)\s*$|(Todas as Modalidades de Acesso)", re.M)
 
 
 def slug(txt, limite=60):
@@ -44,14 +46,16 @@ def slug(txt, limite=60):
 
 
 def cabecalho(texto):
-    """Devolve (cod_carreira, carreira, cod_curso, curso) de uma página de seção, ou None."""
+    """Devolve (cod_carreira, carreira, cod_curso, curso, modalidade) de uma página de seção, ou None."""
     if not RE_SECAO.search(texto):
         return None
     car = RE_CARREIRA.search(texto)
     if not car:
         return None
     cur = RE_CURSO.search(texto)
-    return (car.group(1), car.group(2), cur.group(1) if cur else "", cur.group(2) if cur else "")
+    mod = RE_MODALIDADE.search(texto)
+    modalidade = (mod.group(1) or "Todas") if mod else ""
+    return (car.group(1), car.group(2), cur.group(1) if cur else "", cur.group(2) if cur else "", modalidade)
 
 
 def secoes(leitor):
@@ -70,7 +74,7 @@ def secoes(leitor):
 
 
 def passa_filtro(cab, args):
-    cod_car, carreira, _, curso = cab
+    cod_car, carreira, _, curso, _ = cab
     if args.carreira and cod_car not in args.carreira:
         return False
     if args.unidade and not any(u.upper() in (curso + carreira).upper() for u in args.unidade):
@@ -88,9 +92,10 @@ def picotar(arquivo, destino, args):
     for cab, paginas in grupos:
         if not passa_filtro(cab, args):
             continue
-        cod_car, carreira, cod_cur, curso = cab
+        cod_car, carreira, cod_cur, curso, modalidade = cab
         rotulo = f"{cod_car}-{cod_cur}" if cod_cur else cod_car
-        saida = destino / f"{Path(arquivo).stem}__{rotulo}_{slug(curso or carreira)}.pdf"
+        sufixo = f"_{slug(modalidade, 30)}" if modalidade else ""
+        saida = destino / f"{Path(arquivo).stem}__{rotulo}_{slug(curso or carreira)}{sufixo}.pdf"
         escritor = PdfWriter()
         for i in paginas:
             escritor.add_page(leitor.pages[i])

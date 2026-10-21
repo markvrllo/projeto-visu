@@ -6,7 +6,7 @@ from pypdf import PdfReader
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "scripts"))
 from coletar_fuvest import classificar, links_da_pagina  # noqa: E402
-from picotar_pdfs import picotar, secoes  # noqa: E402
+from picotar_pdfs import cabecalho, picotar, secoes  # noqa: E402
 
 FIXTURES = Path(__file__).parent / "fixtures"
 AMOSTRA = FIXTURES / "FUVEST_2021_qase_chamados_matricula_1_curso_amostra.pdf"
@@ -62,3 +62,13 @@ def test_picotar_amostra_real(tmp_path):
 
     so_icmc = SimpleNamespace(unidade=["ICMC"], carreira=None, campus=None)
     assert picotar(AMOSTRA, tmp_path / "icmc", so_icmc) == 0
+
+
+def test_cabecalho_milhar_e_modalidade():
+    # texto do pypdf em fuvest_2013_qase_inscritos_car.pdf p. 635 e FUVEST_2022_..._carreira.pdf p. 1941
+    p2013 = "Carreira 710−Computação\nCopyright(c) 2013\nDos 3.229 candidatos, 3.229 (100,0%)\n330 vagas.\n"
+    assert cabecalho(p2013) == ("710", "Computação", "", "", "")
+    p2022 = ("Carreira 735−Engenharia Civil (São Carlos)\nDos 26 candidatos, 26 (100,0%)\n"
+             "26 vagas.\nModalidade de Acesso: Ampla Concorrência\n")
+    assert cabecalho(p2022)[4] == "Ampla Concorrência"
+    assert cabecalho(p2022.replace("Modalidade de Acesso: Ampla Concorrência", "Todas as Modalidades de Acesso"))[4] == "Todas"
