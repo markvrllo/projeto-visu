@@ -1,6 +1,6 @@
 import pandas as pd
 
-from src.harmonizacao import calcular_indicadores, categoria_renda, harmonizar, tipo_pergunta
+from src.harmonizacao import categoria_renda, harmonizar, indicadores_de, contagens, montar, tipo_pergunta
 from src.qase_parser import meta_do_nome, parse_linhas
 
 # Trecho real (resumido) de FUVEST_2021_qase_chamados_matricula_1_curso.pdf, páginas 3 a 9,
@@ -96,15 +96,64 @@ def test_parse_reconhece_secao_e_opcoes():
 
 
 def test_indicadores():
-    ind = calcular_indicadores(harmonizar(registros())).iloc[0]
+    harm = harmonizar(registros())
+    chave = ["ano", "etapa"]
+    ind = indicadores_de(contagens(harm, chave), chave).iloc[0]
     assert round(ind["pct_PPI"], 1) == 26.2
     assert round(ind["pct_escola_publica"], 1) == 52.4
     assert round(ind["pct_renda_ate_3SM"], 1) == 16.7        # até 1 SM + 2 a 3 SM
     assert round(ind["pct_renda_mais_10SM"], 1) == 28.6
     assert round(ind["pct_pai_superior"], 1) == 45.0          # "Não sei" fora do denominador: 18/40
     assert round(ind["pct_cursinho"], 1) == 57.1
-    assert (round(ind["pct_mod_AC"], 1), round(ind["pct_mod_EP"], 1), round(ind["pct_mod_PPI"], 1)) == (47.6, 31.0, 21.4)
-    assert not bool(ind["icmc"])
+    assert ind["respondentes"] == 42                          # total da pergunta sobre a escola do ensino médio
+
+
+def _linha(ano, cod, mod, pergunta, opcao, n, arquivo="x.pdf", num=1):
+    return {"ano": ano, "etapa": "inscritos", "arquivo": arquivo, "cod_carreira": cod, "carreira": f"C{cod}",
+            "unidade": None, "modalidade": mod, "num_pergunta": num, "pergunta": pergunta, "opcao": opcao, "n": n}
+
+
+def test_montar_soma_contagens_por_area_e_modalidade():
+    P = "Onde você cursou o ensino médio?"
+    linhas = []
+    # carreira 1 (Exatas): AC 10 de 100 em escola pública; EP 50 de 50
+    linhas += [_linha(2020, 1, "Ampla Concorrência", P, "Todo em escola pública", 10),
+               _linha(2020, 1, "Ampla Concorrência", P, "Todo em escola particular", 90),
+               _linha(2020, 1, "Candidatos de Escola Pública", P, "Todo em escola pública", 50)]
+    # carreira 2 (Humanas), modalidade AC: 30 de 50
+    linhas += [_linha(2020, 2, "Ampla Concorrência", P, "Todo em escola pública", 30),
+               _linha(2020, 2, "Ampla Concorrência", P, "Todo em escola particular", 20)]
+    qase = pd.DataFrame(linhas)
+    mapa = pd.DataFrame({"ano": [2020, 2020], "cod_carreira": [1, 2], "area": ["Exatas", "Humanas"]})
+    anuario = pd.DataFrame([{"ano": 2023, "fonte": "anuario", "ingresso": "fuvest", "etapa": "matriculados",
+                             "nivel": "usp", "area": None, "arquivo": "a.pdf", "pergunta": P,
+                             "opcao": "Todo em escola pública", "n": 7}])
+    ind = montar(qase, anuario, mapa)
+    def v(**k):
+        sel = ind
+        for c, x in k.items():
+            sel = sel[sel[c].isna()] if x is None else sel[sel[c] == x]
+        assert len(sel) == 1, k
+        return sel.iloc[0]
+    assert v(nivel="carreira", cod_carreira=1, modalidade="Todas")["pct_escola_publica"] == 40.0   # (10+50)/150, soma de contagens
+    assert v(nivel="carreira", cod_carreira=1, modalidade="EP")["pct_escola_publica"] == 100.0
+    assert v(nivel="area", area="Exatas", modalidade="Todas")["respondentes"] == 150
+    assert v(nivel="usp", fonte="qase", modalidade="Todas")["pct_escola_publica"] == 45.0          # 90/200
+    assert v(nivel="usp", fonte="qase", modalidade="AC")["pct_escola_publica"].round(2) == 26.67    # (10+30)/150
+    an = v(fonte="anuario")
+    assert an["pct_escola_publica"] == 100.0 and pd.isna(an["pct_PPI"])   # pergunta ausente -> vazio, não zero
+
+
+def test_excluir_reprovados():
+    P = "Onde você cursou o ensino médio?"
+    qase = pd.DataFrame([_linha(2020, 1, None, P, "Todo em escola pública", 10, "a.pdf", 5),
+                         _linha(2020, 1, None, P, "Todo em escola particular", 10, "a.pdf", 5)])
+    mapa = pd.DataFrame({"ano": [2020], "cod_carreira": [1], "area": ["Exatas"]})
+    anuario = pd.DataFrame([{"ano": 2023, "fonte": "anuario", "ingresso": "fuvest", "etapa": "inscritos",
+                             "nivel": "usp", "area": None, "arquivo": "b.pdf", "pergunta": P,
+                             "opcao": "Todo em escola pública", "n": 7}])
+    ind = montar(qase, anuario, mapa, reprov_qase=pd.DataFrame({"arquivo": ["a.pdf"], "num_pergunta": [5]}))
+    assert ind[ind["fonte"] == "qase"].empty or ind.loc[ind["fonte"] == "qase", "pct_escola_publica"].isna().all()
 
 
 def test_categorias_e_perguntas():
@@ -118,6 +167,10 @@ def test_categorias_e_perguntas():
     assert tipo_pergunta("Candidatos que se autodeclararam do grupo PPI: Qual seu sexo?") is None
     assert tipo_pergunta("Onde você cursou/cursa o ensino médio?") == "escola_medio"
     assert tipo_pergunta("Qual é a sua cor ou etnia?") == "cor_raca"
+    assert tipo_pergunta("Você cursa/cursou o Ensino Médio de modo:") is None
+    assert tipo_pergunta("Que tipo de Ensino Médio você concluiu/concluirá?") == "tipo_medio"
+    assert tipo_pergunta("Qual é o nível de instrução do primeiro responsável por você (mãe, pai ou outra pessoa)?") is None
+    assert tipo_pergunta("Qual seu sexo?") == "sexo"
 
 
 # Trechos reais (resumidos) de PDFs por carreira: fuvest_2013_qase_inscritos_car.pdf p. 635 (milhar com

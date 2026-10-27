@@ -1,0 +1,1101 @@
+ano,cod_carreira,carreira,area,treinamento
+2013,100,Administração − Ribeirão Preto,Humanas,False
+2014,100,Administração − Ribeirão Preto,Humanas,False
+2015,100,Administração − Ribeirão Preto,Humanas,False
+2016,100,Administração − Ribeirão Preto,Humanas,False
+2017,100,"Administração, Ciências Contábeis, Economia, Economia e",Humanas,False
+2018,100,"Administração, Ciências Contábeis, Economia, Economia e",Humanas,False
+2019,100,"Administração, Ciências Contábeis, Economia, Economia e",Humanas,False
+2020,100,"Administração, Ciências Contábeis, Economia, Economia e",Humanas,False
+2021,100,"Administração, Ciências Contábeis, Economia, Economia e",Humanas,False
+2022,100,"Administração, Ciências Contábeis, Economia, Finanças e",Humanas,False
+2013,101,Administração − Piracicaba,Humanas,False
+2014,101,Administração − Piracicaba,Humanas,False
+2015,101,Administração − Piracicaba,Humanas,False
+2016,101,Administração − Piracicaba,Humanas,False
+2017,101,Administração − Piracicaba,Humanas,False
+2018,101,Administração − Piracicaba,Humanas,False
+2019,101,Administração − Piracicaba,Humanas,False
+2020,101,Administração − Piracicaba,Humanas,False
+2021,101,Administração − Piracicaba,Humanas,False
+2022,101,Administração (Piracicaba),Humanas,False
+2013,105,Arquitetura − FAU,Humanas,False
+2014,105,Arquitetura − FAU,Humanas,False
+2015,105,Arquitetura − FAU,Humanas,False
+2016,105,Arquitetura − FAU,Humanas,False
+2017,105,Arquitetura − FAU,Humanas,False
+2018,105,Arquitetura − FAU,Humanas,False
+2019,105,Arquitetura − FAU,Humanas,False
+2020,105,Arquitetura − FAU,Humanas,False
+2021,105,Arquitetura − FAU,Humanas,False
+2022,105,Arquitetura − FAU (São Paulo),Humanas,False
+2013,110,Arquitetura − São Carlos,Humanas,False
+2014,110,Arquitetura − São Carlos,Humanas,False
+2015,110,Arquitetura − São Carlos,Humanas,False
+2016,110,Arquitetura − São Carlos,Humanas,False
+2017,110,Arquitetura − São Carlos,Humanas,False
+2018,110,Arquitetura − São Carlos,Humanas,False
+2019,110,Arquitetura − São Carlos,Humanas,False
+2020,110,Arquitetura − São Carlos,Humanas,False
+2021,110,Arquitetura − São Carlos,Humanas,False
+2022,110,Arquitetura (São Carlos),Humanas,False
+2013,115,Artes Cênicas − Bacharelado,Humanas,False
+2014,115,Artes Cênicas − Bacharelado,Humanas,False
+2015,115,Artes Cênicas − Bacharelado,Humanas,False
+2016,115,Artes Cênicas − Bacharelado,Humanas,False
+2017,115,Artes Cênicas,Humanas,False
+2018,115,Artes Cênicas,Humanas,False
+2019,115,Artes Cênicas,Humanas,False
+2020,115,Artes Cênicas,Humanas,False
+2021,115,Artes Cênicas,Humanas,False
+2022,115,Artes Cênicas (São Paulo),Humanas,False
+2013,120,Artes Cênicas − Licenciatura,Humanas,False
+2014,120,Artes Cênicas − Licenciatura,Humanas,False
+2015,120,Artes Cênicas − Licenciatura,Humanas,False
+2016,120,Artes Cênicas − Licenciatura,Humanas,False
+2013,125,Artes Visuais,Humanas,False
+2014,125,Artes Visuais,Humanas,False
+2015,125,Artes Visuais,Humanas,False
+2016,125,Artes Visuais,Humanas,False
+2017,125,Artes Visuais,Humanas,False
+2018,125,Artes Visuais,Humanas,False
+2019,125,Artes Visuais,Humanas,False
+2020,125,Artes Visuais,Humanas,False
+2021,125,Artes Visuais,Humanas,False
+2022,125,Artes Visuais (São Paulo),Humanas,False
+2013,130,Biblioteconomia,Humanas,False
+2014,130,Biblioteconomia,Humanas,False
+2015,130,Biblioteconomia,Humanas,False
+2016,130,Biblioteconomia,Humanas,False
+2017,130,Biblioteconomia,Humanas,False
+2018,130,Biblioteconomia,Humanas,False
+2019,130,Biblioteconomia,Humanas,False
+2020,130,Biblioteconomia,Humanas,False
+2021,130,Ciência da Informação,Humanas,False
+2022,130,Ciência da Informação (São Paulo),Humanas,False
+2013,135,Ciências Contábeis − Ribeirão Preto,Humanas,False
+2014,135,Ciências Contábeis − Ribeirão Preto,Humanas,False
+2015,135,Ciências Contábeis − Ribeirão Preto,Humanas,False
+2016,135,Ciências Contábeis − Ribeirão Preto,Humanas,False
+2013,140,Ciências da Informação e da Documentação − Ribeirão Pre,Humanas,False
+2014,140,Ciências da Informação e da Documentação − Ribeirão Pre,Humanas,False
+2015,140,Ciências da Informação e da Documentação − Ribeirão Pre,Humanas,False
+2016,140,Ciências da Informação e da Documentação − Ribeirão Pre,Humanas,False
+2017,140,Ciências da Informação e da Documentação − Ribeirão Pre,Humanas,False
+2018,140,Ciências da Informação e da Documentação − Ribeirão Pre,Humanas,False
+2019,140,Ciências da Informação e da Documentação − Ribeirão Pre,Humanas,False
+2020,140,Biblioteconomia e Ciência da Informação − Ribeirão Pret,Humanas,False
+2021,140,Biblioteconomia e Ciência da Informação − Ribeirão Pret,Humanas,False
+2022,140,Biblioteconomia e Ciência da Informação (Ribeirão Preto,Humanas,False
+2013,145,Ciências Sociais,Humanas,False
+2014,145,Ciências Sociais,Humanas,False
+2015,145,Ciências Sociais,Humanas,False
+2016,145,Ciências Sociais,Humanas,False
+2017,145,Ciências Sociais,Humanas,False
+2018,145,Ciências Sociais,Humanas,False
+2019,145,Ciências Sociais,Humanas,False
+2020,145,Ciências Sociais,Humanas,False
+2021,145,Ciências Sociais,Humanas,False
+2022,145,Ciências Sociais (São Paulo),Humanas,False
+2013,150,Curso Superior do Audiovisual,Humanas,False
+2014,150,Curso Superior do Audiovisual,Humanas,False
+2015,150,Curso Superior do Audiovisual,Humanas,False
+2016,150,Curso Superior do Audiovisual,Humanas,False
+2017,150,Curso Superior do Audiovisual,Humanas,False
+2018,150,Curso Superior do Audiovisual,Humanas,False
+2019,150,Curso Superior do Audiovisual,Humanas,False
+2020,150,Curso Superior do Audiovisual,Humanas,False
+2021,150,Curso Superior do Audiovisual,Humanas,False
+2022,150,Curso Superior do Audiovisual (São Paulo),Humanas,False
+2013,155,Design,Humanas,False
+2014,155,Design,Humanas,False
+2015,155,Design,Humanas,False
+2016,155,Design,Humanas,False
+2017,155,Design,Humanas,False
+2018,155,Design,Humanas,False
+2019,155,Design,Humanas,False
+2020,155,Design,Humanas,False
+2021,155,Design,Humanas,False
+2022,155,Design (São Paulo),Humanas,False
+2013,160,Direito,Humanas,False
+2014,160,Direito,Humanas,False
+2015,160,Direito,Humanas,False
+2016,160,Direito,Humanas,False
+2017,160,Direito,Humanas,False
+2018,160,Direito,Humanas,False
+2019,160,Direito,Humanas,False
+2020,160,Direito,Humanas,False
+2021,160,Direito,Humanas,False
+2022,160,"Direito (São Paulo, Ribeirão Preto)",Humanas,False
+2013,165,"Economia, Administração, Ciências Contábeis e Atuária",Humanas,False
+2014,165,"Economia, Administração, Ciências Contábeis e Atuária",Humanas,False
+2015,165,"Economia, Administração, Ciências Contábeis e Atuária",Humanas,False
+2016,165,"Economia, Administração, Ciências Contábeis e Atuária",Humanas,False
+2017,165,"Economia, Administração, Ciências Contábeis e Atuária",Humanas,False
+2018,165,"Economia, Administração, Ciências Contábeis e Atuária",Humanas,False
+2019,165,"Economia, Administração, Ciências Contábeis e Atuária",Humanas,False
+2020,165,"Economia, Administração, Ciências Contábeis e Atuária",Humanas,False
+2021,165,"Economia, Administração, Ciências Contábeis e Atuária",Humanas,False
+2022,165,"Economia, Administração, Ciências Contábeis e Atuária (",Humanas,False
+2013,170,Economia Empresarial e Controladoria − Ribeirão Preto,Humanas,False
+2014,170,Economia Empresarial e Controladoria − Ribeirão Preto,Humanas,False
+2015,170,Economia Empresarial e Controladoria − Ribeirão Preto,Humanas,False
+2016,170,Economia Empresarial e Controladoria − Ribeirão Preto,Humanas,False
+2013,175,Economia − Piracicaba,Humanas,False
+2014,175,Economia − Piracicaba,Humanas,False
+2015,175,Economia − Piracicaba,Humanas,False
+2016,175,Economia − Piracicaba,Humanas,False
+2017,175,Economia − Piracicaba,Humanas,False
+2018,175,Economia − Piracicaba,Humanas,False
+2019,175,Economia − Piracicaba,Humanas,False
+2020,175,Economia − Piracicaba,Humanas,False
+2021,175,Economia − Piracicaba,Humanas,False
+2022,175,Economia (Piracicaba),Humanas,False
+2013,180,Economia − Ribeirão Preto,Humanas,False
+2014,180,Economia − Ribeirão Preto,Humanas,False
+2015,180,Economia − Ribeirão Preto,Humanas,False
+2016,180,Economia − Ribeirão Preto,Humanas,False
+2013,185,Editoração,Humanas,False
+2014,185,Editoração,Humanas,False
+2015,185,Editoração,Humanas,False
+2016,185,Editoração,Humanas,False
+2017,185,Editoração,Humanas,False
+2018,185,Editoração,Humanas,False
+2019,185,Editoração,Humanas,False
+2020,185,Editoração,Humanas,False
+2021,185,Editoração,Humanas,False
+2022,185,Editoração (São Paulo),Humanas,False
+2013,190,Filosofia,Humanas,False
+2014,190,Filosofia,Humanas,False
+2015,190,Filosofia,Humanas,False
+2016,190,Filosofia,Humanas,False
+2017,190,Filosofia,Humanas,False
+2018,190,Filosofia,Humanas,False
+2019,190,Filosofia,Humanas,False
+2020,190,Filosofia,Humanas,False
+2021,190,Filosofia,Humanas,False
+2022,190,Filosofia (São Paulo),Humanas,False
+2013,195,Geografia,Humanas,False
+2014,195,Geografia,Humanas,False
+2015,195,Geografia,Humanas,False
+2016,195,Geografia,Humanas,False
+2017,195,Geografia,Humanas,False
+2018,195,Geografia,Humanas,False
+2019,195,Geografia,Humanas,False
+2020,195,Geografia,Humanas,False
+2021,195,Geografia,Humanas,False
+2022,195,Geografia (São Paulo),Humanas,False
+2013,200,"Gestão Ambiental − USP Leste, SP",Humanas,False
+2014,200,"Gestão Ambiental − USP Leste, SP",Humanas,False
+2015,200,"Gestão Ambiental − USP Leste, SP",Humanas,False
+2016,200,"Gestão Ambiental − USP Leste, SP",Humanas,False
+2017,200,"Gestão Ambiental − USP Leste, SP",Humanas,False
+2018,200,"Gestão Ambiental − USP Leste, SP",Humanas,False
+2019,200,"Gestão Ambiental − USP Leste, SP",Humanas,False
+2020,200,"Gestão Ambiental − USP Leste, SP",Humanas,False
+2021,200,"Gestão Ambiental − USP Leste, SP",Humanas,False
+2022,200,Gestão Ambiental − USP Leste (São Paulo),Humanas,False
+2013,205,Gestão Ambiental − Piracicaba,Humanas,False
+2014,205,Gestão Ambiental − Piracicaba,Humanas,False
+2015,205,Gestão Ambiental − Piracicaba,Humanas,False
+2016,205,Gestão Ambiental − Piracicaba,Humanas,False
+2017,205,Gestão Ambiental − Piracicaba,Humanas,False
+2018,205,Gestão Ambiental − Piracicaba,Humanas,False
+2019,205,Gestão Ambiental − Piracicaba,Humanas,False
+2020,205,Gestão Ambiental − Piracicaba,Humanas,False
+2021,205,Gestão Ambiental − Piracicaba,Humanas,False
+2022,205,Gestão Ambiental (Piracicaba),Humanas,False
+2013,210,"Gestão de Políticas Públicas − USP Leste, SP",Humanas,False
+2014,210,"Gestão de Políticas Públicas − USP Leste, SP",Humanas,False
+2015,210,"Gestão de Políticas Públicas − USP Leste, SP",Humanas,False
+2016,210,"Gestão de Políticas Públicas − USP Leste, SP",Humanas,False
+2017,210,"Gestão de Políticas Públicas − USP Leste, SP",Humanas,False
+2018,210,"Gestão de Políticas Públicas − USP Leste, SP",Humanas,False
+2019,210,"Gestão de Políticas Públicas − USP Leste, SP",Humanas,False
+2020,210,"Gestão de Políticas Públicas − USP Leste, SP",Humanas,False
+2021,210,"Gestão de Políticas Públicas − USP Leste, SP",Humanas,False
+2022,210,Gestão de Políticas Públicas − USP Leste (São Paulo),Humanas,False
+2013,215,História,Humanas,False
+2014,215,História,Humanas,False
+2015,215,História,Humanas,False
+2016,215,História,Humanas,False
+2017,215,História,Humanas,False
+2018,215,História,Humanas,False
+2019,215,História,Humanas,False
+2020,215,História,Humanas,False
+2021,215,História,Humanas,False
+2022,215,História (São Paulo),Humanas,False
+2013,220,Jornalismo,Humanas,False
+2014,220,Jornalismo,Humanas,False
+2015,220,Jornalismo,Humanas,False
+2016,220,Jornalismo,Humanas,False
+2017,220,Jornalismo,Humanas,False
+2018,220,Jornalismo,Humanas,False
+2019,220,Jornalismo,Humanas,False
+2020,220,Jornalismo,Humanas,False
+2021,220,Jornalismo,Humanas,False
+2022,220,Jornalismo (São Paulo),Humanas,False
+2013,225,"Lazer e Turismo − USP Leste, SP",Humanas,False
+2014,225,"Lazer e Turismo − USP Leste, SP",Humanas,False
+2015,225,"Lazer e Turismo − USP Leste, SP",Humanas,False
+2016,225,"Lazer e Turismo − USP Leste, SP",Humanas,False
+2017,225,"Lazer e Turismo − USP Leste, SP",Humanas,False
+2018,225,"Lazer e Turismo − USP Leste, SP",Humanas,False
+2019,225,"Lazer e Turismo − USP Leste, SP",Humanas,False
+2020,225,"Lazer e Turismo − USP Leste, SP",Humanas,False
+2021,225,"Lazer e Turismo − USP Leste, SP",Humanas,False
+2022,225,Lazer e Turismo − USP Leste (São Paulo),Humanas,False
+2013,230,Licenciatura em Educomunicação,Humanas,False
+2014,230,Licenciatura em Educomunicação,Humanas,False
+2015,230,Licenciatura em Educomunicação,Humanas,False
+2016,230,Licenciatura em Educomunicação,Humanas,False
+2017,230,Licenciatura em Educomunicação,Humanas,False
+2018,230,Licenciatura em Educomunicação,Humanas,False
+2019,230,Letras,Humanas,False
+2020,230,Letras,Humanas,False
+2021,230,Letras,Humanas,False
+2022,230,Letras (São Paulo),Humanas,False
+2013,235,Letras,Humanas,False
+2014,235,Letras,Humanas,False
+2015,235,Letras,Humanas,False
+2016,235,Letras,Humanas,False
+2017,235,Letras,Humanas,False
+2018,235,Letras,Humanas,False
+2019,235,Licenciatura em Educomunicação,Humanas,False
+2020,235,Licenciatura em Educomunicação,Humanas,False
+2021,235,Licenciatura em Educomunicação,Humanas,False
+2022,235,Licenciatura em Educomunicação (São Paulo),Humanas,False
+2013,240,"Marketing − USP Leste, SP",Humanas,False
+2014,240,"Marketing − USP Leste, SP",Humanas,False
+2015,240,"Marketing − USP Leste, SP",Humanas,False
+2016,240,"Marketing − USP Leste, SP",Humanas,False
+2017,240,"Marketing − USP Leste, SP",Humanas,False
+2018,240,"Marketing − USP Leste, SP",Humanas,False
+2019,240,"Marketing − USP Leste, SP",Humanas,False
+2020,240,"Marketing − USP Leste, SP",Humanas,False
+2021,240,"Marketing − USP Leste, SP",Humanas,False
+2022,240,Marketing − USP Leste (São Paulo),Humanas,False
+2013,245,Música − ECA,Humanas,False
+2014,245,Música − ECA,Humanas,False
+2015,245,Música − ECA,Humanas,False
+2016,245,Música − ECA,Humanas,False
+2017,245,Música − ECA,Humanas,False
+2018,245,Música − ECA,Humanas,False
+2019,245,Música − ECA,Humanas,False
+2020,245,Música − ECA,Humanas,False
+2021,245,Música − ECA,Humanas,False
+2022,245,Música − ECA (São Paulo),Humanas,False
+2013,250,Música − Ribeirão Preto,Humanas,False
+2014,250,Música − Ribeirão Preto,Humanas,False
+2015,250,Música − Ribeirão Preto,Humanas,False
+2016,250,Música − Ribeirão Preto,Humanas,False
+2017,250,Música − Ribeirão Preto,Humanas,False
+2018,250,Música − Ribeirão Preto,Humanas,False
+2019,250,Música − Ribeirão Preto,Humanas,False
+2020,250,Música − Ribeirão Preto,Humanas,False
+2021,250,Música − Ribeirão Preto,Humanas,False
+2022,250,Música (Ribeirão Preto),Humanas,False
+2013,255,Pedagogia,Humanas,False
+2014,255,Pedagogia,Humanas,False
+2015,255,Pedagogia,Humanas,False
+2016,255,Pedagogia,Humanas,False
+2017,255,Pedagogia,Humanas,False
+2018,255,Pedagogia,Humanas,False
+2019,255,Pedagogia,Humanas,False
+2020,255,Pedagogia,Humanas,False
+2021,255,Pedagogia,Humanas,False
+2022,255,Pedagogia (São Paulo),Humanas,False
+2013,260,Pedagogia − Ribeirão Preto,Humanas,False
+2014,260,Pedagogia − Ribeirão Preto,Humanas,False
+2015,260,Pedagogia − Ribeirão Preto,Humanas,False
+2016,260,Pedagogia − Ribeirão Preto,Humanas,False
+2017,260,Pedagogia − Ribeirão Preto,Humanas,False
+2018,260,Pedagogia − Ribeirão Preto,Humanas,False
+2019,260,Pedagogia − Ribeirão Preto,Humanas,False
+2020,260,Pedagogia − Ribeirão Preto,Humanas,False
+2021,260,Pedagogia − Ribeirão Preto,Humanas,False
+2022,260,Pedagogia (Ribeirão Preto),Humanas,False
+2013,265,Publicidade e Propaganda,Humanas,False
+2014,265,Publicidade e Propaganda,Humanas,False
+2015,265,Publicidade e Propaganda,Humanas,False
+2016,265,Publicidade e Propaganda,Humanas,False
+2017,265,Publicidade e Propaganda,Humanas,False
+2018,265,Publicidade e Propaganda,Humanas,False
+2019,265,Publicidade e Propaganda,Humanas,False
+2020,265,Publicidade e Propaganda,Humanas,False
+2021,265,Publicidade e Propaganda,Humanas,False
+2022,265,Publicidade e Propaganda (São Paulo),Humanas,False
+2013,270,Relações Internacionais,Humanas,False
+2014,270,Relações Internacionais,Humanas,False
+2015,270,Relações Internacionais,Humanas,False
+2016,270,Relações Internacionais,Humanas,False
+2017,270,Relações Internacionais,Humanas,False
+2018,270,Relações Internacionais,Humanas,False
+2019,270,Relações Internacionais,Humanas,False
+2020,270,Relações Internacionais,Humanas,False
+2021,270,Relações Internacionais,Humanas,False
+2022,270,Relações Internacionais (São Paulo),Humanas,False
+2013,275,Relações Públicas,Humanas,False
+2014,275,Relações Públicas,Humanas,False
+2015,275,Relações Públicas,Humanas,False
+2016,275,Relações Públicas,Humanas,False
+2017,275,Relações Públicas,Humanas,False
+2018,275,Relações Públicas,Humanas,False
+2019,275,Relações Públicas,Humanas,False
+2020,275,Relações Públicas,Humanas,False
+2021,275,Relações Públicas,Humanas,False
+2022,275,Relações Públicas (São Paulo),Humanas,False
+2013,280,"Têxtil e Moda − USP Leste, SP",Humanas,False
+2014,280,"Têxtil e Moda − USP Leste, SP",Humanas,False
+2015,280,"Têxtil e Moda − USP Leste, SP",Humanas,False
+2016,280,"Têxtil e Moda − USP Leste, SP",Humanas,False
+2017,280,"Têxtil e Moda − USP Leste, SP",Humanas,False
+2018,280,"Têxtil e Moda − USP Leste, SP",Humanas,False
+2019,280,"Têxtil e Moda − USP Leste, SP",Humanas,False
+2020,280,"Têxtil e Moda − USP Leste, SP",Humanas,False
+2021,280,"Têxtil e Moda − USP Leste, SP",Humanas,False
+2022,280,Têxtil e Moda − USP Leste (São Paulo),Humanas,False
+2013,285,Turismo,Humanas,False
+2014,285,Turismo,Humanas,False
+2015,285,Turismo,Humanas,False
+2016,285,Turismo,Humanas,False
+2017,285,Turismo,Humanas,False
+2018,285,Turismo,Humanas,False
+2019,285,Turismo,Humanas,False
+2020,285,Turismo,Humanas,False
+2021,285,Turismo,Humanas,False
+2022,285,Turismo (São Paulo),Humanas,False
+2013,399,Humanas,,True
+2014,399,Treinamento Humanas,,True
+2015,399,Treinamento Humanas,,True
+2016,399,Treinamento Humanas,,True
+2017,399,Treinamento Humanas,,True
+2018,399,Treinamento Humanas,,True
+2019,399,Treinamento H (Humanas),,True
+2020,399,Treinamento H (Humanas),,True
+2021,399,Treinamento H (Humanas),,True
+2022,399,Treinamento H (Humanas),,True
+2013,400,Ciências Biológicas,Biológicas,False
+2014,400,Ciências Biológicas,Biológicas,False
+2015,400,Ciências Biológicas,Biológicas,False
+2016,400,Ciências Biológicas,Biológicas,False
+2017,400,Ciências Biológicas,Biológicas,False
+2018,400,"Bacharelado em Biotecnologia − USP Leste, SP",Biológicas,False
+2019,400,"Bacharelado em Biotecnologia − USP Leste, SP",Biológicas,False
+2020,400,"Bacharelado em Biotecnologia − USP Leste, SP",Biológicas,False
+2021,400,"Bacharelado em Biotecnologia − USP Leste, SP",Biológicas,False
+2022,400,Bacharelado em Biotecnologia − USP Leste (São Paulo),Biológicas,False
+2018,401,Ciências Biológicas,Biológicas,False
+2019,401,Ciências Biológicas,Biológicas,False
+2020,401,Ciências Biológicas,Biológicas,False
+2021,401,Ciências Biológicas,Biológicas,False
+2022,401,Ciências Biológicas (São Paulo),Biológicas,False
+2013,405,Ciências Biológicas − Piracicaba,Biológicas,False
+2014,405,Ciências Biológicas − Piracicaba,Biológicas,False
+2015,405,Ciências Biológicas − Piracicaba,Biológicas,False
+2016,405,Ciências Biológicas − Piracicaba,Biológicas,False
+2017,405,Ciências Biológicas − Piracicaba,Biológicas,False
+2018,405,Ciências Biológicas − Piracicaba,Biológicas,False
+2019,405,Ciências Biológicas − Piracicaba,Biológicas,False
+2020,405,Ciências Biológicas − Piracicaba,Biológicas,False
+2021,405,Ciências Biológicas − Piracicaba,Biológicas,False
+2022,405,Ciências Biológicas (Piracicaba),Biológicas,False
+2013,410,Ciências Biológicas − Ribeirão Preto,Biológicas,False
+2014,410,Ciências Biológicas − Ribeirão Preto,Biológicas,False
+2015,410,Ciências Biológicas − Ribeirão Preto,Biológicas,False
+2016,410,Ciências Biológicas − Ribeirão Preto,Biológicas,False
+2017,410,Ciências Biológicas − Ribeirão Preto,Biológicas,False
+2018,410,Ciências Biológicas − Ribeirão Preto,Biológicas,False
+2019,410,Ciências Biológicas − Ribeirão Preto,Biológicas,False
+2020,410,Ciências Biológicas − Ribeirão Preto,Biológicas,False
+2021,410,Ciências Biológicas − Ribeirão Preto,Biológicas,False
+2022,410,Ciências Biológicas (Ribeirão Preto),Biológicas,False
+2013,415,Ciências Biomédicas,Biológicas,False
+2014,415,Ciências Biomédicas,Biológicas,False
+2015,415,Ciências Biomédicas,Biológicas,False
+2016,415,Ciências Biomédicas,Biológicas,False
+2017,415,Ciências Biomédicas,Biológicas,False
+2018,415,Ciências Biomédicas,Biológicas,False
+2019,415,Ciências Biomédicas,Biológicas,False
+2020,415,Ciências Biomédicas,Biológicas,False
+2021,415,Ciências Biomédicas,Biológicas,False
+2022,415,Ciências Biomédicas (São Paulo),Biológicas,False
+2014,416,Ciências Biomédicas − Ribeirão Preto,Biológicas,False
+2015,416,Ciências Biomédicas − Ribeirão Preto,Biológicas,False
+2016,416,Ciências Biomédicas − Ribeirão Preto,Biológicas,False
+2017,416,Ciências Biomédicas − Ribeirão Preto,Biológicas,False
+2018,416,Ciências Biomédicas − Ribeirão Preto,Biológicas,False
+2019,416,Ciências Biomédicas − Ribeirão Preto,Biológicas,False
+2020,416,Ciências Biomédicas − Ribeirão Preto,Biológicas,False
+2021,416,Ciências Biomédicas − Ribeirão Preto,Biológicas,False
+2022,416,Ciências Biomédicas (Ribeirão Preto),Biológicas,False
+2013,420,"Ciências da Atividade Física − USP Leste, SP",Biológicas,False
+2013,425,Ciências dos Alimentos − Piracicaba,Biológicas,False
+2014,425,Ciências dos Alimentos − Piracicaba,Biológicas,False
+2015,425,Ciências dos Alimentos − Piracicaba,Biológicas,False
+2016,425,Ciências dos Alimentos − Piracicaba,Biológicas,False
+2017,425,Ciências dos Alimentos − Piracicaba,Biológicas,False
+2018,425,Ciências dos Alimentos − Piracicaba,Biológicas,False
+2019,425,Ciências dos Alimentos − Piracicaba,Biológicas,False
+2020,425,Ciências dos Alimentos − Piracicaba,Biológicas,False
+2021,425,Ciências dos Alimentos − Piracicaba,Biológicas,False
+2022,425,Ciências dos Alimentos (Piracicaba),Biológicas,False
+2013,430,Educação Física e Esporte,Biológicas,False
+2014,430,Educação Física e Esporte,Biológicas,False
+2015,430,Educação Física e Esporte,Biológicas,False
+2016,430,Educação Física e Esporte,Biológicas,False
+2017,430,Educação Física e Esporte,Biológicas,False
+2018,430,Educação Física e Esporte,Biológicas,False
+2019,430,Educação Física e Esporte,Biológicas,False
+2020,430,Educação Física e Esporte,Biológicas,False
+2021,430,Educação Física e Esporte,Biológicas,False
+2022,430,Educação Física e Esporte (São Paulo),Biológicas,False
+2013,435,Educação Física − Ribeirão Preto,Biológicas,False
+2014,435,Educação Física e Esporte − Ribeirão Preto,Biológicas,False
+2015,435,Educação Física e Esporte − Ribeirão Preto,Biológicas,False
+2016,435,Educação Física e Esporte − Ribeirão Preto,Biológicas,False
+2017,435,Educação Física e Esporte − Ribeirão Preto,Biológicas,False
+2018,435,Educação Física e Esporte − Ribeirão Preto,Biológicas,False
+2019,435,Educação Física e Esporte − Ribeirão Preto,Biológicas,False
+2020,435,Educação Física e Esporte − Ribeirão Preto,Biológicas,False
+2021,435,Educação Física e Esporte − Ribeirão Preto,Biológicas,False
+2022,435,Educação Física (Ribeirão Preto),Biológicas,False
+2014,436,"Educação Física e Saúde − USP Leste, SP",Biológicas,False
+2015,436,"Educação Física e Saúde − USP Leste, SP",Biológicas,False
+2016,436,"Educação Física e Saúde − USP Leste, SP",Biológicas,False
+2017,436,"Educação Física e Saúde − USP Leste, SP",Biológicas,False
+2018,436,"Educação Física e Saúde − USP Leste, SP",Biológicas,False
+2019,436,"Educação Física e Saúde − USP Leste, SP",Biológicas,False
+2020,436,"Educação Física e Saúde − USP Leste, SP",Biológicas,False
+2021,436,"Educação Física e Saúde − USP Leste, SP",Biológicas,False
+2022,436,Educação Física e Saúde − USP Leste (São Paulo),Biológicas,False
+2013,440,Enfermagem,Biológicas,False
+2014,440,Enfermagem,Biológicas,False
+2015,440,Enfermagem,Biológicas,False
+2016,440,Enfermagem,Biológicas,False
+2017,440,Enfermagem,Biológicas,False
+2018,440,Enfermagem,Biológicas,False
+2019,440,Enfermagem,Biológicas,False
+2020,440,Enfermagem,Biológicas,False
+2021,440,Enfermagem,Biológicas,False
+2022,440,Enfermagem (São Paulo),Biológicas,False
+2013,445,Enfermagem − Ribeirão Preto,Biológicas,False
+2014,445,Enfermagem − Ribeirão Preto,Biológicas,False
+2015,445,Enfermagem − Ribeirão Preto,Biológicas,False
+2016,445,Enfermagem − Ribeirão Preto,Biológicas,False
+2017,445,Enfermagem − Ribeirão Preto,Biológicas,False
+2018,445,Enfermagem − Ribeirão Preto,Biológicas,False
+2019,445,Enfermagem − Ribeirão Preto,Biológicas,False
+2020,445,Enfermagem − Ribeirão Preto,Biológicas,False
+2021,445,Enfermagem − Ribeirão Preto,Biológicas,False
+2022,445,Enfermagem (Ribeirão Preto),Biológicas,False
+2013,450,Engenharia Agronômica − Piracicaba,Biológicas,False
+2014,450,Engenharia Agronômica − Piracicaba,Biológicas,False
+2015,450,Engenharia Agronômica − Piracicaba(*),Biológicas,False
+2016,450,Engenharia Agronômica − Piracicaba(*),Biológicas,False
+2017,450,Engenharia Agronômica − Piracicaba(*),Biológicas,False
+2018,450,Engenharia Agronômica − Piracicaba,Biológicas,False
+2019,450,Engenharia Agronômica − Piracicaba,Biológicas,False
+2020,450,Engenharia Agronômica − Piracicaba,Biológicas,False
+2021,450,Engenharia Agronômica − Piracicaba,Biológicas,False
+2022,450,Engenharia Agronômica (Piracicaba),Biológicas,False
+2013,455,Engenharia Florestal − Piracicaba,Biológicas,False
+2014,455,Engenharia Florestal − Piracicaba,Biológicas,False
+2015,455,Engenharia Florestal − Piracicaba (*),Biológicas,False
+2016,455,Engenharia Florestal − Piracicaba (*),Biológicas,False
+2017,455,Engenharia Florestal − Piracicaba (*),Biológicas,False
+2018,455,Engenharia Florestal − Piracicaba,Biológicas,False
+2019,455,Engenharia Florestal − Piracicaba,Biológicas,False
+2020,455,Engenharia Florestal − Piracicaba,Biológicas,False
+2021,455,Engenharia Florestal − Piracicaba,Biológicas,False
+2022,455,Engenharia Florestal (Piracicaba),Biológicas,False
+2013,460,Farmácia−Bioquímica,Biológicas,False
+2014,460,Farmácia−Bioquímica,Biológicas,False
+2015,460,Farmácia−Bioquímica,Biológicas,False
+2016,460,Farmácia−Bioquímica,Biológicas,False
+2017,460,Farmácia−Bioquímica,Biológicas,False
+2018,460,Farmácia−Bioquímica,Biológicas,False
+2019,460,Farmácia − Bioquímica,Biológicas,False
+2020,460,Farmácia,Biológicas,False
+2021,460,Farmácia,Biológicas,False
+2022,460,Farmácia (São Paulo),Biológicas,False
+2013,465,Farmácia−Bioquímica − Ribeirão Preto,Biológicas,False
+2014,465,Farmácia−Bioquímica − Ribeirão Preto,Biológicas,False
+2015,465,Farmácia−Bioquímica − Ribeirão Preto,Biológicas,False
+2016,465,Farmácia−Bioquímica − Ribeirão Preto,Biológicas,False
+2017,465,Farmácia−Bioquímica − Ribeirão Preto,Biológicas,False
+2018,465,Farmácia−Bioquímica − Ribeirão Preto,Biológicas,False
+2019,465,Farmácia − Bioquímica − Ribeirão Preto,Biológicas,False
+2020,465,Farmácia − Ribeirão Preto,Biológicas,False
+2021,465,Farmácia − Ribeirão Preto,Biológicas,False
+2022,465,Farmácia (Ribeirão Preto),Biológicas,False
+2013,470,Fisioterapia,Biológicas,False
+2014,470,Fisioterapia,Biológicas,False
+2015,470,Fisioterapia,Biológicas,False
+2016,470,Fisioterapia,Biológicas,False
+2017,470,Fisioterapia,Biológicas,False
+2018,470,Fisioterapia,Biológicas,False
+2019,470,Fisioterapia,Biológicas,False
+2020,470,Fisioterapia,Biológicas,False
+2021,470,Fisioterapia,Biológicas,False
+2022,470,Fisioterapia (São Paulo),Biológicas,False
+2013,475,Fisioterapia − Ribeirão Preto,Biológicas,False
+2014,475,Fisioterapia − Ribeirão Preto,Biológicas,False
+2015,475,Fisioterapia − Ribeirão Preto,Biológicas,False
+2016,475,Fisioterapia − Ribeirão Preto,Biológicas,False
+2017,475,Fisioterapia − Ribeirão Preto,Biológicas,False
+2018,475,Fisioterapia − Ribeirão Preto,Biológicas,False
+2019,475,Fisioterapia − Ribeirão Preto,Biológicas,False
+2020,475,Fisioterapia − Ribeirão Preto,Biológicas,False
+2021,475,Fisioterapia − Ribeirão Preto,Biológicas,False
+2022,475,Fisioterapia (Ribeirão Preto),Biológicas,False
+2013,480,Fonoaudiologia,Biológicas,False
+2014,480,Fonoaudiologia,Biológicas,False
+2015,480,Fonoaudiologia,Biológicas,False
+2016,480,Fonoaudiologia,Biológicas,False
+2017,480,Fonoaudiologia,Biológicas,False
+2018,480,Fonoaudiologia,Biológicas,False
+2019,480,Fonoaudiologia,Biológicas,False
+2020,480,Fonoaudiologia,Biológicas,False
+2021,480,Fonoaudiologia,Biológicas,False
+2022,480,Fonoaudiologia (São Paulo),Biológicas,False
+2013,485,Fonoaudiologia − Bauru,Biológicas,False
+2014,485,Fonoaudiologia − Bauru,Biológicas,False
+2015,485,Fonoaudiologia − Bauru,Biológicas,False
+2016,485,Fonoaudiologia − Bauru,Biológicas,False
+2017,485,Fonoaudiologia − Bauru,Biológicas,False
+2018,485,Fonoaudiologia − Bauru,Biológicas,False
+2019,485,Fonoaudiologia − Bauru,Biológicas,False
+2020,485,Fonoaudiologia − Bauru,Biológicas,False
+2021,485,Fonoaudiologia − Bauru,Biológicas,False
+2022,485,Fonoaudiologia (Bauru),Biológicas,False
+2013,490,Fonoaudiologia − Ribeirão Preto,Biológicas,False
+2014,490,Fonoaudiologia − Ribeirão Preto,Biológicas,False
+2015,490,Fonoaudiologia − Ribeirão Preto,Biológicas,False
+2016,490,Fonoaudiologia − Ribeirão Preto,Biológicas,False
+2017,490,Fonoaudiologia − Ribeirão Preto,Biológicas,False
+2018,490,Fonoaudiologia − Ribeirão Preto,Biológicas,False
+2019,490,Fonoaudiologia − Ribeirão Preto,Biológicas,False
+2020,490,Fonoaudiologia − Ribeirão Preto,Biológicas,False
+2021,490,Fonoaudiologia − Ribeirão Preto,Biológicas,False
+2022,490,Fonoaudiologia (Ribeirão Preto),Biológicas,False
+2013,495,"Gerontologia − USP Leste, SP",Biológicas,False
+2014,495,"Gerontologia − USP Leste, SP",Biológicas,False
+2015,495,"Gerontologia − USP Leste, SP",Biológicas,False
+2016,495,"Gerontologia − USP Leste, SP",Biológicas,False
+2017,495,"Gerontologia − USP Leste, SP",Biológicas,False
+2018,495,"Gerontologia − USP Leste, SP",Biológicas,False
+2019,495,"Gerontologia − USP Leste, SP",Biológicas,False
+2020,495,"Gerontologia − USP Leste, SP",Biológicas,False
+2021,495,"Gerontologia − USP Leste, SP",Biológicas,False
+2022,495,Gerontologia − USP Leste (São Paulo),Biológicas,False
+2013,500,Medicina,Biológicas,False
+2014,500,Medicina,Biológicas,False
+2015,500,Medicina,Biológicas,False
+2016,500,Medicina,Biológicas,False
+2017,500,Medicina,Biológicas,False
+2018,500,Medicina,Biológicas,False
+2019,500,Medicina,Biológicas,False
+2020,500,Medicina,Biológicas,False
+2021,500,Medicina,Biológicas,False
+2022,500,Medicina (São Paulo),Biológicas,False
+2018,501,Medicina − Bauru,Biológicas,False
+2019,501,Medicina − Bauru,Biológicas,False
+2020,501,Medicina − Bauru,Biológicas,False
+2021,501,Medicina − Bauru,Biológicas,False
+2022,501,Medicina (Bauru),Biológicas,False
+2013,505,Ciências Médicas − Ribeirão Preto,Biológicas,False
+2014,505,Medicina − Ribeirão Preto,Biológicas,False
+2015,505,Medicina − Ribeirão Preto,Biológicas,False
+2016,505,Medicina − Ribeirão Preto,Biológicas,False
+2017,505,Medicina − Ribeirão Preto,Biológicas,False
+2018,505,Medicina − Ribeirão Preto,Biológicas,False
+2019,505,Medicina − Ribeirão Preto,Biológicas,False
+2020,505,Medicina − Ribeirão Preto,Biológicas,False
+2021,505,Medicina − Ribeirão Preto,Biológicas,False
+2022,505,Medicina (Ribeirão Preto),Biológicas,False
+2013,510,Medicina Veterinária,Biológicas,False
+2014,510,Medicina Veterinária,Biológicas,False
+2015,510,Medicina Veterinária,Biológicas,False
+2016,510,Medicina Veterinária,Biológicas,False
+2017,510,Medicina Veterinária,Biológicas,False
+2018,510,Medicina Veterinária,Biológicas,False
+2019,510,Medicina Veterinária,Biológicas,False
+2020,510,Medicina Veterinária,Biológicas,False
+2021,510,Medicina Veterinária,Biológicas,False
+2022,510,Medicina Veterinária (São Paulo),Biológicas,False
+2013,515,Medicina Veterinária − Pirassununga,Biológicas,False
+2014,515,Medicina Veterinária − Pirassununga,Biológicas,False
+2015,515,Medicina Veterinária − Pirassununga,Biológicas,False
+2016,515,Medicina Veterinária − Pirassununga,Biológicas,False
+2017,515,Medicina Veterinária − Pirassununga,Biológicas,False
+2018,515,Medicina Veterinária − Pirassununga,Biológicas,False
+2019,515,Medicina Veterinária − Pirassununga,Biológicas,False
+2020,515,Medicina Veterinária − Pirassununga,Biológicas,False
+2021,515,Medicina Veterinária − Pirassununga,Biológicas,False
+2022,515,Medicina Veterinária (Pirassununga),Biológicas,False
+2013,520,Nutrição,Biológicas,False
+2014,520,Nutrição,Biológicas,False
+2015,520,Nutrição,Biológicas,False
+2016,520,Nutrição,Biológicas,False
+2017,520,Nutrição,Biológicas,False
+2018,520,Nutrição,Biológicas,False
+2019,520,Nutrição,Biológicas,False
+2020,520,Nutrição,Biológicas,False
+2021,520,Nutrição,Biológicas,False
+2022,520,Nutrição (São Paulo),Biológicas,False
+2013,525,Nutrição e Metabolismo − Ribeirão Preto,Biológicas,False
+2014,525,Nutrição e Metabolismo − Ribeirão Preto,Biológicas,False
+2015,525,Nutrição e Metabolismo − Ribeirão Preto,Biológicas,False
+2016,525,Nutrição e Metabolismo − Ribeirão Preto,Biológicas,False
+2017,525,Nutrição e Metabolismo − Ribeirão Preto,Biológicas,False
+2018,525,Nutrição e Metabolismo − Ribeirão Preto,Biológicas,False
+2019,525,Nutrição e Metabolismo − Ribeirão Preto,Biológicas,False
+2020,525,Nutrição e Metabolismo − Ribeirão Preto,Biológicas,False
+2021,525,Nutrição e Metabolismo − Ribeirão Preto,Biológicas,False
+2022,525,Nutrição e Metabolismo (Ribeirão Preto),Biológicas,False
+2013,530,"Obstetrícia − USP Leste, SP",Biológicas,False
+2014,530,"Obstetrícia − USP Leste, SP",Biológicas,False
+2015,530,"Obstetrícia − USP Leste, SP",Biológicas,False
+2016,530,"Obstetrícia − USP Leste, SP",Biológicas,False
+2017,530,"Obstetrícia − USP Leste, SP",Biológicas,False
+2018,530,"Obstetrícia − USP Leste, SP",Biológicas,False
+2019,530,"Obstetrícia − USP Leste, SP",Biológicas,False
+2020,530,"Obstetrícia − USP Leste, SP",Biológicas,False
+2021,530,"Obstetrícia − USP Leste, SP",Biológicas,False
+2022,530,Obstetrícia − USP Leste (São Paulo),Biológicas,False
+2013,535,Odontologia,Biológicas,False
+2014,535,Odontologia,Biológicas,False
+2015,535,Odontologia,Biológicas,False
+2016,535,Odontologia,Biológicas,False
+2017,535,Odontologia,Biológicas,False
+2018,535,Odontologia,Biológicas,False
+2019,535,Odontologia,Biológicas,False
+2020,535,Odontologia,Biológicas,False
+2021,535,Odontologia,Biológicas,False
+2022,535,Odontologia (São Paulo),Biológicas,False
+2013,540,Odontologia − Bauru,Biológicas,False
+2014,540,Odontologia − Bauru,Biológicas,False
+2015,540,Odontologia − Bauru,Biológicas,False
+2016,540,Odontologia − Bauru,Biológicas,False
+2017,540,Odontologia − Bauru,Biológicas,False
+2018,540,Odontologia − Bauru,Biológicas,False
+2019,540,Odontologia − Bauru,Biológicas,False
+2020,540,Odontologia − Bauru,Biológicas,False
+2021,540,Odontologia − Bauru,Biológicas,False
+2022,540,Odontologia (Bauru),Biológicas,False
+2013,545,Odontologia − Ribeirão Preto,Biológicas,False
+2014,545,Odontologia − Ribeirão Preto,Biológicas,False
+2015,545,Odontologia − Ribeirão Preto,Biológicas,False
+2016,545,Odontologia − Ribeirão Preto,Biológicas,False
+2017,545,Odontologia − Ribeirão Preto,Biológicas,False
+2018,545,Odontologia − Ribeirão Preto,Biológicas,False
+2019,545,Odontologia − Ribeirão Preto,Biológicas,False
+2020,545,Odontologia − Ribeirão Preto,Biológicas,False
+2021,545,Odontologia − Ribeirão Preto,Biológicas,False
+2022,545,Odontologia (Ribeirão Preto),Biológicas,False
+2013,550,Psicologia,Biológicas,False
+2014,550,Psicologia,Biológicas,False
+2015,550,Psicologia,Biológicas,False
+2016,550,Psicologia,Biológicas,False
+2017,550,Psicologia,Biológicas,False
+2018,550,Psicologia,Biológicas,False
+2019,550,Psicologia,Biológicas,False
+2020,550,Psicologia,Biológicas,False
+2021,550,Psicologia,Biológicas,False
+2022,550,Psicologia (São Paulo),Biológicas,False
+2013,555,Psicologia − Ribeirão Preto,Biológicas,False
+2014,555,Psicologia − Ribeirão Preto,Biológicas,False
+2015,555,Psicologia − Ribeirão Preto,Biológicas,False
+2016,555,Psicologia − Ribeirão Preto,Biológicas,False
+2017,555,Psicologia − Ribeirão Preto,Biológicas,False
+2018,555,Psicologia − Ribeirão Preto,Biológicas,False
+2019,555,Psicologia − Ribeirão Preto,Biológicas,False
+2020,555,Psicologia − Ribeirão Preto,Biológicas,False
+2021,555,Psicologia − Ribeirão Preto,Biológicas,False
+2022,555,Psicologia (Ribeirão Preto),Biológicas,False
+2013,560,Saúde Pública,Biológicas,False
+2014,560,Saúde Pública,Biológicas,False
+2015,560,Saúde Pública,Biológicas,False
+2016,560,Saúde Pública,Biológicas,False
+2017,560,Saúde Pública,Biológicas,False
+2018,560,Saúde Pública,Biológicas,False
+2019,560,Saúde Pública,Biológicas,False
+2020,560,Saúde Pública,Biológicas,False
+2021,560,Saúde Pública,Biológicas,False
+2022,560,Saúde Pública (São Paulo),Biológicas,False
+2013,565,Terapia Ocupacional,Biológicas,False
+2014,565,Terapia Ocupacional,Biológicas,False
+2015,565,Terapia Ocupacional,Biológicas,False
+2016,565,Terapia Ocupacional,Biológicas,False
+2017,565,Terapia Ocupacional,Biológicas,False
+2018,565,Terapia Ocupacional,Biológicas,False
+2019,565,Terapia Ocupacional,Biológicas,False
+2020,565,Terapia Ocupacional,Biológicas,False
+2021,565,Terapia Ocupacional,Biológicas,False
+2022,565,Terapia Ocupacional (São Paulo),Biológicas,False
+2013,570,Terapia Ocupacional − Ribeirão Preto,Biológicas,False
+2014,570,Terapia Ocupacional − Ribeirão Preto,Biológicas,False
+2015,570,Terapia Ocupacional − Ribeirão Preto,Biológicas,False
+2016,570,Terapia Ocupacional − Ribeirão Preto,Biológicas,False
+2017,570,Terapia Ocupacional − Ribeirão Preto,Biológicas,False
+2018,570,Terapia Ocupacional − Ribeirão Preto,Biológicas,False
+2019,570,Terapia Ocupacional − Ribeirão Preto,Biológicas,False
+2020,570,Terapia Ocupacional − Ribeirão Preto,Biológicas,False
+2021,570,Terapia Ocupacional − Ribeirão Preto,Biológicas,False
+2022,570,Terapia Ocupacional (Ribeirão Preto),Biológicas,False
+2013,575,Zootecnia − Pirassununga,Biológicas,False
+2014,575,Zootecnia − Pirassununga,Biológicas,False
+2015,575,Zootecnia − Pirassununga,Biológicas,False
+2016,575,Zootecnia − Pirassununga,Biológicas,False
+2017,575,Zootecnia − Pirassununga,Biológicas,False
+2018,575,Zootecnia − Pirassununga,Biológicas,False
+2019,575,Zootecnia − Pirassununga,Biológicas,False
+2020,575,Zootecnia − Pirassununga,Biológicas,False
+2021,575,Zootecnia − Pirassununga,Biológicas,False
+2022,575,Zootecnia (Pirassununga),Biológicas,False
+2013,699,Biológicas,,True
+2014,699,Treinamento Biológicas,,True
+2015,699,Treinamento Biológicas,,True
+2016,699,Treinamento Biológicas,,True
+2017,699,Treinamento Biológicas,,True
+2018,699,Treinamento Biológicas,,True
+2019,699,Treinamento B (Biológicas),,True
+2020,699,Treinamento B (Biológicas),,True
+2021,699,Treinamento B (Biológicas),,True
+2022,699,Treinamento B (Biológicas),,True
+2013,700,Ciências Biomoleculares − São Carlos,Exatas,False
+2014,700,Ciências Biomoleculares − São Carlos,Exatas,False
+2015,700,Ciências Biomoleculares − São Carlos,Exatas,False
+2016,700,Ciências Biomoleculares − São Carlos,Exatas,False
+2017,700,Ciências Biomoleculares − São Carlos,Exatas,False
+2018,700,Ciências Físicas e Biomoleculares − São Carlos,Exatas,False
+2019,700,Ciências Físicas e Biomoleculares − São Carlos,Exatas,False
+2020,700,Ciências Físicas e Biomoleculares − São Carlos,Exatas,False
+2021,700,Ciências Físicas e Biomoleculares − São Carlos,Exatas,False
+2022,700,Ciências Físicas e Biomoleculares (São Carlos),Exatas,False
+2013,705,"Ciências da Natureza − USP Leste, SP",Exatas,False
+2014,705,"Ciências da Natureza − USP Leste, SP",Exatas,False
+2015,705,"Ciências da Natureza − USP Leste, SP",Exatas,False
+2016,705,"Ciências da Natureza − USP Leste, SP",Exatas,False
+2017,705,"Ciências da Natureza − USP Leste, SP",Exatas,False
+2018,705,"Ciências da Natureza − USP Leste, SP",Exatas,False
+2019,705,"Ciências da Natureza − USP Leste, SP",Exatas,False
+2020,705,"Ciências da Natureza − USP Leste, SP",Exatas,False
+2021,705,"Ciências da Natureza − USP Leste, SP",Exatas,False
+2022,705,Ciências da Natureza − USP Leste (São Paulo),Exatas,False
+2013,710,Computação,Exatas,False
+2014,710,Computação,Exatas,False
+2015,710,Computação,Exatas,False
+2016,710,Computação,Exatas,False
+2017,710,Computação,Exatas,False
+2018,710,Computação,Exatas,False
+2019,710,Computação,Exatas,False
+2020,710,Computação,Exatas,False
+2021,710,Computação,Exatas,False
+2022,710,"Computação (São Paulo, São Carlos, Ribeirão Preto)",Exatas,False
+2013,715,Engenharia Aeronáutica − São Carlos,Exatas,False
+2014,715,Engenharia Aeronáutica − São Carlos,Exatas,False
+2015,715,Engenharia Aeronáutica − São Carlos,Exatas,False
+2016,715,Engenharia Aeronáutica − São Carlos,Exatas,False
+2017,715,Engenharia Aeronáutica − São Carlos,Exatas,False
+2018,715,Engenharia Aeronáutica − São Carlos,Exatas,False
+2019,715,Engenharia Aeronáutica − São Carlos,Exatas,False
+2020,715,Engenharia Aeronáutica − São Carlos,Exatas,False
+2021,715,Engenharia Aeronáutica − São Carlos,Exatas,False
+2022,715,Engenharia Aeronáutica (São Carlos),Exatas,False
+2013,720,Engenharia Ambiental − Lorena,Exatas,False
+2014,720,Engenharia Ambiental − Lorena,Exatas,False
+2015,720,Engenharia Ambiental − Lorena,Exatas,False
+2016,720,Engenharia Ambiental − Lorena,Exatas,False
+2017,720,Engenharia Ambiental − Lorena,Exatas,False
+2018,720,Engenharia Ambiental − Lorena,Exatas,False
+2019,720,Engenharia Ambiental − Lorena,Exatas,False
+2020,720,Engenharia Ambiental − Lorena,Exatas,False
+2021,720,Engenharia Ambiental − Lorena,Exatas,False
+2022,720,Engenharia Ambiental (Lorena),Exatas,False
+2013,725,Engenharia Ambiental − São Carlos,Exatas,False
+2014,725,Engenharia Ambiental − São Carlos,Exatas,False
+2015,725,Engenharia Ambiental − São Carlos,Exatas,False
+2016,725,Engenharia Ambiental − São Carlos,Exatas,False
+2017,725,Engenharia Ambiental − São Carlos,Exatas,False
+2018,725,Engenharia Ambiental − São Carlos,Exatas,False
+2019,725,Engenharia Ambiental − São Carlos,Exatas,False
+2020,725,Engenharia Ambiental − São Carlos,Exatas,False
+2021,725,Engenharia Ambiental − São Carlos,Exatas,False
+2022,725,Engenharia Ambiental (São Carlos),Exatas,False
+2013,730,Engenharia Bioquímica − Lorena,Exatas,False
+2014,730,Engenharia Bioquímica − Lorena,Exatas,False
+2015,730,Engenharia Bioquímica − Lorena,Exatas,False
+2016,730,Engenharia Bioquímica − Lorena,Exatas,False
+2017,730,Engenharia Bioquímica − Lorena,Exatas,False
+2018,730,Engenharia Bioquímica − Lorena,Exatas,False
+2019,730,Engenharia Bioquímica − Lorena,Exatas,False
+2020,730,Engenharia Bioquímica − Lorena,Exatas,False
+2021,730,Engenharia Bioquímica − Lorena,Exatas,False
+2022,730,Engenharia Bioquímica (Lorena),Exatas,False
+2013,735,Engenharia Civil − São Carlos,Exatas,False
+2014,735,Engenharia Civil − São Carlos,Exatas,False
+2015,735,Engenharia Civil − São Carlos,Exatas,False
+2016,735,Engenharia Civil − São Carlos,Exatas,False
+2017,735,Engenharia Civil − São Carlos,Exatas,False
+2018,735,Engenharia Civil − São Carlos,Exatas,False
+2019,735,Engenharia Civil − São Carlos,Exatas,False
+2020,735,Engenharia Civil − São Carlos,Exatas,False
+2021,735,Engenharia Civil − São Carlos,Exatas,False
+2022,735,Engenharia Civil (São Carlos),Exatas,False
+2013,740,Engenharia de Alimentos − Pirassununga,Exatas,False
+2014,740,Engenharia de Alimentos − Pirassununga,Exatas,False
+2015,740,Engenharia de Alimentos − Pirassununga,Exatas,False
+2016,740,Engenharia de Alimentos − Pirassununga,Exatas,False
+2017,740,Engenharia de Alimentos − Pirassununga,Exatas,False
+2018,740,Engenharia de Alimentos − Pirassununga,Exatas,False
+2019,740,Engenharia de Alimentos − Pirassununga,Exatas,False
+2020,740,Engenharia de Alimentos − Pirassununga,Exatas,False
+2021,740,Engenharia de Alimentos − Pirassununga,Exatas,False
+2022,740,Engenharia de Alimentos (Pirassununga),Exatas,False
+2013,745,Engenharia de Biossistemas − Pirassununga,Exatas,False
+2014,745,Engenharia de Biossistemas − Pirassununga,Exatas,False
+2015,745,Engenharia de Biossistemas − Pirassununga,Exatas,False
+2016,745,Engenharia de Biossistemas − Pirassununga,Exatas,False
+2017,745,Engenharia de Biossistemas − Pirassununga,Exatas,False
+2018,745,Engenharia de Biossistemas − Pirassununga,Exatas,False
+2019,745,Engenharia de Biossistemas − Pirassununga,Exatas,False
+2020,745,Engenharia de Biossistemas − Pirassununga,Exatas,False
+2021,745,Engenharia de Biossistemas − Pirassununga,Exatas,False
+2022,745,Engenharia de Biossistemas (Pirassununga),Exatas,False
+2013,750,Engenharia de Materiais − Lorena,Exatas,False
+2014,750,Engenharia de Materiais − Lorena,Exatas,False
+2015,750,Engenharia de Materiais − Lorena,Exatas,False
+2016,750,Engenharia de Materiais − Lorena,Exatas,False
+2017,750,Engenharia de Materiais − Lorena,Exatas,False
+2018,750,Engenharia de Materiais − Lorena,Exatas,False
+2019,750,Engenharia de Materiais − Lorena,Exatas,False
+2020,750,Engenharia de Materiais − Lorena,Exatas,False
+2021,750,Engenharia de Materiais − Lorena,Exatas,False
+2022,750,Engenharia de Materiais (Lorena),Exatas,False
+2013,755,Engenharia de Materiais e Manufatura − São Carlos,Exatas,False
+2014,755,Engenharia de Materiais e Manufatura − São Carlos,Exatas,False
+2015,755,Engenharia de Materiais e Manufatura − São Carlos,Exatas,False
+2016,755,Engenharia de Materiais e Manufatura − São Carlos,Exatas,False
+2017,755,Engenharia de Materiais e Manufatura − São Carlos,Exatas,False
+2018,755,Engenharia de Materiais e Manufatura − São Carlos,Exatas,False
+2019,755,Engenharia de Materiais e Manufatura − São Carlos,Exatas,False
+2020,755,Engenharia de Materiais e Manufatura − São Carlos,Exatas,False
+2021,755,Engenharia de Materiais e Manufatura − São Carlos,Exatas,False
+2022,755,Engenharia de Materiais e Manufatura (São Carlos),Exatas,False
+2013,760,Engenharia de Produção − Lorena,Exatas,False
+2014,760,Engenharia de Produção − Lorena,Exatas,False
+2015,760,Engenharia de Produção − Lorena,Exatas,False
+2016,760,Engenharia de Produção − Lorena,Exatas,False
+2017,760,Engenharia de Produção − Lorena,Exatas,False
+2018,760,Engenharia de Produção − Lorena,Exatas,False
+2019,760,Engenharia de Produção − Lorena,Exatas,False
+2020,760,Engenharia de Produção − Lorena,Exatas,False
+2021,760,Engenharia de Produção − Lorena,Exatas,False
+2022,760,Engenharia de Produção (Lorena),Exatas,False
+2013,765,Engenharia Elétrica e de Computação − São Carlos,Exatas,False
+2014,765,Engenharia Elétrica e de Computação − São Carlos,Exatas,False
+2015,765,Engenharia Elétrica e de Computação − São Carlos,Exatas,False
+2016,765,Engenharia Elétrica e de Computação − São Carlos,Exatas,False
+2017,765,Engenharia Elétrica e de Computação − São Carlos,Exatas,False
+2018,765,Engenharia Elétrica e de Computação − São Carlos,Exatas,False
+2019,765,Engenharia Elétrica e de Computação − São Carlos,Exatas,False
+2020,765,Engenharia Elétrica e de Computação − São Carlos,Exatas,False
+2021,765,Engenharia Elétrica e de Computação − São Carlos,Exatas,False
+2022,765,Engenharia Elétrica e de Computação (São Carlos),Exatas,False
+2013,770,Engenharia Física − Lorena,Exatas,False
+2014,770,Engenharia Física − Lorena,Exatas,False
+2015,770,Engenharia Física − Lorena,Exatas,False
+2016,770,Engenharia Física − Lorena,Exatas,False
+2017,770,Engenharia Física − Lorena,Exatas,False
+2018,770,Engenharia Física − Lorena,Exatas,False
+2019,770,Engenharia Física − Lorena,Exatas,False
+2020,770,Engenharia Física − Lorena,Exatas,False
+2021,770,Engenharia Física − Lorena,Exatas,False
+2022,770,Engenharia Física (Lorena),Exatas,False
+2018,771,Engenharia Química − Lorena,Exatas,False
+2019,771,Engenharia Química − Lorena,Exatas,False
+2020,771,Engenharia Química − Lorena,Exatas,False
+2021,771,Engenharia Química − Lorena,Exatas,False
+2022,771,Engenharia Química (Lorena),Exatas,False
+2013,775,Engenharia na Escola Politécnica,Exatas,False
+2014,775,Engenharia na Escola Politécnica,Exatas,False
+2015,775,Engenharia na Escola Politécnica,Exatas,False
+2016,775,Engenharia na Escola Politécnica,Exatas,False
+2017,775,Engenharia na Escola Politécnica,Exatas,False
+2018,775,Engenharia na Escola Politécnica,Exatas,False
+2019,775,Engenharia − São Carlos,Exatas,False
+2020,775,Engenharia − São Carlos,Exatas,False
+2021,775,"Engenharia Mecânica, Engenharia Mecatrônica e Engenhari",Exatas,False
+2022,775,"Engenharia Mecânica, Engenharia Mecatrônica e Engenhari",Exatas,False
+2013,780,Engenharia Química − Lorena,Exatas,False
+2014,780,Engenharia Química − Lorena,Exatas,False
+2015,780,Engenharia Química − Lorena,Exatas,False
+2016,780,Engenharia Química − Lorena,Exatas,False
+2017,780,Engenharia Química − Lorena,Exatas,False
+2019,780,Engenharia na Escola Politécnica,Exatas,False
+2020,780,Engenharia na Escola Politécnica,Exatas,False
+2021,780,Engenharia na Escola Politécnica,Exatas,False
+2022,780,Engenharia na Escola Politécnica (São Paulo),Exatas,False
+2013,785,Engenharia − São Carlos,Exatas,False
+2014,785,Engenharia − São Carlos,Exatas,False
+2015,785,Engenharia − São Carlos,Exatas,False
+2016,785,Engenharia − São Carlos,Exatas,False
+2017,785,Engenharia − São Carlos,Exatas,False
+2018,785,Engenharia − São Carlos,Exatas,False
+2013,790,Física / Meteorologia / Geofísica / Astronomia / Estatí,Exatas,False
+2014,790,Fís. / Fís. Comput. / Meteor. / Geofís. / Astron. / Est,Exatas,False
+2015,790,Fís. / Fís. Comput. / Meteor. / Geofís. / Astron. / Est,Exatas,False
+2016,790,Fís. / Fís. Comput. / Meteor. / Geofís. / Astron. / Est,Exatas,False
+2017,790,Fís. / Fís. Comput. / Meteor. / Geofís. / Astron. / Est,Exatas,False
+2018,790,Física / Física Computacional / Meteorologia / Geofísic,Exatas,False
+2019,790,Física / Física Computacional / Meteorologia / Geofísic,Exatas,False
+2020,790,Física / Física Computacional / Meteorologia / Geofísic,Exatas,False
+2021,790,Física / Física Computacional / Meteorologia / Geofísic,Exatas,False
+2022,790,Física / Física Computacional / Meteorologia / Geofísic,Exatas,False
+2021,791,Ciência de Dados − São Carlos,Exatas,False
+2022,791,Ciência de Dados (São Carlos),Exatas,False
+2013,795,Física Médica − Ribeirão Preto,Exatas,False
+2014,795,Física Médica − Ribeirão Preto,Exatas,False
+2015,795,Física Médica − Ribeirão Preto,Exatas,False
+2016,795,Física Médica − Ribeirão Preto,Exatas,False
+2017,795,Física Médica − Ribeirão Preto,Exatas,False
+2018,795,Física Médica − Ribeirão Preto,Exatas,False
+2019,795,Física Médica − Ribeirão Preto,Exatas,False
+2020,795,Física Médica − Ribeirão Preto,Exatas,False
+2021,795,Física Médica − Ribeirão Preto,Exatas,False
+2022,795,"Física Médica (São Paulo, Ribeirão Preto)",Exatas,False
+2013,800,Geologia,Exatas,False
+2014,800,Geologia,Exatas,False
+2015,800,Geologia,Exatas,False
+2016,800,Geologia,Exatas,False
+2017,800,Geologia,Exatas,False
+2018,800,Geologia,Exatas,False
+2019,800,Geologia,Exatas,False
+2020,800,Geologia,Exatas,False
+2021,800,Geologia,Exatas,False
+2022,800,Geologia (São Paulo),Exatas,False
+2013,805,Informática Biomédica − Ribeirão Preto,Exatas,False
+2014,805,Informática Biomédica − Ribeirão Preto,Exatas,False
+2015,805,Informática Biomédica − Ribeirão Preto,Exatas,False
+2016,805,Informática Biomédica − Ribeirão Preto,Exatas,False
+2017,805,Informática Biomédica − Ribeirão Preto,Exatas,False
+2018,805,Informática Biomédica − Ribeirão Preto,Exatas,False
+2019,805,Informática Biomédica − Ribeirão Preto,Exatas,False
+2020,805,Informática Biomédica − Ribeirão Preto,Exatas,False
+2021,805,Informática Biomédica − Ribeirão Preto,Exatas,False
+2022,805,Informática Biomédica (Ribeirão Preto),Exatas,False
+2013,810,Informática − São Carlos,Exatas,False
+2014,810,Informática − São Carlos,Exatas,False
+2015,810,Sistemas de Informação − São Carlos,Exatas,False
+2016,810,Sistemas de Informação − São Carlos,Exatas,False
+2017,810,Sistemas de Informação − São Carlos,Exatas,False
+2018,810,Sistemas de Informação − São Carlos,Exatas,False
+2013,815,Licenciatura em Ciências Exatas − São Carlos,Exatas,False
+2014,815,Licenciatura em Ciências Exatas (com Habilitações) − Sã,Exatas,False
+2015,815,Licenciatura em Ciências Exatas − São Carlos,Exatas,False
+2016,815,Licenciatura em Ciências Exatas − São Carlos,Exatas,False
+2017,815,Licenciatura em Ciências Exatas − São Carlos,Exatas,False
+2018,815,Licenciatura em Ciências Exatas − São Carlos,Exatas,False
+2019,815,Licenciatura em Ciências Exatas − São Carlos,Exatas,False
+2020,815,Licenciatura em Ciências Exatas − São Carlos,Exatas,False
+2021,815,Licenciatura em Ciências Exatas − São Carlos,Exatas,False
+2022,815,Licenciatura em Ciências Exatas (São Carlos),Exatas,False
+2013,820,Licenciatura em Geociências e Educação Ambiental,Exatas,False
+2014,820,Licenciatura em Geociências e Educação Ambiental,Exatas,False
+2015,820,Licenciatura em Geociências e Educação Ambiental,Exatas,False
+2016,820,Licenciatura em Geociências e Educação Ambiental,Exatas,False
+2017,820,Licenciatura em Geociências e Educação Ambiental,Exatas,False
+2018,820,Licenciatura em Geociências e Educação Ambiental,Exatas,False
+2019,820,Licenciatura em Geociências e Educação Ambiental,Exatas,False
+2020,820,Licenciatura em Geociências e Educação Ambiental,Exatas,False
+2021,820,Licenciatura em Geociências e Educação Ambiental,Exatas,False
+2022,820,Licenciatura em Geociências e Educação Ambiental (São P,Exatas,False
+2013,825,Licenciatura em Matemática / Física,Exatas,False
+2014,825,Licenciatura em Matemática / Física,Exatas,False
+2015,825,Licenciatura em Matemática / Física,Exatas,False
+2016,825,Licenciatura em Matemática / Física,Exatas,False
+2017,825,Licenciatura em Matemática / Física,Exatas,False
+2018,825,Licenciatura em Matemática / Física,Exatas,False
+2019,825,Licenciatura em Matemática / Física,Exatas,False
+2020,825,Licenciatura em Matemática / Física,Exatas,False
+2021,825,Licenciatura em Matemática / Física,Exatas,False
+2022,825,Licenciatura em Matemática / Física (São Paulo),Exatas,False
+2013,830,Matemática Aplicada − Ribeirão Preto,Exatas,False
+2014,830,Matemática Aplicada − Ribeirão Preto,Exatas,False
+2015,830,Matemática Aplicada − Ribeirão Preto,Exatas,False
+2016,830,Matemática Aplicada − Ribeirão Preto,Exatas,False
+2017,830,Matemática Aplicada − Ribeirão Preto,Exatas,False
+2018,830,Matemática Aplicada − Ribeirão Preto,Exatas,False
+2019,830,Matemática Aplicada − Ribeirão Preto,Exatas,False
+2020,830,Matemática Aplicada − Ribeirão Preto,Exatas,False
+2021,830,Matemática Aplicada − Ribeirão Preto,Exatas,False
+2022,830,Matemática Aplicada (Ribeirão Preto),Exatas,False
+2013,835,Matemática − São Carlos,Exatas,False
+2013,840,Oceanografia,Exatas,False
+2014,840,Oceanografia,Exatas,False
+2015,840,Oceanografia,Exatas,False
+2016,840,Oceanografia,Exatas,False
+2017,840,Oceanografia,Exatas,False
+2018,840,Oceanografia,Exatas,False
+2019,840,Oceanografia,Exatas,False
+2020,840,Oceanografia,Exatas,False
+2021,840,Oceanografia,Exatas,False
+2022,840,Oceanografia (São Paulo),Exatas,False
+2013,845,Química Ambiental,Exatas,False
+2013,850,Química (Bacharelados) − Ribeirão Preto,Exatas,False
+2014,850,Química (Bacharelados) − Ribeirão Preto,Exatas,False
+2015,850,Química (Bacharelados) − Ribeirão Preto,Exatas,False
+2016,850,Química (Bacharelados) − Ribeirão Preto,Exatas,False
+2017,850,Química (Bacharelados) − Ribeirão Preto,Exatas,False
+2018,850,Química (Bacharelados) − Ribeirão Preto,Exatas,False
+2019,850,Química (Bacharelado Ou Bacharelado com Habilitação em,Exatas,False
+2020,850,Química (Bacharelado Ou Bacharelado com Habilitação em,Exatas,False
+2021,850,Química (Bacharelado Ou Bacharelado com Habilitação em,Exatas,False
+2022,850,Química (Bacharelado Ou Bacharelado com Habilitação em,Exatas,False
+2013,855,Química − Bacharelado e Licenciatura,Exatas,False
+2014,855,Química − Bacharelado e Licenciatura,Exatas,False
+2015,855,Química − Bacharelado e Licenciatura,Exatas,False
+2016,855,Química − Bacharelado e Licenciatura,Exatas,False
+2017,855,Química − Bacharelado e Licenciatura,Exatas,False
+2018,855,Química − Bacharelado e Licenciatura,Exatas,False
+2019,855,Química − Bacharelado e Licenciatura,Exatas,False
+2020,855,Química − Bacharelado e Licenciatura,Exatas,False
+2021,855,Química − Bacharelado e Licenciatura,Exatas,False
+2022,855,Química − Bacharelado e Licenciatura (São Paulo),Exatas,False
+2013,860,Química − Licenciatura,Exatas,False
+2013,865,Química − Licenciatura − Ribeirão Preto,Exatas,False
+2014,865,Química − Licenciatura − Ribeirão Preto,Exatas,False
+2015,865,Química − Licenciatura − Ribeirão Preto,Exatas,False
+2016,865,Química − Licenciatura − Ribeirão Preto,Exatas,False
+2017,865,Química − Licenciatura − Ribeirão Preto,Exatas,False
+2018,865,Química − Licenciatura − Ribeirão Preto,Exatas,False
+2019,865,Química − Licenciatura − Ribeirão Preto,Exatas,False
+2020,865,Química − Licenciatura − Ribeirão Preto,Exatas,False
+2021,865,Química − Licenciatura e Bacharelado − Ribeirão Preto,Exatas,False
+2022,865,Química − Licenciatura e Bacharelado (Ribeirão Preto),Exatas,False
+2013,870,Química (Bacharelados) − São Carlos,Exatas,False
+2014,870,Química (Bacharelados) − São Carlos,Exatas,False
+2015,870,Química (Bacharelados) − São Carlos,Exatas,False
+2016,870,Química (Bacharelados) − São Carlos,Exatas,False
+2017,870,Química (Bacharelados) − São Carlos,Exatas,False
+2018,870,Química (Bacharelado e Bacharelado com Atribuições Tecn,Exatas,False
+2019,870,Química (Bacharelado e Bacharelado com Atribuições Tecn,Exatas,False
+2020,870,Química (Bacharelado e Bacharelado com Atribuições Tecn,Exatas,False
+2021,870,Química (Bacharelado e Bacharelado com Atribuições Tecn,Exatas,False
+2022,870,Química (Bacharelado e Bacharelado com Atribuições Tecn,Exatas,False
+2019,875,Sistemas de Informação − São Carlos,Exatas,False
+2020,875,Sistemas de Informação − São Carlos,Exatas,False
+2021,875,Sistemas de Informação − São Carlos,Exatas,False
+2022,875,Sistemas de Informação (São Carlos),Exatas,False
+2013,999,Exatas,,True
+2014,999,Treinamento Exatas,,True
+2015,999,Treinamento Exatas,,True
+2016,999,Treinamento Exatas,,True
+2017,999,Treinamento Exatas,,True
+2018,999,Treinamento Exatas,,True
+2019,999,Treinamento e (Exatas),,True
+2020,999,Treinamento e (Exatas),,True
+2021,999,Treinamento e (Exatas),,True
+2022,999,Treinamento e (Exatas),,True

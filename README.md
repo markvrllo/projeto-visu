@@ -16,13 +16,22 @@ python scripts/coletar_fuvest.py --anos 2010-2022
 # 2. (opcional) separar cada PDF em um arquivo por carreira/curso
 python scripts/picotar_pdfs.py data/raw/*qase*.pdf
 
-# 3. extrair as tabelas dos PDFs -> data/processed/qase_longo.csv
-python -m src.qase_parser data/raw/*qase*.pdf      # ou data/raw/por_curso/*.pdf (não use os dois juntos)
+# 3. extrair as tabelas dos PDFs do QASE -> data/processed/qase_longo.csv
+#    (um CSV por PDF em data/processed/cache_qase/: mostra o progresso e retoma se for interrompido)
+python -m src.qase_parser data/raw/por_carreira
 
-# 4. harmonizar categorias e calcular indicadores -> data/processed/indicadores.csv
-python -m src.harmonizacao
+# 4. extrair as tabelas dos recortes do Anuário -> data/processed/anuario_longo.csv
+python -m src.anuario_parser data/raw/anuario
 
-# 5. abrir o app em http://127.0.0.1:8050
+# 5. validar a extração -> docs/relatorio_validacao.md e data/processed/validacao_*.csv
+python -m src.validacao --pdfs data/raw/por_carreira
+
+# 6. tabela carreira -> área, indicadores do contrato e tabela ponte de 2022
+python scripts/gerar_carreira_area.py
+python -m src.harmonizacao              # -> data/processed/indicadores.csv
+python -m src.ponte                     # -> data/processed/ponte_2022.csv
+
+# 7. abrir o app em http://127.0.0.1:8050
 python app/app.py
 ```
 
@@ -85,11 +94,32 @@ python -m src.qase_parser --dump data/raw/ARQUIVO.pdf --paginas 3-6
 
 e ajuste as regex do topo de `src/qase_parser.py`.
 
+## Extração determinística e validação
+
+Nenhum número é lido ou digitado à mão: tudo sai dos PDFs por código (pdfplumber + regras fixas), e cada linha
+extraída guarda o `arquivo` e a `pagina` de origem. `src/validacao.py` confere cada pergunta (a soma das opções
+bate com "N respostas"; a % impressa bate com a contagem; as 3 áreas do Anuário somam o total da USP). O que falha
+é reprovado e o indicador fica vazio. O resumo está em `docs/relatorio_validacao.md`.
+
+A tabela ponte de 2022 (`data/processed/ponte_2022.csv`) compara a soma das carreiras do QASE com o Anuário no
+mesmo ano: nos inscritos as duas fontes coincidem (100.998 × 100.999 respondentes e indicadores iguais em todas as
+áreas), o que confere os dois parsers e a regra carreira → área. Nos matriculados o Anuário tem ~5% mais pessoas
+e os indicadores diferem até ~3 pp (provavelmente datas de corte diferentes).
+
+Problemas encontrados nas próprias fontes (e tratados como dado ausente):
+- Anuário 2023, tabela por área: repete as quantidades da tabela de 2022 (as áreas não somam o total de 2023).
+- Anuário 2026: a tabela de renda não traz a faixa "acima de 50 SM"; renda de 2026 fica vazia.
+- Anuário 2022/2023 por área: "Cinco pessoas" com 0 inscritos (pergunta fora dos indicadores).
+- QASE 2022, matriculados: a seção do grupo PPI vem com o cabeçalho "Todas as Modalidades"; a modalidade é
+  tirada das respostas da própria seção (100% PPI), e a troca fica registrada (check Q8).
+
 ## Pontos de atenção no pré-processamento
 
 - **Carreira × curso:** até ~2018 os dados vêm por carreira (ex.: "710 Computação" junta vários cursos). "Chamados 1ª matrícula por curso" existe em todos os anos e é o recorte por curso mais consistente.
 - **Renda:** as faixas são em salários mínimos e o SM muda a cada ano. Confira se algum ano usa reais.
 - **Cobertura:** o QASE descreve só quem entrou pela Fuvest. As vagas do Sisu, do Enem-USP e do Provão Paulista ficam de fora, e isso deve ser discutido como limitação.
 - **2023 em diante:** a Fuvest não publicou o QASE em PDF.
-- **Modalidade (AC/EP/PPI):** em 2021 há a pergunta "Em qual modalidade de acesso você se inscreveu?". Os indicadores `pct_mod_*` ficam vazios nos anos sem essa pergunta.
+- **Modalidade (AC/EP/PPI):** de 2019 a 2022 os PDFs por carreira vêm separados por modalidade; a modalidade "Todas" é a soma das três (contagens, não porcentagens).
+- **Pai e mãe:** a partir de 2022 (QASE e Anuário) a pergunta é sobre o "primeiro/segundo responsável (mãe, pai ou outra pessoa)"; `pct_pai_superior` e `pct_mae_superior` ficam vazios.
+- **Treineiros:** as carreiras 399, 699 e 999 (treinamento) ficam fora de todos os níveis, como no Anuário.
 - **Denominador:** respostas como "Não sei", "Não possuo pai" e "No exterior" ficam fora do cálculo do percentual.

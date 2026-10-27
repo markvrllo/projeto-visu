@@ -6,3 +6,5 @@ data/raw/*.pdf
 data/raw/**/*.pdf
 data/*.pdf
 .pytest_cache/
+data/processed/cache_qase/
+data/processed/qase_longo.csv
