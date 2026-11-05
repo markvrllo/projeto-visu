@@ -1,10 +1,21 @@
-# Do inscrito ao matriculado: o perfil de quem entra no ICMC
+# Quem entra na USP: o perfil dos ingressantes antes e depois das cotas (2013–2026)
 
 Projeto de SCC0252 Visualização Computacional (ICMC-USP, 2026/2).
 
-Analisamos o Questionário de Avaliação Socioeconômica (QASE) da Fuvest de 2010 a 2022. O objetivo é ver como o perfil dos candidatos (escola pública, PPI, renda, escolaridade dos pais) muda entre as etapas do vestibular e ao longo dos anos, antes e depois das cotas, com foco nos cursos do ICMC.
+Integrantes: Fabio Kauê Araujo da Silva (16311045), João Victor De Bortoli Prado (13672071), Marcos Vinicius Reballo (7576746) e Pyerry Klyzlow Xavier (15484839).
 
-## Como rodar
+Usamos o Questionário de Avaliação Socioeconômica (QASE) da Fuvest de 2013 a 2022, por carreira, e o Anuário Estatístico da USP de 2022 a 2026, para o total da USP e as três áreas. O objetivo é ver como o perfil dos ingressantes (escola pública, PPI, renda, escolaridade dos pais) mudou ao longo dos anos, antes e depois das cotas, em que etapa do vestibular o perfil muda e quais carreiras mudaram mais.
+
+## Para abrir o app (os dados já estão incluídos)
+
+```bash
+pip install -r requirements.txt
+python app/app.py          # abre em http://127.0.0.1:8050
+```
+
+O app lê `data/processed/indicadores.csv` e mostra três visões: a série temporal (Q1), o funil do inscrito ao matriculado (Q2) e as coordenadas paralelas das carreiras (Q3). Os 22 recortes do Anuário usados estão em `data/raw/anuario/`. Os PDFs do QASE (3.875 arquivos, depois de separados por carreira) não foram incluídos por causa do tamanho; as URLs estão em `data/fontes_qase.csv`, e os passos abaixo refazem tudo a partir deles.
+
+## Como refazer os dados a partir dos PDFs
 
 ```bash
 python -m venv .venv && source .venv/bin/activate   # Windows: .venv\Scripts\activate
@@ -82,7 +93,12 @@ python scripts/recortar_anuario.py AnuarioUSP_2026.pdf --com-candidato-vaga     
 | `scripts/baixar_pdfs.py` | Plano B: download a partir da lista fixa |
 | `src/qase_parser.py` | Extração das tabelas do QASE (pdfplumber + regex) |
 | `src/harmonizacao.py` | Identificação das perguntas, reagrupamento das categorias e cálculo dos indicadores |
-| `app/app.py` | App Dash com as visualizações |
+| `src/anuario_parser.py`, `src/validacao.py`, `src/ponte.py` | Extração do Anuário, validação da extração e tabela ponte de 2022 |
+| `data/carreira_area.csv` | Área (Biológicas, Exatas, Humanas) de cada carreira em cada ano |
+| `data/processed/indicadores.csv` | Tabela final usada pelo app (4.870 linhas); descrita em `docs/panorama_indicadores.md` |
+| `app/app.py`, `app/dados.py` | App Dash: layout, filtros e leitura dos dados |
+| `app/visoes/serie.py`, `funil.py`, `paralelas.py` | As três visões (Q1, Q2 e Q3) |
+| `docs/figuras/` | Prints das visões e simulações de daltonismo usados no relatório |
 
 ## Calibração do parser
 
