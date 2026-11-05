@@ -1,15 +1,24 @@
 import plotly.graph_objects as go
 import pandas as pd
 
-def criar_grafico_serie(df, indicador, etapa):
+def criar_grafico_serie(df, indicador, etapa, rotulo=None):
     """
     Cria a Visão 1: Série temporal (2013-2026) para a USP e as 3 áreas.
     """
-    df_q1 = df[(df['etapa'] == etapa) & (df['nivel'].isin(['usp', 'area']))].copy()
+    # só Fuvest e o total das modalidades: AC/EP/PPI (2019-2022) e ENEM-USP/Provão (2025-2026)
+    # são outros grupos de pessoas e não podem entrar na mesma linha
+    df_q1 = df[(df['etapa'] == etapa) & (df['nivel'].isin(['usp', 'area']))
+               & (df['ingresso'] == 'fuvest') & (df['modalidade'] == 'Todas')].copy()
     df_q1['area_plot'] = df_q1.apply(lambda x: 'USP' if x['nivel'] == 'usp' else x['area'], axis=1)
-    df_agg = df_q1.groupby(['ano', 'fonte', 'area_plot'], as_index=False)[indicador].mean()
-    
+    # já sobra uma linha por ano, fonte e área; as % vêm das contagens, então não se tira média
+    df_agg = df_q1[['ano', 'fonte', 'area_plot', 'respondentes', indicador]].dropna(subset=[indicador])
+    rotulo = rotulo or indicador
+
     fig = go.Figure()
+    if df_agg.empty:
+        fig.add_annotation(text="Sem dados para este indicador nesta etapa", showarrow=False,
+                           x=0.5, y=0.5, xref="paper", yref="paper")
+        return fig
 
     cores = {
         'USP': '#000000',
@@ -17,6 +26,9 @@ def criar_grafico_serie(df, indicador, etapa):
         'Exatas': '#0072B2',
         'Humanas': '#E69F00'
     }
+    # forma do marcador por área, para não depender só da cor
+    simbolos = {'USP': 'circle', 'Biológicas': 'diamond', 'Exatas': 'triangle-up', 'Humanas': 'square'}
+    hover = '%{x}: %{y:.1f}%<br>%{customdata} respondentes<extra>%{fullData.name}</extra>'
 
     areas = df_agg['area_plot'].unique()
 
@@ -29,17 +41,22 @@ def criar_grafico_serie(df, indicador, etapa):
             fig.add_trace(go.Scatter(
                 x=df_qase['ano'], y=df_qase[indicador],
                 mode='lines+markers', name=f'{area} (QASE)',
-                line=dict(color=cor, width=3), marker=dict(size=8),
+                line=dict(color=cor, width=3), marker=dict(size=8, symbol=simbolos.get(area)),
+                customdata=df_qase['respondentes'], hovertemplate=hover,
                 showlegend=False
             ))
 
         df_anuario = df_area[df_area['fonte'] == 'anuario']
         if not df_anuario.empty:
+            # ano sem dado (ex.: áreas em 2023) vira NaN para a linha não ligar por cima da lacuna
+            anos = range(df_anuario['ano'].min(), df_anuario['ano'].max() + 1)
+            df_anuario = df_anuario.set_index('ano').reindex(anos).rename_axis('ano').reset_index()
             fig.add_trace(go.Scatter(
                 x=df_anuario['ano'], y=df_anuario[indicador],
                 mode='lines+markers', name=f'{area} (Anuário)',
                 line=dict(color=cor, width=3, dash='dot'),
-                marker=dict(size=8, symbol='square'),
+                marker=dict(size=8, symbol=simbolos.get(area, 'circle') + '-open', line=dict(width=2)),
+                customdata=df_anuario['respondentes'], hovertemplate=hover,
                 showlegend=False
             ))
             
@@ -52,9 +69,10 @@ def criar_grafico_serie(df, indicador, etapa):
             font=dict(color=cor, size=12), xanchor='left', yanchor='middle'
         )
     
-    fig.add_vline(x=2022.5, line_width=1.5, line_dash="dash", line_color="gray")
+    # 2022 está nas duas fontes: os dois pontos aparecem, e a diferença entre eles é de método
+    fig.add_vline(x=2022, line_width=1.5, line_dash="dash", line_color="gray")
     fig.add_annotation(
-        x=2022.5, y=df_agg[indicador].max(),
+        x=2022, y=df_agg[indicador].max(),
         text="Mudança de Fonte<br>(QASE → Anuário)",
         showarrow=False, xanchor='center', yanchor='bottom',
         font=dict(size=10, color="gray")
@@ -76,8 +94,8 @@ def criar_grafico_serie(df, indicador, etapa):
             )
 
     fig.update_layout(
-        title=f"Evolução Temporal: {indicador} ({etapa.title()})",
-        xaxis_title="Ano", yaxis_title=f"{indicador} (%)",
+        title=f"Evolução Temporal: {rotulo} ({etapa.title()})",
+        xaxis_title="Ano", yaxis_title=f"{rotulo} (%)",
         margin=dict(r=100), plot_bgcolor='white', hovermode="x unified"
     )
     
