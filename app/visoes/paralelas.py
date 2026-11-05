@@ -28,14 +28,17 @@ def criar_grafico_paralelas(df, ano, etapa, min_respondentes=20, destaque="area"
         cor = dict(color=d["cod_carreira"].isin(alvo).astype(int), cmin=0, cmax=1,
                    colorscale=[[0, COR_OUTROS], [1, COR_DESTAQUE]])
         nomes = d.loc[d["cod_carreira"].isin(alvo), "carreira"].tolist()
-        legenda = "em laranja: " + (", ".join(nomes) if nomes else "nenhuma carreira com dados neste filtro")
+        legenda = "em laranja: " + ("; ".join(nomes) if nomes else "nenhuma carreira com dados neste filtro")
 
     # o 1º eixo é a área: serve de legenda e permite filtrar uma área arrastando sobre ele
     dimensoes = [dict(label="Área", values=d["area_num"], tickvals=[0, 1, 2], ticktext=AREAS)]
     dimensoes += [dict(label=CURTOS[c] + " (%)", values=d[c], range=[0, 100]) for c in eixos]
     fig = go.Figure(go.Parcoords(line=cor, dimensions=dimensoes))
-    fig.update_layout(title=f"{len(d)} carreiras em {ano} ({etapa}, mín. {min_respondentes} respondentes); {legenda}",
-                      margin=dict(l=70, r=50, t=90), height=500, font=dict(size=12))
+    fig.update_layout(title=f"{len(d)} carreiras em {ano} ({etapa}, mín. {min_respondentes} respondentes)",
+                      margin=dict(l=70, r=50, t=90, b=90), height=540, font=dict(size=12))
+    # legenda embaixo do gráfico (as coordenadas paralelas do plotly não têm legenda própria)
+    fig.add_annotation(text=legenda, x=0, y=-0.15, xref="paper", yref="paper", xanchor="left",
+                       showarrow=False, font=dict(size=12))
     return fig
 
 
