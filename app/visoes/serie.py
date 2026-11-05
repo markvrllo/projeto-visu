@@ -1,6 +1,8 @@
 import plotly.graph_objects as go
 import pandas as pd
 
+from dados import espalhar
+
 def criar_grafico_serie(df, indicador, etapa, rotulo=None):
     """
     Cria a Visão 1: Série temporal (2013-2026) para a USP e as 3 áreas.
@@ -31,6 +33,7 @@ def criar_grafico_serie(df, indicador, etapa, rotulo=None):
     hover = '%{x}: %{y:.1f}%<br>%{customdata} respondentes<extra>%{fullData.name}</extra>'
 
     areas = df_agg['area_plot'].unique()
+    rotulos = []
 
     for area in areas:
         df_area = df_agg[df_agg['area_plot'] == area].sort_values('ano')
@@ -61,10 +64,15 @@ def criar_grafico_serie(df, indicador, etapa, rotulo=None):
             ))
             
         ultimo_ano = df_area['ano'].max()
-        ultimo_valor = df_area[df_area['ano'] == ultimo_ano][indicador].values[0]
-        
+        ultimo_valor = df_area[df_area['ano'] == ultimo_ano][indicador].values[-1]
+        rotulos.append((area, ultimo_ano, ultimo_valor, cor))
+
+    # rótulo direto no fim de cada linha, afastando os que ficariam sobrepostos
+    folga = 0.06 * (df_agg[indicador].max() - df_agg[indicador].min() or 1)
+    ys = espalhar([r[2] for r in rotulos], folga)
+    for (area, ultimo_ano, _, cor), y in zip(rotulos, ys):
         fig.add_annotation(
-            x=ultimo_ano + 0.3, y=ultimo_valor,
+            x=ultimo_ano + 0.3, y=y,
             text=f"<b>{area}</b>", showarrow=False,
             font=dict(color=cor, size=12), xanchor='left', yanchor='middle'
         )
