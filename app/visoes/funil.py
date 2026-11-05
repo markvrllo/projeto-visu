@@ -21,34 +21,47 @@ def criar_grafico_funil(df, indicador, anos, rotulo=None):
     A inclinação mostra o filtro do vestibular: linha descendo = o grupo perde espaço até a matrícula.
     """
     rotulo = rotulo or indicador
-    fig = make_subplots(rows=1, cols=len(anos), shared_yaxes=True, horizontal_spacing=0.08,
+    fig = make_subplots(rows=1, cols=len(anos), shared_yaxes=True, horizontal_spacing=0.16,
                         subplot_titles=[str(a) for a in anos])
     for col, ano in enumerate(anos, start=1):
         d, fonte = _dados_do_ano(df, ano, indicador)
+        # os títulos dos painéis são as primeiras anotações da figura
+        fig.layout.annotations[col - 1].text = f"{ano} ({'QASE' if fonte == 'qase' else 'Anuário'})"
+        if d.empty:
+            fig.add_annotation(text="Sem dados deste indicador<br>neste ano", showarrow=False,
+                               x=0.5, y=0.5, xref=f"x{col if col > 1 else ''} domain",
+                               yref=f"y{col if col > 1 else ''} domain", font=dict(color="gray", size=13))
+            continue
         etapas = [e for e in ETAPAS if e in set(d["etapa"])]
-        deltas = []
+        rotulos = []
         for grupo, g in d.groupby("grupo"):
             g = g.set_index("etapa").reindex(etapas)
+            # a USP fica por cima e mais grossa; as áreas, mais finas
+            largura = 4 if grupo == "USP" else 2.5
             fig.add_trace(go.Scatter(
                 x=[ETAPAS[e] for e in etapas], y=g[indicador], name=grupo, legendgroup=grupo,
-                showlegend=(col == 1), mode="lines+markers",
-                line=dict(color=CORES_AREA[grupo], width=3),
-                marker=dict(size=10, symbol=SIMBOLOS_AREA[grupo]),
+                showlegend=False, mode="lines+markers",
+                line=dict(color=CORES_AREA[grupo], width=largura),
+                marker=dict(size=9, symbol=SIMBOLOS_AREA[grupo]),
                 customdata=g["respondentes"],
                 hovertemplate=f"{grupo}, %{{x}}: %{{y:.1f}}%<br>%{{customdata}} respondentes<extra></extra>",
             ), row=1, col=col)
-            # variação do inscrito ao matriculado, escrita na ponta da linha (é a resposta da Q2)
+            # rótulo direto na ponta da linha: o nome do grupo e a variação do inscrito ao matriculado
+            # (é a resposta da Q2); substitui a legenda
+            ultimo = g[indicador].dropna()
+            if ultimo.empty:
+                continue
+            texto = f"<b>{grupo}</b>"
             if {"inscritos", "matriculados"} <= set(etapas):
                 delta = g.loc["matriculados", indicador] - g.loc["inscritos", indicador]
-                deltas.append((grupo, g.loc["matriculados", indicador], delta))
-        folga = 0.08 * (d[indicador].max() - d[indicador].min() or 1)
-        for (grupo, _, delta), y in zip(deltas, espalhar([v for _, v, _ in deltas], folga)):
-            fig.add_annotation(x=ETAPAS["matriculados"], y=y, text=f"{delta:+.1f} pp", showarrow=False,
-                               xanchor="left", xshift=10, font=dict(color=CORES_AREA[grupo], size=11),
-                               row=1, col=col)
-        fig.layout.annotations[col - 1].text = f"{ano} ({'QASE' if fonte == 'qase' else 'Anuário'})"
-    fig.update_layout(title=f"Do inscrito ao matriculado: {rotulo}", plot_bgcolor="white",
-                      legend_title_text="", margin=dict(r=60), height=450)
-    fig.update_yaxes(title_text=f"{rotulo} (%)", row=1, col=1)
-    fig.update_yaxes(showgrid=True, gridcolor="LightGray")
+                texto += f" {delta:+.1f} pp".replace(".", ",").replace("-", "−")
+            rotulos.append((grupo, ETAPAS[ultimo.index[-1]], ultimo.iloc[-1], texto))
+        folga = 0.09 * (d[indicador].max() - d[indicador].min() or 1)
+        for (grupo, x, _, texto), y in zip(rotulos, espalhar([v for _, _, v, _ in rotulos], folga)):
+            fig.add_annotation(x=x, y=y, text=texto, showarrow=False, xanchor="left", xshift=12,
+                               font=dict(color=CORES_AREA[grupo], size=12), row=1, col=col)
+    fig.update_layout(title=f"Do inscrito ao matriculado: {rotulo}", plot_bgcolor="white", showlegend=False,
+                      margin=dict(l=70, r=150, t=90, b=50), height=470, separators=",.")
+    fig.update_yaxes(title_text=rotulo, row=1, col=1)
+    fig.update_yaxes(showgrid=True, gridcolor="LightGray", ticksuffix="%")
     return fig

@@ -79,20 +79,22 @@ def criar_grafico_serie(df, indicador, etapa, rotulo=None):
     
     # 2022 está nas duas fontes: os dois pontos aparecem, e a diferença entre eles é de método
     fig.add_vline(x=2022, line_width=1.5, line_dash="dash", line_color="gray")
+    # os textos ficam acima da área do gráfico, para não cobrir as linhas
     fig.add_annotation(
-        x=2022, y=df_agg[indicador].max(),
-        text="Mudança de Fonte<br>(QASE → Anuário)",
-        showarrow=False, xanchor='center', yanchor='bottom',
-        font=dict(size=10, color="gray")
+        x=2022.1, y=1, yref="paper", text="Troca de fonte: QASE → Anuário",
+        showarrow=False, xanchor='left', yanchor='bottom',
+        font=dict(size=11, color="gray")
     )
 
     if indicador in ['pct_escola_publica', 'pct_PPI']:
         cotas_info = {2018: '37%', 2019: '40%', 2020: '45%', 2021: '50%'}
         fig.add_vrect(
             x0=2017.5, x1=2021.5,
-            fillcolor="#F0E442", opacity=0.15, layer="below", line_width=0,
-            annotation_text="Implementação de Cotas (2018-2021)",
-            annotation_position="top left", annotation_font_size=10
+            fillcolor="#F0E442", opacity=0.15, layer="below", line_width=0
+        )
+        fig.add_annotation(
+            x=2019.5, y=1, yref="paper", text="Implantação das cotas (2018–2021)",
+            showarrow=False, xanchor='center', yanchor='bottom', font=dict(size=11, color="#555555")
         )
         for ano, pct in cotas_info.items():
             fig.add_annotation(
@@ -103,8 +105,8 @@ def criar_grafico_serie(df, indicador, etapa, rotulo=None):
 
     fig.update_layout(
         title=f"Evolução Temporal: {rotulo} ({etapa.title()})",
-        xaxis_title="Ano", yaxis_title=f"{rotulo} (%)",
-        margin=dict(r=100), plot_bgcolor='white', hovermode="x unified"
+        xaxis_title="Ano", yaxis_title=rotulo if "%" in rotulo else f"{rotulo} (%)",
+        margin=dict(r=100), plot_bgcolor='white', hovermode="x unified", separators=",."
     )
     
     fig.update_yaxes(showgrid=True, gridwidth=1, gridcolor='LightGray')

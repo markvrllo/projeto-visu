@@ -15,6 +15,12 @@ def criar_grafico_paralelas(df, ano, etapa, min_respondentes=20, destaque="area"
     # eixos: só os indicadores que existem neste ano (pai e mãe somem em 2022)
     eixos = [c for c in INDICADORES if d[c].notna().any()]
     d = d.dropna(subset=eixos)
+    if destaque not in ("area", "icmc"):
+        destaque = int(destaque)
+    if destaque != "area":
+        # as carreiras destacadas vão para o fim, para serem desenhadas por cima das outras
+        alvo = CARREIRAS_ICMC if destaque == "icmc" else {destaque}
+        d = d.assign(_dest=d["cod_carreira"].isin(alvo)).sort_values("_dest")
     d["area_num"] = d["area"].map({a: i for i, a in enumerate(AREAS)})
 
     if destaque == "area":
@@ -24,7 +30,6 @@ def criar_grafico_paralelas(df, ano, etapa, min_respondentes=20, destaque="area"
             [2 / 3, CORES_AREA["Humanas"]], [1, CORES_AREA["Humanas"]]])
         legenda = "cor = área"
     else:
-        alvo = CARREIRAS_ICMC if destaque == "icmc" else {int(destaque)}
         cor = dict(color=d["cod_carreira"].isin(alvo).astype(int), cmin=0, cmax=1,
                    colorscale=[[0, COR_OUTROS], [1, COR_DESTAQUE]])
         nomes = d.loc[d["cod_carreira"].isin(alvo), "carreira"].tolist()
@@ -33,7 +38,9 @@ def criar_grafico_paralelas(df, ano, etapa, min_respondentes=20, destaque="area"
     # o 1º eixo é a área: serve de legenda e permite filtrar uma área arrastando sobre ele
     dimensoes = [dict(label="Área", values=d["area_num"], tickvals=[0, 1, 2], ticktext=AREAS)]
     dimensoes += [dict(label=CURTOS[c] + " (%)", values=d[c], range=[0, 100]) for c in eixos]
-    fig = go.Figure(go.Parcoords(line=cor, dimensions=dimensoes))
+    # rangefont transparente: esconde os "0" e "100" repetidos em cima e embaixo de cada eixo
+    fig = go.Figure(go.Parcoords(line=cor, dimensions=dimensoes,
+                                 rangefont=dict(color="rgba(0,0,0,0)")))
     fig.update_layout(title=f"{len(d)} carreiras em {ano} ({etapa}, mín. {min_respondentes} respondentes)",
                       margin=dict(l=70, r=50, t=90, b=90), height=540, font=dict(size=12))
     # legenda embaixo do gráfico (as coordenadas paralelas do plotly não têm legenda própria)
