@@ -1,0 +1,137 @@
+check,gravidade,ano,etapa,nivel,area,cod_carreira,modalidade,indicador,detalhe
+M2 média ponderada != Todas,aviso,2020,matriculados,carreira,Humanas,285,,pct_renda_ate_3SM,"modalidades = 33.33%, Todas = 35.00% (-1.67 p.p.)"
+M2 média ponderada != Todas,aviso,2020,matriculados,carreira,Biológicas,530,,pct_renda_ate_3SM,"modalidades = 24.46%, Todas = 25.58% (-1.12 p.p.)"
+M2 média ponderada != Todas,aviso,2020,matriculados,carreira,Exatas,715,,pct_renda_ate_3SM,"modalidades = 24.36%, Todas = 25.93% (-1.57 p.p.)"
+M2 média ponderada != Todas,aviso,2020,matriculados,carreira,Exatas,815,,pct_renda_ate_3SM,"modalidades = 31.67%, Todas = 33.33% (-1.67 p.p.)"
+M2 média ponderada != Todas,aviso,2020,matriculados,carreira,Exatas,815,,pct_renda_mais_10SM,"modalidades = 8.33%, Todas = 9.52% (-1.19 p.p.)"
+M2 média ponderada != Todas,aviso,2021,inscritos,carreira,Humanas,235,,pct_pai_superior,"modalidades = 42.65%, Todas = 45.88% (-3.23 p.p.)"
+M2 média ponderada != Todas,aviso,2021,inscritos,carreira,Humanas,235,,pct_mae_superior,"modalidades = 36.85%, Todas = 38.04% (-1.19 p.p.)"
+M2 média ponderada != Todas,aviso,2021,inscritos,carreira,Humanas,260,,pct_pai_superior,"modalidades = 36.28%, Todas = 37.42% (-1.14 p.p.)"
+M2 média ponderada != Todas,aviso,2021,inscritos,carreira,Humanas,285,,pct_pai_superior,"modalidades = 32.94%, Todas = 33.96% (-1.02 p.p.)"
+M2 média ponderada != Todas,aviso,2021,inscritos,carreira,Biológicas,560,,pct_pai_superior,"modalidades = 34.73%, Todas = 36.36% (-1.63 p.p.)"
+M2 média ponderada != Todas,aviso,2021,inscritos,carreira,Exatas,705,,pct_pai_superior,"modalidades = 51.87%, Todas = 53.28% (-1.41 p.p.)"
+M2 média ponderada != Todas,aviso,2021,inscritos,carreira,Exatas,770,,pct_pai_superior,"modalidades = 57.98%, Todas = 59.02% (-1.03 p.p.)"
+M2 média ponderada != Todas,aviso,2021,matriculados,carreira,Humanas,115,,pct_pai_superior,"modalidades = 56.67%, Todas = 55.56% (+1.11 p.p.)"
+M2 média ponderada != Todas,aviso,2021,matriculados,carreira,Humanas,125,,pct_pai_superior,"modalidades = 51.67%, Todas = 53.57% (-1.90 p.p.)"
+M2 média ponderada != Todas,aviso,2021,matriculados,carreira,Humanas,130,,pct_pai_superior,"modalidades = 44.44%, Todas = 46.15% (-1.71 p.p.)"
+M2 média ponderada != Todas,aviso,2021,matriculados,carreira,Humanas,140,,pct_pai_superior,"modalidades = 13.33%, Todas = 11.76% (+1.57 p.p.)"
+M2 média ponderada != Todas,aviso,2021,matriculados,carreira,Humanas,145,,pct_pai_superior,"modalidades = 61.72%, Todas = 62.77% (-1.06 p.p.)"
+M2 média ponderada != Todas,aviso,2021,matriculados,carreira,Humanas,175,,pct_pai_superior,"modalidades = 38.91%, Todas = 37.84% (+1.08 p.p.)"
+M2 média ponderada != Todas,aviso,2021,matriculados,carreira,Humanas,200,,pct_pai_superior,"modalidades = 43.09%, Todas = 44.30% (-1.21 p.p.)"
+M2 média ponderada != Todas,aviso,2021,matriculados,carreira,Humanas,205,,pct_tecnico,"modalidades = 43.98%, Todas = 42.86% (+1.12 p.p.)"
+M2 média ponderada != Todas,aviso,2021,matriculados,carreira,Humanas,235,,pct_pai_superior,"modalidades = 35.71%, Todas = 38.89% (-3.17 p.p.)"
+M2 média ponderada != Todas,aviso,2021,matriculados,carreira,Biológicas,416,,pct_pai_superior,"modalidades = 59.72%, Todas = 61.11% (-1.39 p.p.)"
+M2 média ponderada != Todas,aviso,2021,matriculados,carreira,Biológicas,425,,pct_pai_superior,"modalidades = 33.57%, Todas = 34.62% (-1.04 p.p.)"
+M2 média ponderada != Todas,aviso,2021,matriculados,carreira,Biológicas,430,,pct_pai_superior,"modalidades = 59.53%, Todas = 61.33% (-1.81 p.p.)"
+M2 média ponderada != Todas,aviso,2021,matriculados,carreira,Biológicas,435,,pct_pai_superior,"modalidades = 49.60%, Todas = 51.28% (-1.68 p.p.)"
+M2 média ponderada != Todas,aviso,2021,matriculados,carreira,Biológicas,490,,pct_mae_superior,"modalidades = 31.82%, Todas = 28.57% (+3.25 p.p.)"
+M2 média ponderada != Todas,aviso,2021,matriculados,carreira,Biológicas,525,,pct_pai_superior,"modalidades = 66.67%, Todas = 68.42% (-1.75 p.p.)"
+M2 média ponderada != Todas,aviso,2021,matriculados,carreira,Biológicas,545,,pct_pai_superior,"modalidades = 48.52%, Todas = 50.00% (-1.48 p.p.)"
+M2 média ponderada != Todas,aviso,2021,matriculados,carreira,Exatas,705,,pct_pai_superior,"modalidades = 36.95%, Todas = 41.67% (-4.72 p.p.)"
+M2 média ponderada != Todas,aviso,2021,matriculados,carreira,Exatas,725,,pct_pai_superior,"modalidades = 63.66%, Todas = 65.38% (-1.73 p.p.)"
+M2 média ponderada != Todas,aviso,2021,matriculados,carreira,Exatas,735,,pct_pai_superior,"modalidades = 54.95%, Todas = 56.60% (-1.65 p.p.)"
+M2 média ponderada != Todas,aviso,2021,matriculados,carreira,Exatas,791,,pct_pai_superior,"modalidades = 69.05%, Todas = 66.67% (+2.38 p.p.)"
+M2 média ponderada != Todas,aviso,2021,matriculados,carreira,Exatas,800,,pct_pai_superior,"modalidades = 43.48%, Todas = 45.16% (-1.68 p.p.)"
+M2 média ponderada != Todas,aviso,2021,matriculados,carreira,Exatas,820,,pct_pai_superior,"modalidades = 22.36%, Todas = 21.05% (+1.31 p.p.)"
+M2 média ponderada != Todas,aviso,2021,matriculados,carreira,Exatas,855,,pct_pai_superior,"modalidades = 53.91%, Todas = 55.00% (-1.09 p.p.)"
+M2 média ponderada != Todas,aviso,2022,inscritos,carreira,Humanas,250,,pct_renda_ate_3SM,"modalidades = 40.76%, Todas = 39.68% (+1.08 p.p.)"
+M2 média ponderada != Todas,aviso,2022,matriculados,carreira,Humanas,115,,pct_tecnico,"modalidades = 28.97%, Todas = 30.00% (-1.03 p.p.)"
+M3 modalidade faltando,aviso,2019,inscritos,carreira,Humanas,145,PPI,,falta PPI
+M3 modalidade faltando,aviso,2019,inscritos,carreira,Humanas,150,PPI,,falta PPI
+M3 modalidade faltando,aviso,2019,inscritos,carreira,Humanas,160,PPI,,falta PPI
+M3 modalidade faltando,aviso,2019,inscritos,carreira,Humanas,190,PPI,,falta PPI
+M3 modalidade faltando,aviso,2019,inscritos,carreira,Humanas,195,EP,,falta EP
+M3 modalidade faltando,aviso,2019,inscritos,carreira,Humanas,215,PPI,,falta PPI
+M3 modalidade faltando,aviso,2019,inscritos,carreira,Humanas,255,PPI,,falta PPI
+M3 modalidade faltando,aviso,2019,inscritos,carreira,Biológicas,400,PPI,,falta PPI
+M3 modalidade faltando,aviso,2019,inscritos,carreira,Biológicas,415,PPI,,falta PPI
+M3 modalidade faltando,aviso,2019,inscritos,carreira,Biológicas,470,PPI,,falta PPI
+M3 modalidade faltando,aviso,2019,inscritos,carreira,Exatas,705,PPI,,falta PPI
+M3 modalidade faltando,aviso,2019,inscritos,carreira,Exatas,800,PPI,,falta PPI
+M3 modalidade faltando,aviso,2019,inscritos,carreira,Exatas,820,PPI,,falta PPI
+M3 modalidade faltando,aviso,2019,matriculados,carreira,Humanas,140,PPI,,falta PPI
+M3 modalidade faltando,aviso,2019,matriculados,carreira,Humanas,145,PPI,,falta PPI
+M3 modalidade faltando,aviso,2019,matriculados,carreira,Humanas,150,PPI,,falta PPI
+M3 modalidade faltando,aviso,2019,matriculados,carreira,Humanas,155,PPI,,falta PPI
+M3 modalidade faltando,aviso,2019,matriculados,carreira,Humanas,160,PPI,,falta PPI
+M3 modalidade faltando,aviso,2019,matriculados,carreira,Humanas,190,PPI,,falta PPI
+M3 modalidade faltando,aviso,2019,matriculados,carreira,Humanas,195,EP,,falta EP
+M3 modalidade faltando,aviso,2019,matriculados,carreira,Humanas,215,PPI,,falta PPI
+M3 modalidade faltando,aviso,2019,matriculados,carreira,Humanas,255,PPI,,falta PPI
+M3 modalidade faltando,aviso,2019,matriculados,carreira,Biológicas,400,PPI,,falta PPI
+M3 modalidade faltando,aviso,2019,matriculados,carreira,Biológicas,415,PPI,,falta PPI
+M3 modalidade faltando,aviso,2019,matriculados,carreira,Biológicas,470,PPI,,falta PPI
+M3 modalidade faltando,aviso,2019,matriculados,carreira,Biológicas,565,PPI,,falta PPI
+M3 modalidade faltando,aviso,2019,matriculados,carreira,Exatas,705,PPI,,falta PPI
+M3 modalidade faltando,aviso,2019,matriculados,carreira,Exatas,745,PPI,,falta PPI
+M3 modalidade faltando,aviso,2019,matriculados,carreira,Exatas,800,PPI,,falta PPI
+M3 modalidade faltando,aviso,2019,matriculados,carreira,Exatas,820,PPI,,falta PPI
+M3 modalidade faltando,aviso,2020,inscritos,carreira,Humanas,150,PPI,,falta PPI
+M3 modalidade faltando,aviso,2020,inscritos,carreira,Humanas,195,EP,,falta EP
+M3 modalidade faltando,aviso,2020,inscritos,carreira,Biológicas,400,PPI,,falta PPI
+M3 modalidade faltando,aviso,2020,inscritos,carreira,Biológicas,410,PPI,,falta PPI
+M3 modalidade faltando,aviso,2020,inscritos,carreira,Biológicas,555,PPI,,falta PPI
+M3 modalidade faltando,aviso,2020,inscritos,carreira,Exatas,705,PPI,,falta PPI
+M3 modalidade faltando,aviso,2020,inscritos,carreira,Exatas,800,PPI,,falta PPI
+M3 modalidade faltando,aviso,2020,inscritos,carreira,Exatas,820,PPI,,falta PPI
+M3 modalidade faltando,aviso,2020,matriculados,carreira,Humanas,150,PPI,,falta PPI
+M3 modalidade faltando,aviso,2020,matriculados,carreira,Humanas,195,EP,,falta EP
+M3 modalidade faltando,aviso,2020,matriculados,carreira,Biológicas,400,PPI,,falta PPI
+M3 modalidade faltando,aviso,2020,matriculados,carreira,Biológicas,410,PPI,,falta PPI
+M3 modalidade faltando,aviso,2020,matriculados,carreira,Biológicas,555,PPI,,falta PPI
+M3 modalidade faltando,aviso,2020,matriculados,carreira,Exatas,705,PPI,,falta PPI
+M3 modalidade faltando,aviso,2020,matriculados,carreira,Exatas,800,PPI,,falta PPI
+M3 modalidade faltando,aviso,2020,matriculados,carreira,Exatas,820,PPI,,falta PPI
+M3 modalidade faltando,aviso,2021,inscritos,carreira,Biológicas,410,PPI,,falta PPI
+M3 modalidade faltando,aviso,2021,inscritos,carreira,Biológicas,415,PPI,,falta PPI
+M3 modalidade faltando,aviso,2021,inscritos,carreira,Biológicas,555,PPI,,falta PPI
+M3 modalidade faltando,aviso,2021,inscritos,carreira,Biológicas,570,PPI,,falta PPI
+M3 modalidade faltando,aviso,2021,inscritos,carreira,Exatas,800,PPI,,falta PPI
+M3 modalidade faltando,aviso,2021,inscritos,carreira,Exatas,820,PPI,,falta PPI
+M3 modalidade faltando,aviso,2021,matriculados,carreira,Humanas,185,PPI,,falta PPI
+M3 modalidade faltando,aviso,2021,matriculados,carreira,Biológicas,410,PPI,,falta PPI
+M3 modalidade faltando,aviso,2021,matriculados,carreira,Biológicas,415,PPI,,falta PPI
+M3 modalidade faltando,aviso,2021,matriculados,carreira,Biológicas,555,PPI,,falta PPI
+M3 modalidade faltando,aviso,2021,matriculados,carreira,Biológicas,570,PPI,,falta PPI
+M3 modalidade faltando,aviso,2021,matriculados,carreira,Exatas,800,PPI,,falta PPI
+M3 modalidade faltando,aviso,2021,matriculados,carreira,Exatas,820,PPI,,falta PPI
+M3 modalidade faltando,aviso,2022,inscritos,carreira,Humanas,185,PPI,,falta PPI
+M3 modalidade faltando,aviso,2022,inscritos,carreira,Humanas,220,PPI,,falta PPI
+M3 modalidade faltando,aviso,2022,inscritos,carreira,Biológicas,410,PPI,,falta PPI
+M3 modalidade faltando,aviso,2022,inscritos,carreira,Biológicas,530,PPI,,falta PPI
+M3 modalidade faltando,aviso,2022,inscritos,carreira,Biológicas,555,PPI,,falta PPI
+M3 modalidade faltando,aviso,2022,inscritos,carreira,Exatas,745,PPI,,falta PPI
+M3 modalidade faltando,aviso,2022,inscritos,carreira,Exatas,800,PPI,,falta PPI
+M3 modalidade faltando,aviso,2022,inscritos,carreira,Exatas,820,PPI,,falta PPI
+M3 modalidade faltando,aviso,2022,matriculados,carreira,Humanas,185,PPI,,falta PPI
+M3 modalidade faltando,aviso,2022,matriculados,carreira,Humanas,220,PPI,,falta PPI
+M3 modalidade faltando,aviso,2022,matriculados,carreira,Biológicas,410,PPI,,falta PPI
+M3 modalidade faltando,aviso,2022,matriculados,carreira,Biológicas,530,PPI,,falta PPI
+M3 modalidade faltando,aviso,2022,matriculados,carreira,Biológicas,555,PPI,,falta PPI
+M3 modalidade faltando,aviso,2022,matriculados,carreira,Biológicas,570,PPI,,falta PPI
+M3 modalidade faltando,aviso,2022,matriculados,carreira,Exatas,720,PPI,,falta PPI
+M3 modalidade faltando,aviso,2022,matriculados,carreira,Exatas,745,PPI,,falta PPI
+M3 modalidade faltando,aviso,2022,matriculados,carreira,Exatas,800,PPI,,falta PPI
+M3 modalidade faltando,aviso,2022,matriculados,carreira,Exatas,820,PPI,,falta PPI
+M4 modalidade fora do próprio critério,aviso,2019,inscritos,carreira,Humanas,205,PPI,pct_escola_publica,pct_escola_publica = 80.0% com 5 respondentes
+M4 modalidade fora do próprio critério,aviso,2019,inscritos,carreira,Biológicas,495,PPI,pct_PPI,pct_PPI = 75.0% com 4 respondentes
+M4 modalidade fora do próprio critério,aviso,2019,inscritos,carreira,Biológicas,525,PPI,pct_PPI,pct_PPI = 85.7% com 14 respondentes
+M4 modalidade fora do próprio critério,aviso,2019,inscritos,carreira,Biológicas,575,PPI,pct_PPI,pct_PPI = 88.9% com 9 respondentes
+M4 modalidade fora do próprio critério,aviso,2019,inscritos,carreira,Exatas,750,PPI,pct_PPI,pct_PPI = 83.3% com 6 respondentes
+M4 modalidade fora do próprio critério,aviso,2019,matriculados,carreira,Humanas,245,PPI,pct_escola_publica,pct_escola_publica = 85.7% com 7 respondentes
+M4 modalidade fora do próprio critério,aviso,2019,matriculados,carreira,Humanas,275,EP,pct_escola_publica,pct_escola_publica = 80.0% com 5 respondentes
+M4 modalidade fora do próprio critério,aviso,2019,matriculados,carreira,Biológicas,460,PPI,pct_escola_publica,pct_escola_publica = 88.9% com 9 respondentes
+M4 modalidade fora do próprio critério,aviso,2019,matriculados,carreira,Biológicas,495,PPI,pct_PPI,pct_PPI = 66.7% com 3 respondentes
+M4 modalidade fora do próprio critério,aviso,2019,matriculados,carreira,Exatas,830,PPI,pct_escola_publica,pct_escola_publica = 75.0% com 4 respondentes
+M4 modalidade fora do próprio critério,aviso,2019,matriculados,carreira,Exatas,855,PPI,pct_PPI,pct_PPI = 87.5% com 8 respondentes
+M4 modalidade fora do próprio critério,aviso,2020,matriculados,carreira,Humanas,190,EP,pct_escola_publica,pct_escola_publica = 89.5% com 19 respondentes
+M4 modalidade fora do próprio critério,aviso,2020,matriculados,carreira,Humanas,215,PPI,pct_PPI,pct_PPI = 88.9% com 9 respondentes
+M4 modalidade fora do próprio critério,aviso,2021,matriculados,carreira,Exatas,791,EP,pct_escola_publica,pct_escola_publica = 75.0% com 4 respondentes
+M4 modalidade fora do próprio critério,aviso,2022,inscritos,carreira,Humanas,225,PPI,pct_PPI,pct_PPI = 88.9% com 9 respondentes
+M4 modalidade fora do próprio critério,aviso,2022,inscritos,carreira,Biológicas,525,PPI,pct_PPI,pct_PPI = 85.7% com 7 respondentes
+M4 modalidade fora do próprio critério,aviso,2022,inscritos,carreira,Biológicas,570,PPI,pct_escola_publica,pct_escola_publica = 66.7% com 3 respondentes
+M4 modalidade fora do próprio critério,aviso,2022,inscritos,carreira,Exatas,755,PPI,pct_PPI,pct_PPI = 80.0% com 5 respondentes
+M4 modalidade fora do próprio critério,aviso,2022,matriculados,carreira,Humanas,195,PPI,pct_PPI,pct_PPI = 85.7% com 7 respondentes
+M4 modalidade fora do próprio critério,aviso,2022,matriculados,carreira,Humanas,245,PPI,pct_PPI,pct_PPI = 83.3% com 6 respondentes
+M4 modalidade fora do próprio critério,aviso,2022,matriculados,carreira,Biológicas,525,PPI,pct_PPI,pct_PPI = 0.0% com 1 respondentes
+M4 modalidade fora do próprio critério,aviso,2022,matriculados,carreira,Exatas,875,PPI,pct_PPI,pct_PPI = 85.7% com 7 respondentes

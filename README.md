@@ -41,6 +41,7 @@ python -m src.validacao --pdfs data/raw/por_carreira
 python scripts/gerar_carreira_area.py
 python -m src.harmonizacao              # -> data/processed/indicadores.csv
 python -m src.ponte                     # -> data/processed/ponte_2022.csv
+python -m src.representacao             # -> data/processed/representacao.csv e validacao_modalidades.csv
 
 # 7. abrir o app em http://127.0.0.1:8050
 python app/app.py
@@ -94,6 +95,7 @@ python scripts/recortar_anuario.py AnuarioUSP_2026.pdf --com-candidato-vaga     
 | `src/qase_parser.py` | Extração das tabelas do QASE (pdfplumber + regex) |
 | `src/harmonizacao.py` | Identificação das perguntas, reagrupamento das categorias e cálculo dos indicadores |
 | `src/anuario_parser.py`, `src/validacao.py`, `src/ponte.py` | Extração do Anuário, validação da extração e tabela ponte de 2022 |
+| `src/representacao.py` | Diferença e razão de representação (inscritos → matriculados) e validação das modalidades AC/EP/PPI ([docs/representacao.md](docs/representacao.md)) |
 | `data/carreira_area.csv` | Área (Biológicas, Exatas, Humanas) de cada carreira em cada ano |
 | `data/processed/indicadores.csv` | Tabela final usada pelo app (4.870 linhas); descrita em `docs/panorama_indicadores.md` |
 | `app/app.py`, `app/dados.py` | App Dash: layout, filtros e leitura dos dados |
