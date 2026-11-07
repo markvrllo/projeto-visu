@@ -58,11 +58,11 @@ Junto com essa correção, `respondentes` passou a ser o total de **todas** as r
 
 Para o M2 e o intervalo de confiança ficarem exatos, o `indicadores.csv` ganhou nove colunas no fim, `n_escola_publica` … `n_tecnico`: o denominador de cada `pct_*`. As colunas antigas não mudam de nome nem de posição. O M2 agora pondera as modalidades por esse denominador, e o aviso da carreira 235 some (ver teste `test_m2_pondera_pelo_denominador_do_indicador`).
 
-O `indicadores.csv` deste PR ainda **não** tem essa correção: ela precisa do `qase_longo.csv`, que só existe no notebook do Marcos. Ver "Como regenerar".
+Os CSVs foram regerados do zero no notebook do Marcos (commit d181184) com essas três correções. Escola pública da USP (Fuvest), inscritos / matriculados, antes → depois: 2015 33,8 → 35,0 / 36,1 → 37,4; 2016 34,5 → 35,8 / 31,7 → 33,1; 2017 33,5 → 35,0 / 28,5 → 30,0; 2018 33,2 → 34,9 / 31,4 → 33,3; 2019 32,3 → 33,9 / 31,1 → 32,9; 2020 33,6 → 35,3 / 39,0 → 41,1. 2013, 2014, 2021 e 2022 não mudam. Avisos das modalidades: M2 0 (eram 37, todos falsos), M3 77, M4 17.
 
 ## Como regenerar
 
-Os CSVs deste PR foram gerados aqui só para a parte do Anuário (o QASE não mudou; as linhas do QASE no `indicadores.csv` são as mesmas). Na máquina do Marcos, para regenerar tudo do zero:
+Os CSVs deste PR foram regerados do zero no notebook do Marcos, que tem o `qase_longo.csv` (fora do git). Para repetir:
 
 ```
 python -m src.anuario_parser data/raw/anuario
