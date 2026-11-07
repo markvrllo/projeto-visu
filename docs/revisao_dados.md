@@ -38,7 +38,7 @@ Consequência: comparar QASE 2022 com Anuário 2023 mistura método e mudança r
 
 ### 4. Definição de "escola pública" (nota para o relatório)
 
-`pct_escola_publica` soma "todo" e "maior parte" do ensino médio em escola pública. A cota EP exige o ensino médio inteiro em escola pública. "Maior parte" acrescenta de 0,5 a 1,5 p.p. (Anuário 2022–2026). Não muda as conclusões, mas precisa estar escrito.
+`pct_escola_publica` soma "todo" e "maior parte" do ensino médio em escola pública. Foi uma escolha de definição feita na estrutura inicial (19/10), não um erro de extração, e ela já aparece na seção de pré-processamento da entrega 1. O que falta dizer é que ela é mais larga que o critério da cota EP, que exige o ensino médio inteiro em escola pública. "Maior parte" acrescenta de 0,5 a 1,5 p.p. (Anuário 2022–2026), mais entre os inscritos do que entre os matriculados. Na Fuvest 2026 (USP), a diferença matriculados − inscritos seria +10,2 p.p. só com "todo" e é +9,5 p.p. com a definição atual; a razão seria 1,30 em vez de 1,27. Não muda as conclusões.
 
 ### 5. Lacunas que as visões não devem preencher
 
