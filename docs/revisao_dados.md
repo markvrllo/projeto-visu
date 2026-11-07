@@ -56,6 +56,8 @@ As linhas não devem ligar pontos através desses buracos.
 
 Junto com essa correção, `respondentes` passou a ser o total de **todas** as respostas da pergunta sobre a escola (inclusive "No exterior" e "Em outra situação"), e não só das classificadas. Antes, mudar a classificação de uma opção mudava também o nº de respondentes, e com ele os pesos do M2, `amostra_pequena` e o intervalo de confiança. Agora `respondentes` é o nº de questionários, como diz a documentação. As porcentagens não mudam por isso; o nº de respondentes sobe ~0,4% (ex.: Fuvest 2022, inscritos, Anuário: 101.371, o total impresso).
 
+Para o M2 e o intervalo de confiança ficarem exatos, o `indicadores.csv` ganhou nove colunas no fim, `n_escola_publica` … `n_tecnico`: o denominador de cada `pct_*`. As colunas antigas não mudam de nome nem de posição. O M2 agora pondera as modalidades por esse denominador, e o aviso da carreira 235 some (ver teste `test_m2_pondera_pelo_denominador_do_indicador`).
+
 O `indicadores.csv` deste PR ainda **não** tem essa correção: ela precisa do `qase_longo.csv`, que só existe no notebook do Marcos. Ver "Como regenerar".
 
 ## Como regenerar

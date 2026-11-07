@@ -29,6 +29,9 @@ COLUNAS = ["ano", "fonte", "ingresso", "etapa", "nivel", "area", "cod_carreira",
            "modalidade", "respondentes", "pct_escola_publica", "pct_PPI", "pct_renda_ate_3SM",
            "pct_renda_mais_10SM", "pct_pai_superior", "pct_mae_superior", "pct_cursinho", "pct_mulheres",
            "pct_tecnico"]
+# denominador de cada indicador (respostas classificadas da pergunta), para pesos e intervalos exatos
+DENOMINADORES = {c: "n_" + c[len("pct_"):] for c in COLUNAS if c.startswith("pct_")}
+COLUNAS = COLUNAS + list(DENOMINADORES.values())
 
 
 def normalizar(txt):
@@ -260,7 +263,8 @@ def indicadores_de(cont: pd.DataFrame, chave) -> pd.DataFrame:
         parte = tot.merge(sel, on=chave, how="left")
         # a pergunta existe mas ninguém marcou a categoria -> 0 %; pergunta ausente -> NaN
         parte[nome] = 100 * parte["n_cat"].fillna(0) / parte["total"]
-        linhas = linhas.merge(parte[chave + [nome]], on=chave, how="left")
+        parte["n_" + nome[len("pct_"):]] = parte["total"]
+        linhas = linhas.merge(parte[chave + [nome, "n_" + nome[len("pct_"):]]], on=chave, how="left")
     linhas["respondentes"] = np.nan
     for tipo in TIPOS_RESPONDENTES:
         resp = (cont[cont["tipo"] == tipo][chave + ["total_bruto"]].drop_duplicates()
@@ -346,7 +350,8 @@ def montar(qase, anuario, carreira_area, reprov_qase=None, reprov_anuario=None):
             ind[c] = np.nan
     ind = ind[COLUNAS].replace({"": np.nan})
     ind["cod_carreira"] = ind["cod_carreira"].astype("Int64")
-    ind["respondentes"] = ind["respondentes"].astype("Int64")
+    for c in ["respondentes"] + list(DENOMINADORES.values()):
+        ind[c] = ind[c].astype("Int64")
     ordem_nivel = {"usp": 0, "area": 1, "carreira": 2}
     ind = ind.sort_values(["ano", "fonte", "ingresso", "etapa", "nivel", "area", "cod_carreira", "modalidade"],
                           key=lambda s: s.map(ordem_nivel) if s.name == "nivel" else s)
