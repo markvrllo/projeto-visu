@@ -31,20 +31,19 @@ Por ano e etapa:
 
 ## Anuário (2022–2026)
 
-- 16 recortes, 10890 linhas extraídas.
+- 16 recortes, 10902 linhas extraídas.
 
 | check | gravidade | ocorrências |
 |---|---|---|
-| A1 % não somam 100 | reprova | 42 |
-| A2 % impressa != quantidade | aviso | 484 |
+| A1 % não somam 100 | reprova | 30 |
+| A2 % impressa != quantidade | aviso | 370 |
 | A2 % impressa != quantidade | reprova | 58 |
 | A3 soma das áreas != USP | aviso | 1 |
 | A3 soma das áreas != USP | reprova | 1 |
-| A4 total da pergunta != total da tabela | aviso | 45 |
+| A4 total da pergunta != total da tabela | aviso | 39 |
 
 Reprovações:
 
-- anuario_2026__fuvest_geral.pdf p. 4 — Qual é a renda mensal bruta da sua família, incluindo seu próprio rendimento? O valor do salário mínimo (SM) é R$ 1.518,00: A1 % não somam 100 (soma = 98.07%)
 - anuario_2026__fuvest_geral.pdf p. 5 — Qual é o nível de instrução do primeiro responsável por você (mãe, pai ou outra pessoa)?: A1 % não somam 100 (soma = 98.10%)
 - anuario_2026__fuvest_geral.pdf p. 6 — Qual é o nível de instrução do segundo responsável por você (mãe, pai ou outra pessoa)?: A1 % não somam 100 (soma = 94.69%)
 - anuario_2022__fuvest_por_area.pdf p. 4 — Quantas pessoas da família, incluindo você, vivem da renda indicada na pergunta anterior? [Biológicas]: A1 % não somam 100 (soma = 87.80%)
@@ -53,9 +52,6 @@ Reprovações:
 - anuario_2023__fuvest_por_area.pdf p. 4 — Quantas pessoas da família, incluindo você, vivem da renda indicada na pergunta anterior? [Biológicas]: A1 % não somam 100 (soma = 87.80%)
 - anuario_2023__fuvest_por_area.pdf p. 4 — Quantas pessoas da família, incluindo você, vivem da renda indicada na pergunta anterior? [Exatas]: A1 % não somam 100 (soma = 87.80%)
 - anuario_2023__fuvest_por_area.pdf p. 4 — Quantas pessoas da família, incluindo você, vivem da renda indicada na pergunta anterior? [Humanas]: A1 % não somam 100 (soma = 89.10%)
-- anuario_2026__fuvest_por_area.pdf p. 4 — Qual é a renda mensal bruta da sua família, incluindo seu próprio rendimento? O valor do salário mínimo (SM) é R$ 1.518,00 [Biológicas]: A1 % não somam 100 (soma = 98.54%)
-- anuario_2026__fuvest_por_area.pdf p. 4 — Qual é a renda mensal bruta da sua família, incluindo seu próprio rendimento? O valor do salário mínimo (SM) é R$ 1.518,00 [Exatas]: A1 % não somam 100 (soma = 97.60%)
-- anuario_2026__fuvest_por_area.pdf p. 4 — Qual é a renda mensal bruta da sua família, incluindo seu próprio rendimento? O valor do salário mínimo (SM) é R$ 1.518,00 [Humanas]: A1 % não somam 100 (soma = 97.76%)
 - anuario_2026__fuvest_por_area.pdf p. 5 — Qual é o nível de instrução do primeiro responsável por você (mãe, pai ou outra pessoa)? [Biológicas]: A1 % não somam 100 (soma = 98.49%)
 - anuario_2026__fuvest_por_area.pdf p. 5 — Qual é o nível de instrução do primeiro responsável por você (mãe, pai ou outra pessoa)? [Exatas]: A1 % não somam 100 (soma = 98.52%)
 - anuario_2026__fuvest_por_area.pdf p. 5 — Qual é o nível de instrução do primeiro responsável por você (mãe, pai ou outra pessoa)? [Humanas]: A1 % não somam 100 (soma = 97.32%)
@@ -82,7 +78,7 @@ Avisos de porcentagem (as contagens são usadas; a % impressa pelo Anuário dife
 |---|---|
 | anuario_2022__fuvest_por_area.pdf | 6 |
 | anuario_2023__fuvest_por_area.pdf | 6 |
-| anuario_2026__fuvest_geral.pdf | 122 |
-| anuario_2026__fuvest_por_area.pdf | 350 |
+| anuario_2026__fuvest_geral.pdf | 92 |
+| anuario_2026__fuvest_por_area.pdf | 266 |
 
 Os detalhes, com arquivo e página, estão em `data/processed/validacao_qase.csv` e `data/processed/validacao_anuario.csv`.

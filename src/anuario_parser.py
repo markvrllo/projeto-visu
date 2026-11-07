@@ -22,6 +22,10 @@ pergunta naquela coluna; o anuário não imprime o total).
 Etapas em que a coluna inteira de uma pergunta vem zerada (ex.: "Conv." do ENEM-USP e do Provão
 Paulista, que não têm convocação) são descartadas: não existe dado, e zero seria mentira.
 
+O Anuário 2026 (Fuvest, geral e por área) não imprime a faixa de renda "Acima de 50 SM": as outras
+somam ~98%. A faixa é reposta pelo total da coluna (ver `completar_faixa_de_renda`), com
+`reconstruida = True`. Sem isso a pergunta de renda de 2026 seria reprovada e o indicador ficaria vazio.
+
 Uso:
     python -m src.anuario_parser data/raw/anuario -o data/processed/anuario_longo.csv
 """
@@ -162,6 +166,45 @@ def descartar_colunas_vazias(df):
     return df[total > 0].copy()
 
 
+FAIXA_TOPO = "Acima de 50 SM"
+
+
+def completar_faixa_de_renda(df):
+    """Repõe a faixa "Acima de 50 SM" quando o Anuário não a imprime (Anuário 2026, Fuvest).
+
+    A % impressa das outras faixas é calculada sobre o total de questionários da coluna, então o que
+    falta para 100% é exatamente a faixa ausente. A quantidade dela é esse total (o da pergunta sobre a
+    escola do ensino médio, na mesma tabela, área e etapa) menos a soma das faixas impressas. Só repõe
+    quando a penúltima faixa ("Acima de 30 ... até 50 SM") existe e a de cima não, e a linha nova fica
+    marcada em `reconstruida`.
+    """
+    from src.harmonizacao import normalizar, tipo_pergunta
+
+    df = df.copy()
+    df["reconstruida"] = False
+    tipos = df["pergunta"].map(tipo_pergunta)
+    area_ = df["area"].fillna("")  # total da USP: área vazia
+    esc = tipos == "escola_medio"
+    total = df[esc]["n"].groupby([df.loc[esc, "arquivo"], area_[esc], df.loc[esc, "etapa"]]).sum()
+    novas = []
+    ren = tipos == "renda"
+    for (arq, perg, area, etapa), g in df[ren].groupby([df.loc[ren, "arquivo"], df.loc[ren, "pergunta"], area_[ren],
+                                                         df.loc[ren, "etapa"]]):
+        ops = [normalizar(o) for o in g["opcao"]]
+        if any(o.startswith("acima de 50") for o in ops) or not any("ate 50 sm" in o for o in ops):
+            continue
+        n_total = total.get((arq, area, etapa))
+        falta = None if n_total is None else int(n_total - g["n"].sum())
+        if not falta or falta <= 0:
+            continue
+        base = g.iloc[-1].to_dict()
+        novas.append({**base, "opcao": FAIXA_TOPO, "n": falta, "pct": round(100 * falta / n_total, 2),
+                      "reconstruida": True})
+    if novas:
+        df = pd.concat([df, pd.DataFrame(novas)], ignore_index=True)
+    return df
+
+
 def parse_pdf(arquivo):
     m = RE_NOME.search(Path(arquivo).name)
     if not m:
@@ -180,7 +223,7 @@ def ler_pasta(pdfs):
         problemas.extend(probs)
     df = pd.DataFrame(registros)
     if not df.empty:
-        df = descartar_colunas_vazias(df)
+        df = completar_faixa_de_renda(descartar_colunas_vazias(df))
         df["n_respostas"] = df.groupby(["arquivo", "pergunta", "area", "etapa"], dropna=False)["n"].transform("sum")
     return df, pd.DataFrame(problemas)
 

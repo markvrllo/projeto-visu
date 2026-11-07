@@ -15,7 +15,8 @@ Arquivo: `data/processed/indicadores.csv`, 4.870 linhas e 20 colunas. Uma linha 
 | `cod_carreira`, `carreira` | código e nome da carreira Fuvest | 117 carreiras; só no nível `carreira` |
 | `unidade` | unidade USP | vazia por enquanto (os PDFs por carreira não trazem a unidade) |
 | `modalidade` | modalidade de acesso | `Todas`, `AC`, `EP`, `PPI` (AC/EP/PPI só QASE 2019–2022) |
-| `respondentes` | nº de pessoas que responderam (base das %) | total da pergunta de escola do ensino médio; sem ela, a de cor/raça ou a de sexo |
+| `respondentes` | nº de pessoas que responderam o questionário | total de todas as respostas da pergunta de escola do ensino médio (inclusive "No exterior" e "Em outra situação"); sem ela, a de cor/raça ou a de sexo |
+| `n_escola_publica` … `n_tecnico` | denominador de cada `pct_*` | respostas classificadas da pergunta ("Não sei", "No exterior" etc. ficam fora); use como peso ao agregar ou comparar |
 | `pct_escola_publica` | % que cursou o ensino médio todo ou a maior parte em escola pública | |
 | `pct_PPI` | % pretos, pardos e indígenas | |
 | `pct_renda_ate_3SM` | % com renda familiar até 3 salários mínimos | |

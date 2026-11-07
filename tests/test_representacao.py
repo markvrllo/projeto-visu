@@ -70,3 +70,32 @@ def test_validar_modalidades_media_ponderada():
     val = validar_modalidades(ind)
     m2 = val[val["check"].str.startswith("M2")]
     assert list(m2["indicador"]) == ["pct_escola_publica"]
+
+
+def test_intervalo_da_diferenca():
+    # 1000 inscritos com 30%, 100 matriculados com 45%: diferença 15 p.p., erro-padrão ~5,2 p.p.
+    ind = pd.DataFrame([linha(2017, "inscritos", "Todas", 1000, 30.0, None, nivel="usp", area=None),
+                        linha(2017, "matriculados", "Todas", 100, 45.0, None, nivel="usp", area=None)])
+    ep = representacao(ind).set_index("indicador").loc["pct_escola_publica"]
+    meia = 1.96 * 100 * ((0.3 * 0.7 / 1000) + (0.45 * 0.55 / 100)) ** 0.5
+    assert ep["ic95_inf_pp"] == pytest.approx(15 - meia)
+    assert ep["ic95_sup_pp"] == pytest.approx(15 + meia)
+    assert bool(ep["diferenca_clara"])          # ~4,9 a ~25 p.p.: não inclui o zero
+    pequena = pd.DataFrame([linha(2017, "inscritos", "Todas", 1000, 30.0, None, nivel="usp", area=None),
+                            linha(2017, "matriculados", "Todas", 10, 40.0, None, nivel="usp", area=None)])
+    assert not bool(representacao(pequena).set_index("indicador").loc["pct_escola_publica", "diferenca_clara"])
+
+
+def test_m2_pondera_pelo_denominador_do_indicador():
+    # carreira 235, inscritos 2021 (PDFs conferidos): pai com superior = 32/56, 7/18 e 0/11; Todas = 39/85.
+    # "Não sei" e "Não possuo pai" saem do denominador, então pesar pelos respondentes (57, 23, 17) erra 3 p.p.
+    def l(mod, resp, n, pct):
+        d = linha(2021, "inscritos", mod, resp, None, None, cod=235, area="Humanas")
+        d.update(pct_pai_superior=pct, n_pai_superior=n)
+        return d
+    linhas = [l("AC", 57, 56, 100 * 32 / 56), l("EP", 23, 18, 100 * 7 / 18), l("PPI", 17, 11, 0.0),
+              l("Todas", 97, 85, 100 * 39 / 85)]
+    val = validar_modalidades(pd.DataFrame(linhas))
+    assert not val["check"].str.startswith("M2").any()
+    sem_n = pd.DataFrame(linhas).drop(columns="n_pai_superior")
+    assert validar_modalidades(sem_n)["check"].str.startswith("M2").any()

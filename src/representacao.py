@@ -34,8 +34,22 @@ AMOSTRA_MINIMA = 30
 CRITERIO_DA_MODALIDADE = {("EP", "pct_escola_publica"), ("PPI", "pct_escola_publica"), ("PPI", "pct_PPI")}
 
 COLUNAS = ["ano", "fonte", "ingresso", "nivel", "area", "cod_carreira", "carreira", "modalidade", "indicador",
-           "respondentes_inscritos", "respondentes_matriculados", "pct_inscritos", "pct_matriculados",
-           "diferenca_pp", "razao", "amostra_pequena", "criterio_da_modalidade"]
+           "respondentes_inscritos", "respondentes_matriculados", "n_inscritos", "n_matriculados",
+           "pct_inscritos", "pct_matriculados",
+           "diferenca_pp", "ic95_inf_pp", "ic95_sup_pp", "diferenca_clara", "razao", "amostra_pequena",
+           "criterio_da_modalidade"]
+
+
+DEN = {c: "n_" + c[len("pct_"):] for c in INDICADORES}
+
+
+def _com_denominadores(df: pd.DataFrame) -> pd.DataFrame:
+    """Garante as colunas n_* (indicadores.csv antigos não têm): vazias, para cair no nº de respondentes."""
+    df = df.copy()
+    for c in DEN.values():
+        if c not in df:
+            df[c] = np.nan
+    return df
 
 
 def _chave(df: pd.DataFrame) -> pd.DataFrame:
@@ -43,24 +57,47 @@ def _chave(df: pd.DataFrame) -> pd.DataFrame:
     return df.fillna({"area": "", "cod_carreira": -1})
 
 
+def intervalo_diferenca(rep: pd.DataFrame, z=1.96):
+    """Intervalo de 95% (aproximação normal) para a diferença em p.p.
+
+    Os dados são o universo de quem respondeu, não uma amostra; o intervalo mede quanto a diferença
+    oscilaria com outra turma do mesmo tamanho, o que importa nas carreiras pequenas. Tratar as duas
+    etapas como independentes é conservador: os matriculados estão contidos nos inscritos, então o
+    intervalo verdadeiro é um pouco mais estreito. Usa o denominador do próprio indicador (n_inscritos,
+    n_matriculados) e, quando ele falta, o nº de respondentes.
+    """
+    pi, pm = rep["pct_inscritos"].astype(float) / 100, rep["pct_matriculados"].astype(float) / 100
+    ni = rep["n_inscritos"].astype(float).fillna(rep["respondentes_inscritos"].astype(float))
+    nm = rep["n_matriculados"].astype(float).fillna(rep["respondentes_matriculados"].astype(float))
+    ep = 100 * np.sqrt(pi * (1 - pi) / ni + pm * (1 - pm) / nm)
+    return rep["diferenca_pp"] - z * ep, rep["diferenca_pp"] + z * ep
+
+
 def representacao(ind: pd.DataFrame) -> pd.DataFrame:
     """indicadores.csv -> uma linha por recorte e indicador com diferença e razão de representação.
 
     Só entram recortes que têm as duas etapas (inscritos e matriculados) na mesma fonte.
     """
-    ind = _chave(ind)
+    ind = _com_denominadores(_chave(ind))
     longos = {}
     for etapa in ["inscritos", "matriculados"]:
         e = ind[ind["etapa"] == etapa]
         longo = e.melt(id_vars=RECORTE + ["carreira", "respondentes"], value_vars=INDICADORES,
                        var_name="indicador", value_name="pct")
-        longos[etapa] = longo.rename(columns={"pct": f"pct_{etapa}", "respondentes": f"respondentes_{etapa}"})
+        den = e.melt(id_vars=RECORTE, value_vars=[DEN[c] for c in INDICADORES], var_name="indicador",
+                     value_name="n")
+        den["indicador"] = den["indicador"].map({v: k for k, v in DEN.items()})
+        longo = longo.merge(den, on=RECORTE + ["indicador"], how="left", validate="one_to_one")
+        longos[etapa] = longo.rename(columns={"pct": f"pct_{etapa}", "respondentes": f"respondentes_{etapa}",
+                                              "n": f"n_{etapa}"})
     rep = longos["inscritos"].drop(columns="carreira").merge(longos["matriculados"], on=RECORTE + ["indicador"],
                                                              how="inner", validate="one_to_one")
     rep = rep.dropna(subset=["pct_inscritos", "pct_matriculados"])
 
     rep["diferenca_pp"] = rep["pct_matriculados"] - rep["pct_inscritos"]
     rep["razao"] = rep["pct_matriculados"] / rep["pct_inscritos"].where(rep["pct_inscritos"] > 0)
+    rep["ic95_inf_pp"], rep["ic95_sup_pp"] = intervalo_diferenca(rep)
+    rep["diferenca_clara"] = (rep["ic95_inf_pp"] > 0) | (rep["ic95_sup_pp"] < 0)
     rep["amostra_pequena"] = rep["respondentes_matriculados"] < AMOSTRA_MINIMA
     rep["criterio_da_modalidade"] = [(m, i) in CRITERIO_DA_MODALIDADE
                                      for m, i in zip(rep["modalidade"], rep["indicador"])]
@@ -77,13 +114,14 @@ def validar_modalidades(ind: pd.DataFrame, tolerancia_pp=1.0, minimo_criterio=90
     """Confere AC + EP + PPI contra a linha 'Todas' do QASE (2019–2022). Devolve uma linha por problema.
 
     M1 (reprova) soma dos respondentes das modalidades != respondentes de 'Todas'.
-    M2 (aviso)   média dos indicadores das modalidades, ponderada pelos respondentes, longe de 'Todas'
-                 por mais de `tolerancia_pp`. É aproximada: cada pergunta tem o próprio nº de respostas.
+    M2 (aviso)   média dos indicadores das modalidades, ponderada pelo denominador de cada indicador (n_*),
+                 longe de 'Todas' por mais de `tolerancia_pp`. Sem as colunas n_*, pondera pelos
+                 respondentes e fica aproximada ("Não sei", "No exterior" etc. saem do denominador).
     M3 (aviso)   recorte sem alguma das três modalidades (o PDF daquela modalidade não existe ou foi reprovado).
     M4 (aviso)   modalidade que não bate com o próprio critério: EP ou PPI com menos de `minimo_criterio`%
                  de escola pública, ou PPI com menos disso de pretos, pardos e indígenas.
     """
-    q = _chave(ind[(ind["fonte"] == "qase") & ind["modalidade"].isin(MODALIDADES + ["Todas"])])
+    q = _com_denominadores(_chave(ind[(ind["fonte"] == "qase") & ind["modalidade"].isin(MODALIDADES + ["Todas"])]))
     grupos = ["ano", "etapa", "nivel", "area", "cod_carreira"]
     q = q[q.groupby(grupos)["modalidade"].transform(lambda s: s.isin(MODALIDADES).any())]
     todas = q[q["modalidade"] == "Todas"].set_index(grupos)
@@ -111,8 +149,10 @@ def validar_modalidades(ind: pd.DataFrame, tolerancia_pp=1.0, minimo_criterio=90
 
     for col in INDICADORES:
         ok = mods[mods[col].notna()]
-        n = ok.groupby(grupos)["respondentes"].sum()
-        media = (ok[col] * ok["respondentes"]).groupby([ok[g] for g in grupos]).sum() / n
+        # peso = denominador do indicador (exato); sem ele, o nº de respondentes (aproximado)
+        peso = ok[DEN[col]].astype(float).fillna(ok["respondentes"].astype(float))
+        n = peso.groupby([ok[g] for g in grupos]).sum()
+        media = (ok[col] * peso).groupby([ok[g] for g in grupos]).sum() / n
         dif = (media - todas[col]).dropna()
         for idx, v in dif[dif.abs() > tolerancia_pp].items():
             add(idx, "M2 média ponderada != Todas", "aviso",
@@ -136,6 +176,7 @@ def resumo(rep: pd.DataFrame, val: pd.DataFrame) -> str:
     linhas = [f"representacao.csv: {len(rep)} linhas, "
               f"{rep.loc[rep['nivel'] == 'carreira', 'cod_carreira'].nunique()} carreiras, anos {rep['ano'].min()}–{rep['ano'].max()}",
               f"  com amostra pequena (< {AMOSTRA_MINIMA} matriculados): {int(rep['amostra_pequena'].sum())}",
+              f"  com diferença clara (IC 95% sem o zero): {int(rep['diferenca_clara'].sum())}",
               "validacao_modalidades.csv:"]
     if val.empty:
         linhas.append("  nenhum problema")
