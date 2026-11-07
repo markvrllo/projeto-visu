@@ -214,3 +214,11 @@ def test_meta_do_nome():
     assert (m["ano"], m["etapa"], m["nivel"]) == (2021, "matriculados", "curso")
     m = meta_do_nome("fuvest_2017_qase_umatr_USP_cur.pdf")
     assert (m["ano"], m["etapa"], m["nivel"]) == (2017, "matriculados", "curso")
+
+
+def test_outra_situacao_fica_fora_mesmo_citando_escola_particular():
+    from src.harmonizacao import categoria_escola
+    assert categoria_escola("Em outra situação (Escola particular com bolsa, Fundações, SESI, SENAI)") is None
+    assert categoria_escola("Em outra situação") is None
+    assert categoria_escola("Todo em escola particular, com bolsa de estudo") == "particular"
+    assert categoria_escola("Maior parte em escola pública") == "publica"

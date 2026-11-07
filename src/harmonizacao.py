@@ -89,6 +89,10 @@ def categoria_cor(op):
 
 def categoria_escola(op):
     o = normalizar(op)
+    # de 2015 em diante o QASE escreve "Em outra situação (Escola particular com bolsa, Fundações, SESI,
+    # SENAI)": é a mesma opção residual de antes, e não "escola particular"; fica fora do denominador
+    if o.startswith(("em outra situacao", "outra situacao")):
+        return None
     # "todo em escola pública" e "maior parte em escola pública" contam como pública
     if "public" in o:
         return "publica"

@@ -49,10 +49,12 @@ Consequência: comparar QASE 2022 com Anuário 2023 mistura método e mudança r
 
 As linhas não devem ligar pontos através desses buracos.
 
-### 6. Pontos que só dá para conferir com os PDFs do QASE (máquina do Marcos)
+### 6. Conferido nos PDFs do QASE (notebook do Marcos, 07/11)
 
-- Aviso M2 em 2021, `pct_pai_superior` (27 dos 37 casos; ex.: carreira 235, inscritos, 3,2 p.p.). Abrir o PDF da carreira 235 de 2021 e ver se o nº de respostas da pergunta do pai muda entre AC, EP e PPI.
-- Escola pública entre os inscritos cai de 39,1% (2014) para 33,8% (2015), e a razão da USP sobe de 0,86 para 1,07. Pode ser real, mas vale abrir um PDF de 2014 e um de 2015 e conferir as opções da pergunta.
+- **Aviso M2 de 2021 (pai com ensino superior): não é erro.** Carreira 235, inscritos: a pergunta e as 11 opções são iguais em AC, EP e PPI, e o "N respostas" é igual ao nº de questionários (57, 23 e 17). O aviso vem do próprio M2: ele pondera as modalidades pelos questionários, mas "Não sei" e "Não possuo pai" saem do denominador e são muito mais comuns em EP e PPI (denominadores 56, 18 e 11). A conta exata dá os 45,88% de "Todas". Os outros avisos de pai e mãe devem ter a mesma causa.
+- **Queda da escola pública 2014 → 2015: em parte era erro de harmonização (corrigido neste PR).** Em 2015 a opção residual passou a se chamar "Em outra situação (Escola particular com bolsa, Fundações, SESI, SENAI)" e saltou de 438 para 4.192 inscritos. Como o texto contém "particular", `categoria_escola` passou a contá-la como particular, e até 2014 ela ficava fora do denominador. Agora "outra situação" fica fora em todos os anos. Com isso, inscritos de escola pública: 2015 = 35,0% (era 33,8%), 2016 = 35,8% (era 34,5%); 2013 e 2014 não mudam. O resto da queda (~4 p.p.) é real: os inscritos de escola pública caem de 57,4 mil para 42,9 mil. Mesmo assim, a série tem uma quebra de questionário em 2015, porque alguns bolsistas de escola particular podem ter passado para a opção nova; isso deve constar no relatório.
+
+O `indicadores.csv` deste PR ainda **não** tem essa correção: ela precisa do `qase_longo.csv`, que só existe no notebook do Marcos. Ver "Como regenerar".
 
 ## Como regenerar
 
