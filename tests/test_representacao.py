@@ -70,3 +70,17 @@ def test_validar_modalidades_media_ponderada():
     val = validar_modalidades(ind)
     m2 = val[val["check"].str.startswith("M2")]
     assert list(m2["indicador"]) == ["pct_escola_publica"]
+
+
+def test_intervalo_da_diferenca():
+    # 1000 inscritos com 30%, 100 matriculados com 45%: diferença 15 p.p., erro-padrão ~5,2 p.p.
+    ind = pd.DataFrame([linha(2017, "inscritos", "Todas", 1000, 30.0, None, nivel="usp", area=None),
+                        linha(2017, "matriculados", "Todas", 100, 45.0, None, nivel="usp", area=None)])
+    ep = representacao(ind).set_index("indicador").loc["pct_escola_publica"]
+    meia = 1.96 * 100 * ((0.3 * 0.7 / 1000) + (0.45 * 0.55 / 100)) ** 0.5
+    assert ep["ic95_inf_pp"] == pytest.approx(15 - meia)
+    assert ep["ic95_sup_pp"] == pytest.approx(15 + meia)
+    assert bool(ep["diferenca_clara"])          # ~4,9 a ~25 p.p.: não inclui o zero
+    pequena = pd.DataFrame([linha(2017, "inscritos", "Todas", 1000, 30.0, None, nivel="usp", area=None),
+                            linha(2017, "matriculados", "Todas", 10, 40.0, None, nivel="usp", area=None)])
+    assert not bool(representacao(pequena).set_index("indicador").loc["pct_escola_publica", "diferenca_clara"])

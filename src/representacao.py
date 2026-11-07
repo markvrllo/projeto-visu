@@ -35,12 +35,28 @@ CRITERIO_DA_MODALIDADE = {("EP", "pct_escola_publica"), ("PPI", "pct_escola_publ
 
 COLUNAS = ["ano", "fonte", "ingresso", "nivel", "area", "cod_carreira", "carreira", "modalidade", "indicador",
            "respondentes_inscritos", "respondentes_matriculados", "pct_inscritos", "pct_matriculados",
-           "diferenca_pp", "razao", "amostra_pequena", "criterio_da_modalidade"]
+           "diferenca_pp", "ic95_inf_pp", "ic95_sup_pp", "diferenca_clara", "razao", "amostra_pequena",
+           "criterio_da_modalidade"]
 
 
 def _chave(df: pd.DataFrame) -> pd.DataFrame:
     """Troca os vazios das colunas do recorte por marcadores, para o merge não perder linhas."""
     return df.fillna({"area": "", "cod_carreira": -1})
+
+
+def intervalo_diferenca(rep: pd.DataFrame, z=1.96):
+    """Intervalo de 95% (aproximação normal) para a diferença em p.p.
+
+    Os dados são o universo de quem respondeu, não uma amostra; o intervalo mede quanto a diferença
+    oscilaria com outra turma do mesmo tamanho, o que importa nas carreiras pequenas. Tratar as duas
+    etapas como independentes é conservador: os matriculados estão contidos nos inscritos, então o
+    intervalo verdadeiro é um pouco mais estreito. O nº de respondentes é o do questionário, não o
+    de cada pergunta, então o intervalo é aproximado.
+    """
+    pi, pm = rep["pct_inscritos"].astype(float) / 100, rep["pct_matriculados"].astype(float) / 100
+    ni, nm = rep["respondentes_inscritos"].astype(float), rep["respondentes_matriculados"].astype(float)
+    ep = 100 * np.sqrt(pi * (1 - pi) / ni + pm * (1 - pm) / nm)
+    return rep["diferenca_pp"] - z * ep, rep["diferenca_pp"] + z * ep
 
 
 def representacao(ind: pd.DataFrame) -> pd.DataFrame:
@@ -61,6 +77,8 @@ def representacao(ind: pd.DataFrame) -> pd.DataFrame:
 
     rep["diferenca_pp"] = rep["pct_matriculados"] - rep["pct_inscritos"]
     rep["razao"] = rep["pct_matriculados"] / rep["pct_inscritos"].where(rep["pct_inscritos"] > 0)
+    rep["ic95_inf_pp"], rep["ic95_sup_pp"] = intervalo_diferenca(rep)
+    rep["diferenca_clara"] = (rep["ic95_inf_pp"] > 0) | (rep["ic95_sup_pp"] < 0)
     rep["amostra_pequena"] = rep["respondentes_matriculados"] < AMOSTRA_MINIMA
     rep["criterio_da_modalidade"] = [(m, i) in CRITERIO_DA_MODALIDADE
                                      for m, i in zip(rep["modalidade"], rep["indicador"])]
@@ -136,6 +154,7 @@ def resumo(rep: pd.DataFrame, val: pd.DataFrame) -> str:
     linhas = [f"representacao.csv: {len(rep)} linhas, "
               f"{rep.loc[rep['nivel'] == 'carreira', 'cod_carreira'].nunique()} carreiras, anos {rep['ano'].min()}–{rep['ano'].max()}",
               f"  com amostra pequena (< {AMOSTRA_MINIMA} matriculados): {int(rep['amostra_pequena'].sum())}",
+              f"  com diferença clara (IC 95% sem o zero): {int(rep['diferenca_clara'].sum())}",
               "validacao_modalidades.csv:"]
     if val.empty:
         linhas.append("  nenhum problema")

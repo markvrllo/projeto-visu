@@ -31,10 +31,12 @@ Uma linha por recorte × indicador. Só entram recortes com as duas etapas (insc
 | `respondentes_inscritos`, `respondentes_matriculados` | Questionários respondidos em cada etapa. |
 | `pct_inscritos`, `pct_matriculados` | % do grupo em cada etapa. |
 | `diferenca_pp`, `razao` | As duas medidas. `razao` fica vazia quando o grupo tem 0% entre os inscritos. |
+| `ic95_inf_pp`, `ic95_sup_pp` | Intervalo de 95% da diferença (aproximação normal). Os dados são o universo de quem respondeu; o intervalo mede quanto a diferença oscilaria com outra turma do mesmo tamanho. É conservador (trata as etapas como independentes, mas os matriculados estão dentro dos inscritos) e aproximado (usa o nº de questionários, não o de respostas de cada pergunta). |
+| `diferenca_clara` | `True` quando o intervalo não contém o zero. Mais informativo que `amostra_pequena`: entre as carreiras com 30 ou mais matriculados (modalidade Todas, % escola pública), só 39% têm diferença clara. O heatmap deve esmaecer as células com `False`. |
 | `amostra_pequena` | `True` quando há menos de 30 respondentes matriculados: a razão oscila muito (um aluno muda vários p.p.). O heatmap deve marcar essas células ou deixá-las mais claras. |
 | `criterio_da_modalidade` | `True` quando o indicador é o próprio critério da modalidade (escola pública em EP e PPI; PPI em PPI). Dentro da modalidade ele vale ~100% nas duas etapas, então a medida não informa nada. A V5 deve filtrar essas linhas. |
 
-Cobertura: QASE 2013–2022 (USP, áreas e 117 carreiras; por modalidade AC/EP/PPI de 2019 a 2022) e Anuário 2022–2026 (USP e áreas; Fuvest, ENEM-USP 2025–26 e Provão Paulista 2026). Metade das linhas de carreira × modalidade tem amostra pequena.
+Cobertura: QASE 2013–2022 (USP, áreas e 117 carreiras; por modalidade AC/EP/PPI de 2019 a 2022) e Anuário 2022–2026 (USP e áreas; Fuvest, ENEM-USP 2025–26 e Provão Paulista 2026). A renda da Fuvest 2026 usa a faixa "Acima de 50 SM" reconstruída (o Anuário 2026 não a imprime; ver `docs/revisao_dados.md`). Metade das linhas de carreira × modalidade tem amostra pequena.
 
 Leitura rápida (carreiras, modalidade Todas, % escola pública, sem amostra pequena): a razão mediana foi 0,81 em 2013–2018 e 1,08 em 2019–2022. A fração de carreiras com razão abaixo de 0,8 caiu de 73% em 2013 para 2% em 2022.
 
