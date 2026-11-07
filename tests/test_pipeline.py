@@ -1,4 +1,5 @@
 import pandas as pd
+import pytest
 
 from src.harmonizacao import categoria_renda, harmonizar, indicadores_de, contagens, montar, tipo_pergunta
 from src.qase_parser import meta_do_nome, parse_linhas
@@ -222,3 +223,15 @@ def test_outra_situacao_fica_fora_mesmo_citando_escola_particular():
     assert categoria_escola("Em outra situação") is None
     assert categoria_escola("Todo em escola particular, com bolsa de estudo") == "particular"
     assert categoria_escola("Maior parte em escola pública") == "publica"
+
+
+def test_respondentes_contam_opcoes_sem_categoria():
+    from src.harmonizacao import contagens, harmonizar, indicadores_de
+    p = "Onde você cursou o ensino médio?"
+    longo = pd.DataFrame([{"ano": 2015, "etapa": "inscritos", "pergunta": p, "opcao": o, "n": n} for o, n in [
+        ("Todo em escola pública", 30), ("Todo em escola particular", 60), ("No exterior", 2),
+        ("Em outra situação (Escola particular com bolsa, Fundações, SESI, SENAI)", 8)]])
+    chave = ["ano", "etapa"]
+    ind = indicadores_de(contagens(harmonizar(longo), chave), chave).iloc[0]
+    assert ind["pct_escola_publica"] == pytest.approx(100 * 30 / 90)   # % sem as opções residuais
+    assert ind["respondentes"] == 100                                   # nº de respondentes com todas

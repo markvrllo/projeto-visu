@@ -180,7 +180,8 @@ INDICADORES = {
     "pct_mulheres": ("sexo", "F"),
     "pct_tecnico": ("tipo_medio", "tecnico"),
 }
-# nº de respondentes = total de respostas da pergunta sobre a escola do ensino médio; onde ela não existe
+# nº de respondentes = total de respostas da pergunta sobre a escola do ensino médio (todas as opções, inclusive
+# "No exterior" e "Em outra situação"); onde ela não existe
 # (ENEM-USP 2025, Provão Paulista, que só aceita aluno de escola pública), a de cor/raça ou a de sexo
 TIPOS_RESPONDENTES = ["escola_medio", "cor_raca", "sexo"]
 
@@ -190,8 +191,9 @@ def harmonizar(longo: pd.DataFrame) -> pd.DataFrame:
     df["tipo"] = df["pergunta"].map(tipo_pergunta)
     df = df[df["tipo"].isin(CATEGORIZADORES)].copy()
     df["categoria"] = [CATEGORIZADORES[t](o) for t, o in zip(df["tipo"], df["opcao"])]
-    # respostas sem categoria ("Não sei", "No exterior"...) saem também do denominador
-    return df[df["categoria"].notna()]
+    # respostas sem categoria ("Não sei", "No exterior"...) ficam com categoria vazia: saem do numerador e do
+    # denominador das %, mas continuam no nº de respondentes (ver contagens)
+    return df
 
 
 # --- 3. Preparar as duas fontes no mesmo formato -----------------------------
@@ -235,12 +237,19 @@ def preparar_qase(qase: pd.DataFrame, carreira_area: pd.DataFrame) -> pd.DataFra
 
 
 def contagens(harm: pd.DataFrame, chave) -> pd.DataFrame:
-    """n por categoria e total por pergunta, somando todas as linhas da chave."""
+    """n por categoria e total por pergunta, somando todas as linhas da chave.
+
+    `total` (denominador das %) soma só as respostas com categoria; `total_bruto` soma todas as respostas da
+    pergunta, inclusive "No exterior", "Em outra situação" e "Não sei", e é o que vira o nº de respondentes.
+    Assim o nº de respondentes não depende de como as opções são classificadas.
+    """
     harm = harm.copy()
     harm[chave] = harm[chave].fillna("")
-    por_cat = harm.groupby(chave + ["tipo", "categoria"])["n"].sum().rename("n_cat").reset_index()
-    total = harm.groupby(chave + ["tipo"])["n"].sum().rename("total")
-    return por_cat.join(total, on=chave + ["tipo"])
+    com_cat = harm[harm["categoria"].notna()]
+    por_cat = com_cat.groupby(chave + ["tipo", "categoria"])["n"].sum().rename("n_cat").reset_index()
+    total = com_cat.groupby(chave + ["tipo"])["n"].sum().rename("total")
+    bruto = harm.groupby(chave + ["tipo"])["n"].sum().rename("total_bruto")
+    return por_cat.join(total, on=chave + ["tipo"]).join(bruto, on=chave + ["tipo"])
 
 
 def indicadores_de(cont: pd.DataFrame, chave) -> pd.DataFrame:
@@ -254,7 +263,8 @@ def indicadores_de(cont: pd.DataFrame, chave) -> pd.DataFrame:
         linhas = linhas.merge(parte[chave + [nome]], on=chave, how="left")
     linhas["respondentes"] = np.nan
     for tipo in TIPOS_RESPONDENTES:
-        resp = cont[cont["tipo"] == tipo][chave + ["total"]].drop_duplicates().rename(columns={"total": "_r"})
+        resp = (cont[cont["tipo"] == tipo][chave + ["total_bruto"]].drop_duplicates()
+                .rename(columns={"total_bruto": "_r"}))
         linhas = linhas.merge(resp, on=chave, how="left")
         linhas["respondentes"] = linhas["respondentes"].fillna(linhas.pop("_r"))
     return linhas
